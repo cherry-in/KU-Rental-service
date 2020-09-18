@@ -10,8 +10,8 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 const port = 3030;
-app.listen(port, () => console.log(port));
 
+app.listen(port, () => console.log(port));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
