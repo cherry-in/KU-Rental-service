@@ -1,5 +1,6 @@
 import React, { } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Log = styled.div`
     background-color: #981e1e;
@@ -28,7 +29,9 @@ function Login() {
                             <input className="form-control" id="author_input" name="author" type="text" required />
                         </div>
                         <div className="form-group">
-                            <button className="btn" type="submit">로그인</button>
+                            <Link to="/home">
+                                <button className="btn" type="submit">로그인</button>
+                            </Link>
                         </div>
                     </form>
                 </Log>
