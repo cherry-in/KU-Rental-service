@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
-
 import Login from './Pages/Login';
 import Home from './Pages/Home';
 
