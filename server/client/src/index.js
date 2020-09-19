@@ -5,14 +5,27 @@ import * as serviceWorker from './serviceWorker';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
-// import Login from './Pages/Login';
-// import Home from './Pages/Home';
-import App from './App'
+import Login from './Pages/LoginPage';
+import Home from './Pages/HomePage';
+import Signup from './Pages/SignupPage';
+import Apply from './Pages/ApplyPage';
+import Check from './Pages/CheckPage';
+import Notice from './Pages/NoticePage';
 
 ReactDOM.render(
-  <App />,
+<Router>
+    <Switch>
+      <Route exact path="/" component={Login} />
+      <Route path="/home" component={Home} />
+      <Route path="/signup" component={Signup} />
+      <Route path="/apply" component={Apply} />
+      <Route path="/check" component={Check} />
+      <Route path="/notice" component={Notice} />
+    </Switch>
+  </Router>,
   document.getElementById('root')
 );
+
 
 
 // ReactDOM.render(
