@@ -1,5 +1,5 @@
 {
-  "name": "learn-express",
+  "name": "server",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -15,8 +15,9 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.6",
     "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11",
+    "pug": "^3.0.0",
     "react": "^16.13.1"
   }
 }
