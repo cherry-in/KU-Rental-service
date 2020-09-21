@@ -3,17 +3,30 @@ import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
+import axios from 'axios';
+// import { PrivateRoute } from './PrivateRoute';
 
-import Login from './Pages/Login';
-import Home from './Pages/Home';
-import Signup from './Pages/Signup';
+
+import Login from './Pages/LoginPage';
+import Home from './Pages/HomePage';
+import Signup from './Pages/SignupPage';
+import Apply from './Pages/ApplyPage';
+import Check from './Pages/CheckPage';
+import Notice from './Pages/NoticePage';
+
+axios.defaults.validateStatus = function (status) {
+  return status < 500; // default
+}
 
 ReactDOM.render(
 <Router>
     <Switch>
       <Route exact path="/" component={Login} />
-      <Route path="/Home" component={Home} />
-      <Route path="/Signup" component={Signup} />
+      <Route path="/home" component={Home} />
+      <Route path="/signup" component={Signup} />
+      <Route path="/apply" component={Apply} />
+      <Route path="/check" component={Check} />
+      <Route path="/notice" component={Notice} />
     </Switch>
   </Router>,
   document.getElementById('root')
