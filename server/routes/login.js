@@ -36,7 +36,7 @@ router.post('/', function (req, res, next) {
                 const token = jwt.sign({
                     id:users.id,
                 }, process.env.JWT_SECRET, {
-                    expiresIn: '10m', // 12시간
+                    expiresIn: '1m',
                 });
                 return res.status(201).json({
                     token,

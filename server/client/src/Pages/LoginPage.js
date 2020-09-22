@@ -32,7 +32,7 @@ function Login() {
                         initialValues={{ id: '', password: '' }}
                         validationSchema={Yup.object({
                             id: Yup.string()
-                        .required('아이디를 입력해주세요.'),
+                        .required('학번을 입력해주세요.'),
                             password: Yup.string()
                                 .required('비밀번호를 입력해주세요.')
                                 .min(8, '8자 이상 입력해주세요.'),
@@ -71,10 +71,10 @@ function Login() {
                                         <div className="form-group mb-4">
                                             <input
                                                 className={(touched.id && errors.id ? 'form-control is-invalid' : "form-control")}
-                                                type="text"
+                                                type="number"
                                                 name="id"
                                                 {...getFieldProps('id')}
-                                                placeholder="Input id"
+                                                placeholder="Input Student Id"
                                             />
                                             {touched.id && errors.id ? (
                                                 <div className="invalid-feedback text-left">{errors.id}</div>
@@ -96,6 +96,7 @@ function Login() {
                                             Login
                                         </button>
                                         <button><Link to="/home">홈</Link></button>
+                                        <div></div>
                                         <Link to="/signup">비밀번호를 잊으셨나요?</Link>
                                         <div></div>
                                         <Link to="/signup">회원이 아니신가요?</Link>

@@ -20,7 +20,7 @@ function Signup() {
                     name: Yup.string()
                         .required('이름을 입력해주세요.'),
                     id: Yup.string()
-                        .required('아이디를 입력해주세요.'),
+                        .required('학번을 입력해주세요.'),
                     password: Yup.string()
                         .required('비밀번호를 입력해주세요.')
                         .min(8, '8자 이상 입력해주세요.'),
@@ -72,10 +72,10 @@ function Signup() {
                                 <div className="form-group mb-4">
                                     <input
                                         className={(touched.id && errors.id ? 'form-control is-invalid' : "form-control")}
-                                        type="text"
+                                        type="number"
                                         name="id"
                                         {...getFieldProps('id')}
-                                        placeholder="Input id"
+                                        placeholder="Input Student Id"
                                     />
                                     {touched.id && errors.id ? (
                                         <div className="invalid-feedback text-left">{errors.id}</div>
@@ -108,8 +108,8 @@ function Signup() {
                                 <button type="submit" className="btn btn-dark" disabled={isSubmitting}>
                                     Sign Up
                                 </button>
-                                <button><Link to="/">로그인</Link></button>
-                                <button><Link to="/home">홈</Link></button>
+                                <button><Link to="/login">로그인</Link></button>
+                                <button><Link to="/">홈</Link></button>
                             </form>
                         </div>
                     )}
