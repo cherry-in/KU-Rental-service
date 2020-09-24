@@ -42,7 +42,7 @@ function Home() {
         <div>
             <Menu />
             <div className="container">
-                <Drop className="row dropdown">
+                <Drop className="row dropdown mt-5 mb-5">
                     <button className="btn btn-lg dropdown-toggle mx-auto col-5" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         기간을 선택해주십시오.  
                     </button>
