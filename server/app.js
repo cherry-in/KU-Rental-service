@@ -6,7 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const { connect } = require('http2');
+const connect = require('./schemas');
 
 var app = express();
 connect();

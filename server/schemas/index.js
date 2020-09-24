@@ -5,11 +5,7 @@ module.exports = () => {
         if (process.env.NODE_ENV !== 'production') {
             mongoose.set('debug', true);
         }
-<<<<<<< HEAD
         mongoose.connect('mongodb://hijinju:highlight@localhost:27017/admin', {
-=======
-        mongoose.connect('mongodb://rkyoung7:rkdud127@localhost:27017/admin', {
->>>>>>> origin/rkyoung7
             dbName: 'KU_Rental',
         }, (error) => {
             if (error) {
@@ -29,9 +25,4 @@ module.exports = () => {
     });
     require('./user');
     require('./reserve');
-
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> origin/rkyoung7
