@@ -6,22 +6,21 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Link, Redirect } from 'react-router-dom';
 
 function Signup() {
-    //   const [state, setState] = useState(false);
+      const [state, setState] = useState(false);
 
-    //   if (state) {
-    //     return <Redirect to="/login" />;
-    //   }
+      if (state) {
+        return <Redirect to="/login" />;
+      }
 
     return (
         <div className="d-flex flex-column justify-content-between vh-100">
             <Formik
-                initialValues={{ name: '', email: '', password: '', password2: '', address: '', }}
+                initialValues={{ name: '', id: '', password: '', password2: ''}}
                 validationSchema={Yup.object({
                     name: Yup.string()
                         .required('이름을 입력해주세요.'),
-                    email: Yup.string()
-                        .email('이메일형식이 유효하지 않습니다.')
-                        .required('이메일을 입력해주세요.'),
+                    id: Yup.string()
+                        .required('학번을 입력해주세요.'),
                     password: Yup.string()
                         .required('비밀번호를 입력해주세요.')
                         .min(8, '8자 이상 입력해주세요.'),
@@ -29,23 +28,21 @@ function Signup() {
                         .required('비밀번호를 다시 입력해주세요.')
                         .min(8, '8자 이상 입력해주세요.')
                         .oneOf([Yup.ref("password"), null], '비밀번호가 일치하지 않습니다.'),
-                    address: Yup.string()
-                        .required('주소를 입력해주세요.')
                 })}
                 onSubmit={(values, { setSubmitting }) => {
-                    // axios({
-                    //   method: 'post',
-                    //   url: '/users',
-                    //   data: values,
-                    // }).then(res => {
-                    //   if (res.status === 404) return alert(res.data.error)
+                    axios({
+                      method: 'post',
+                      url: '/users',
+                      data: values,
+                    }).then(res => {
+                      if (res.status === 404) return alert(res.data.error)
                     alert("회원가입이 완료되었습니다!")
 
-                    //   setState(true);
-                    // })
-                    //   .catch(err => {
-                    //     alert(err.error)
-                    //   });
+                      setState(true);
+                    })
+                      .catch(err => {
+                        alert(err.error)
+                      });
 
                     setTimeout(() => {
                         setSubmitting(false);
@@ -74,25 +71,14 @@ function Signup() {
                                 </div>
                                 <div className="form-group mb-4">
                                     <input
-                                        className={(touched.email && errors.email ? 'form-control is-invalid' : "form-control")}
-                                        type="email"
-                                        name="email"
-                                        {...getFieldProps('email')}
-                                        placeholder="Input Email"
+                                        className={(touched.id && errors.id ? 'form-control is-invalid' : "form-control")}
+                                        type="number"
+                                        name="id"
+                                        {...getFieldProps('id')}
+                                        placeholder="Input Student Id"
                                     />
-                                    {touched.email && errors.email ? (
-                                        <div className="invalid-feedback text-left">{errors.email}</div>
-                                    ) : null}
-                                </div>
-                                <div className="form-group mb-4">
-                                    <input
-                                        className={(touched.address && errors.address ? 'form-control is-invalid' : "form-control")}
-                                        type="text"
-                                        name="address"
-                                        {...getFieldProps('address')}
-                                        placeholder="Input Address" />
-                                    {touched.address && errors.address ? (
-                                        <div className="invalid-feedback text-left">{errors.address}</div>
+                                    {touched.id && errors.id ? (
+                                        <div className="invalid-feedback text-left">{errors.id}</div>
                                     ) : null}
                                 </div>
                                 <div className="form-group mb-4">
@@ -121,9 +107,9 @@ function Signup() {
                                 </div>
                                 <button type="submit" className="btn btn-dark" disabled={isSubmitting}>
                                     Sign Up
-                  </button>
-                                <button>
-                                    <Link to="/">gha</Link></button>
+                                </button>
+                                <button><Link to="/login">로그인</Link></button>
+                                <button><Link to="/">홈</Link></button>
                             </form>
                         </div>
                     )}
