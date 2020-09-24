@@ -41,4 +41,8 @@ const reserveSchema = new Schema({
     
 });
 
+<<<<<<< HEAD
 module.exports = mongoose.model('Reserve', reserveSchema);
+=======
+module.exports = mongoose.model('Reserve', reserveSchema);
+>>>>>>> origin/rkyoung7
