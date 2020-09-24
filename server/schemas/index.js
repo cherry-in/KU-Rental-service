@@ -5,7 +5,7 @@ module.exports = () => {
         if (process.env.NODE_ENV !== 'production') {
             mongoose.set('debug', true);
         }
-        mongoose.connect('mongodb://rkyoung7:rkdud127@localhost:27017/admin', {
+        mongoose.connect('mongodb://hijinju:highlight@localhost:27017/admin', {
             dbName: 'KU_Rental',
         }, (error) => {
             if (error) {
