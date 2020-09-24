@@ -5,10 +5,10 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 const Log = styled.div`
-    background-color: #981e1e;
+    background-color: #7B031D;
 `
 const Logo = styled.div`
-    background-color: #E76A6A;
+    background-color: rgb(239, 218, 200);
 `
 
 function Login() {
@@ -104,4 +104,4 @@ function Login() {
     )
 }
 
-export default Login
+export default Login;
