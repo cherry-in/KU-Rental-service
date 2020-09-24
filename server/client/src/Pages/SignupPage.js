@@ -20,8 +20,7 @@ function Signup() {
                     name: Yup.string()
                         .required('이름을 입력해주세요.'),
                     id: Yup.string()
-                        // .id('이메일형식이 유효하지 않습니다.')
-                        .required('이메일을 입력해주세요.'),
+                        .required('학번을 입력해주세요.'),
                     password: Yup.string()
                         .required('비밀번호를 입력해주세요.')
                         .min(8, '8자 이상 입력해주세요.'),
@@ -29,11 +28,8 @@ function Signup() {
                         .required('비밀번호를 다시 입력해주세요.')
                         .min(8, '8자 이상 입력해주세요.')
                         .oneOf([Yup.ref("password"), null], '비밀번호가 일치하지 않습니다.'),
-                    // address: Yup.string()
-                    //     .required('주소를 입력해주세요.')
                 })}
                 onSubmit={(values, { setSubmitting }) => {
-                    console.log(values);
                     axios({
                       method: 'post',
                       url: '/users',
@@ -76,26 +72,15 @@ function Signup() {
                                 <div className="form-group mb-4">
                                     <input
                                         className={(touched.id && errors.id ? 'form-control is-invalid' : "form-control")}
-                                        type="text"
+                                        type="number"
                                         name="id"
                                         {...getFieldProps('id')}
-                                        placeholder="Input id"
+                                        placeholder="Input Student Id"
                                     />
                                     {touched.id && errors.id ? (
                                         <div className="invalid-feedback text-left">{errors.id}</div>
                                     ) : null}
                                 </div>
-                                {/* <div className="form-group mb-4">
-                                    <input
-                                        className={(touched.address && errors.address ? 'form-control is-invalid' : "form-control")}
-                                        type="text"
-                                        name="address"
-                                        {...getFieldProps('address')}
-                                        placeholder="Input Address" />
-                                    {touched.address && errors.address ? (
-                                        <div className="invalid-feedback text-left">{errors.address}</div>
-                                    ) : null}
-                                </div> */}
                                 <div className="form-group mb-4">
                                     <input
                                         className={(touched.password && errors.password ? 'form-control is-invalid' : "form-control")}
@@ -122,9 +107,9 @@ function Signup() {
                                 </div>
                                 <button type="submit" className="btn btn-dark" disabled={isSubmitting}>
                                     Sign Up
-                  </button>
-                                <button><Link to="/">로그인</Link></button>
-                                <button><Link to="/home">홈</Link></button>
+                                </button>
+                                <button><Link to="/login">로그인</Link></button>
+                                <button><Link to="/">홈</Link></button>
                             </form>
                         </div>
                     )}

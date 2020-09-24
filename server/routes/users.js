@@ -1,8 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const User = require('../schemas/user');
+const bcrypt = require("bcrypt");
+const { verifyToken } = require('./middlewares');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
+const router = express.Router();
+
+router.post('/', function (req, res, next) {
   console.log('/users post req.body', req.body)
   User.findOne({ id: req.body.id }, function (err, users) {
     if (err) return res.status(500).json({ error: err });
@@ -28,5 +31,4 @@ router.get('/', function(req, res, next) {
       });
   })
 });
-
 module.exports = router;

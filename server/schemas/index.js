@@ -6,7 +6,7 @@ module.exports = () => {
             mongoose.set('debug', true);
         }
         mongoose.connect('mongodb://cherry:1q2w3e4r@localhost:27017/admin', {
-            dbName: 'KU_Rental',
+            dbName: 'ku_rental', useNewUrlParser: true, useUnifiedTopology: true,
         }, (error) => {
             if (error) {
                 console.log('몽고디비 연결 에러', error);
