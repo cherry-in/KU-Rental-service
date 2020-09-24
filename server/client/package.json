@@ -9,11 +9,8 @@
     "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
     "formik": "^2.1.5",
-<<<<<<< HEAD
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
-=======
->>>>>>> origin/rkyoung7
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
@@ -25,13 +22,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-<<<<<<< HEAD
-    "eject": "react-scripts eject",
-    "proxy": "http://localhost:3030"
-=======
     "eject": "react-scripts eject"
->>>>>>> origin/rkyoung7
   },
+  "proxy": "http://localhost:3030",
   "eslintConfig": {
     "extends": "react-app"
   },

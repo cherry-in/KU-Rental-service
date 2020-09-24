@@ -11,7 +11,6 @@ const Logo = styled.div`
     background-color: #E76A6A;
 `
 
-
 function Login() {
     return (
         <div className="container-fluid">
