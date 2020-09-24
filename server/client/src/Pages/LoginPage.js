@@ -1,8 +1,10 @@
-import React, { } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const Log = styled.div`
     background-color: #981e1e;
@@ -13,6 +15,11 @@ const Logo = styled.div`
 
 
 function Login() {
+    const [state, setState]= useState(false);
+
+  if (state) {
+    return <Redirect to="/home" />;
+  }
     return (
         <div className="container-fluid">
             <div className="row">
@@ -22,31 +29,30 @@ function Login() {
                 </Logo>
                 <Log className="col-md-7 col-12">
                     <Formik
-                        initialValues={{ email: '', password: '' }}
+                        initialValues={{ id: '', password: '' }}
                         validationSchema={Yup.object({
-                            email: Yup.string()
-                                .email('이메일형식이 유효하지 않습니다.')
-                                .required('이메일을 입력해주세요.'),
+                            id: Yup.string()
+                        .required('학번을 입력해주세요.'),
                             password: Yup.string()
                                 .required('비밀번호를 입력해주세요.')
                                 .min(8, '8자 이상 입력해주세요.'),
                         })}
                         onSubmit={(values, { setSubmitting }) => {
-                            // axios({
-                            //   method: 'post',
-                            //   url: '/login',
-                            //   data: values,
-                            // }).then(res => {
-                            //   if (res.status === 404) return alert(res.data.error)
+                            axios({
+                              method: 'post',
+                              url: '/login',
+                              data: values,
+                            }).then(res => {
+                              if (res.status === 404) return alert(res.data.error)
                             alert("로그인이 완료되었습니다!")
 
-                            //   localStorage.setItem('token', res.data.token);
-                            //   localStorage.setItem('id', res.data.users._id);
-                            //   setState(true);
-                            // })
-                            //   .catch(err => {
-                            //     alert(err.error)
-                            //   });
+                              localStorage.setItem('token', res.data.token);
+                              localStorage.setItem('id', res.data.users._id);
+                              setState(true);
+                            })
+                              .catch(err => {
+                                alert(err.error)
+                              });
 
                             setTimeout(() => {
                                 setSubmitting(false);
@@ -64,14 +70,14 @@ function Login() {
                                     <form onSubmit={handleSubmit} className="col-sm-3">
                                         <div className="form-group mb-4">
                                             <input
-                                                className={(touched.email && errors.email ? 'form-control is-invalid' : "form-control")}
-                                                type="email"
-                                                name="email"
-                                                {...getFieldProps('email')}
-                                                placeholder="Input Email"
+                                                className={(touched.id && errors.id ? 'form-control is-invalid' : "form-control")}
+                                                type="number"
+                                                name="id"
+                                                {...getFieldProps('id')}
+                                                placeholder="Input Student Id"
                                             />
-                                            {touched.email && errors.email ? (
-                                                <div className="invalid-feedback text-left">{errors.email}</div>
+                                            {touched.id && errors.id ? (
+                                                <div className="invalid-feedback text-left">{errors.id}</div>
                                             ) : null}
                                         </div>
                                         <div className="form-group mb-4">
@@ -88,9 +94,9 @@ function Login() {
                                         </div>
                                         <button type="submit" className="btn btn-dark" disabled={isSubmitting}>
                                             Login
-                  </button>
-                                        <button>
-                                            <Link to="/home">gha</Link></button>
+                                        </button>
+                                        <button><Link to="/home">홈</Link></button>
+                                        <div></div>
                                         <Link to="/signup">비밀번호를 잊으셨나요?</Link>
                                         <div></div>
                                         <Link to="/signup">회원이 아니신가요?</Link>
