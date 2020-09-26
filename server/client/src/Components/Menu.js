@@ -8,11 +8,12 @@ const Nav = styled.nav`
 
 function Menu() {
     const [state, setState] = useState()
-    
+    const name = localStorage.getItem('name');
+
     if (state) return <Redirect to="/" />;
 
     function logout() {
-        localStorage.removeItem('token');
+        localStorage.clear();
         alert("로그아웃 되었습니다.");
         setState(true);
     }
@@ -39,6 +40,7 @@ function Menu() {
                     </li>
                 </ul>
                 <div>
+                    <div>{name}님 안녕하세요.</div>
                     <button onClick={logout} type="button">로그아웃</button>
                     <button><Link to="/signup">회원가입</Link></button>
                 </div>

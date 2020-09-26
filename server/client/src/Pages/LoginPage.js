@@ -44,10 +44,9 @@ function Login() {
                               data: values,
                             }).then(res => {
                               if (res.status === 404) return alert(res.data.error)
-                            alert("로그인이 완료되었습니다!")
-
                               localStorage.setItem('token', res.data.token);
                               localStorage.setItem('id', res.data.users._id);
+                              localStorage.setItem('name', res.data.users.name);
                               setState(true);
                             })
                               .catch(err => {

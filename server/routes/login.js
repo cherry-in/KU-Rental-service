@@ -20,7 +20,7 @@ router.get('/', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
     console.log('/login post request', req.body)
-    User.findOne({ id: req.body.id }, 'id password', function (err, users) {
+    User.findOne({ id: req.body.id }, 'id password name', function (err, users) {
         if (err) return res.status(500).json({ error: err });
 
         if (!users) {
