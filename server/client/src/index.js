@@ -4,8 +4,7 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
-// import { PrivateRoute } from './PrivateRoute';
-
+import { PrivateRoute } from './Components/PrivateRoute';
 
 import Login from './Pages/LoginPage';
 import Home from './Pages/HomePage';
@@ -13,6 +12,8 @@ import Signup from './Pages/SignupPage';
 import Apply from './Pages/ApplyPage';
 import Check from './Pages/CheckPage';
 import Notice from './Pages/NoticePage';
+import Find from './Pages/FindPage';
+import Change from './Pages/ChangePage';
 
 axios.defaults.validateStatus = function (status) {
   return status < 500; // default
@@ -21,12 +22,18 @@ axios.defaults.validateStatus = function (status) {
 ReactDOM.render(
 <Router>
     <Switch>
-      <Route exact path="/" component={Login} />
+      <PrivateRoute exact path="/" component={Home} />
+      <Route path="/login" component={Login} />
       <Route path="/home" component={Home} />
       <Route path="/signup" component={Signup} />
       <Route path="/apply" component={Apply} />
       <Route path="/check" component={Check} />
       <Route path="/notice" component={Notice} />
+      <Route path="/find" component={Find} />
+      <Route path="/change" component={Change}/>
+      <Redirect path="/login" to="/" />
+      <Redirect path="/home" to="/" />
+      <Redirect path="/change/:id" to="/change"/>
     </Switch>
   </Router>,
   document.getElementById('root')
