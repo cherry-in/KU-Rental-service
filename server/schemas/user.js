@@ -12,6 +12,17 @@ const userSchema = new Schema({
         type: String,
         
     },
+    role: {
+      type: String,
+      default:'user',
+    },
+    answer:{
+      type: String,
+    },
+    question: {
+      type: String,
+    },
+  
     id: {
         type: Number,
         required: true,

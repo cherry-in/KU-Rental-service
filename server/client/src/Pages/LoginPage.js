@@ -7,10 +7,10 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 
 const Log = styled.div`
-    background-color: #981e1e;
+    background-color: #7B031D;
 `
 const Logo = styled.div`
-    background-color: #E76A6A;
+    background-color: rgb(239, 218, 200);
 `
 
 
@@ -92,12 +92,12 @@ function Login() {
                                                 <div className="invalid-feedback text-left">{errors.password}</div>
                                             ) : null}
                                         </div>
-                                        <button type="submit" className="btn btn-dark" disabled={isSubmitting}>
+                                        <button type="submit" class="btn btn-outline-light" disabled={isSubmitting}>
                                             Login
                                         </button>
-                                        <button><Link to="/home">홈</Link></button>
+                                        <button class="btn btn-outline-light"><Link to="/home">홈</Link></button>
                                         <div></div>
-                                        <Link to="/signup">비밀번호를 잊으셨나요?</Link>
+                                        <Link to="/find">비밀번호를 잊으셨나요?</Link>
                                         <div></div>
                                         <Link to="/signup">회원이 아니신가요?</Link>
                                     </form>

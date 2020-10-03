@@ -10,6 +10,7 @@ function Home() {
                 home
                 <button><Link to="/login">로그인</Link></button>
                 <button><Link to="/signup">회원가입</Link></button>
+                <button><Link to="/change">비밀번호 수정</Link></button>
             </div>
         </div>
     )
