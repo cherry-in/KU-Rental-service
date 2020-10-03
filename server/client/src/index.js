@@ -27,7 +27,7 @@ ReactDOM.render(
       <Route path="/home" component={Home} />
       <Route path="/signup" component={Signup} />
       <Route path="/apply" component={Apply} />
-      <Route path="/check" component={Check} />
+      <Route path="/check/:id" component={Check} />
       <Route path="/notice" component={Notice} />
       <Route path="/find" component={Find} />
       <Route path="/change" component={Change}/>

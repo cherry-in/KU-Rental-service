@@ -33,7 +33,11 @@ function Menu() {
                         <Link to="/apply" className="nav-link">대관 신청</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/check" className="nav-link">대관 확인/취소</Link>
+                        <Link to={{
+                            pathname: `/check/${localStorage.getItem('_id')}`,
+                            state: { id: localStorage.getItem('_id') },
+                        }} className="nav-link">
+                            대관 확인/취소</Link>
                     </li>
                     <li className="nav-item">
                         <Link to="/notice" className="nav-link">공지사항</Link>

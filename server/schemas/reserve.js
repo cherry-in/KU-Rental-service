@@ -1,44 +1,46 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
+const { Types: { ObjectId } } = Schema;
 const reserveSchema = new Schema({
-    date: {
-        type: String,
-    },
-    time: {
-        type: String,
-        
-    },
-    room:{
-        type: String,
-        
-    },
-    name: { //대표자 이름
-        type: String,
-    
-    },
-    id:{
-      type: Number,
-      
-    },
-    reason: {
-      type: String,
+  id: {
+    type: ObjectId,
+    required: true,
+    ref: 'User',
+  },
+  date: {
+    type: String,
+  },
+  time: {
+    type: String,
 
-    },
-    member: {
-      type: String,
-      
-    },
-    approve: {
-      type: Boolean,
-     
-    },
-    num: {
-      type: Number,
-    
-    },
-  
-    
+  },
+  room: {
+    type: String,
+
+  },
+  name: { //대표자 이름
+    type: String,
+
+  },
+  reason: {
+    type: String,
+
+  },
+  member: {
+    type: String,
+
+  },
+  approve: {
+    type: Boolean,
+    default: false,
+
+  },
+  num: {
+    type: Number,
+  },
+
+
 });
 
 module.exports = mongoose.model('Reserve', reserveSchema);

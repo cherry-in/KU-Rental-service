@@ -55,6 +55,8 @@ router.post('/find', function (req, res, next) {
     User.findOne({ id: req.body.id }, 'id question answer', function (err, users) {
         if (err) return res.status(500).json({ error: err });
 
+        if (!users) return res.status(404).json({ error: '해당 학번이 존재하지 않습니다.' });
+        
         if (users.question === req.body.question) {
             if (users.answer === req.body.answer) {
                 return res.status(201).json({users});
