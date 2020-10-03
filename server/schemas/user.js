@@ -4,25 +4,30 @@ const saltRounds = 10;
 
 const { Schema } = mongoose;
 const userSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-
-  },
-  id: {
-    type: Number,
-    required: true,
-  },
-  question: {
-    type: String,
-  },
-  answer: {
-    type: String,
-  },
-
+    name: {
+        type: String,
+        required: true,
+    },
+    password: {
+        type: String,
+        
+    },
+    role: {
+      type: String,
+      default:'user',
+    },
+    answer:{
+      type: String,
+    },
+    question: {
+      type: String,
+    },
+  
+    id: {
+        type: Number,
+        required: true,
+    },
+    
 });
 
 userSchema.pre("save", function (next) {

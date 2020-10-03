@@ -9,11 +9,11 @@ import { PrivateRoute } from './Components/PrivateRoute';
 import Login from './Pages/LoginPage';
 import Home from './Pages/HomePage';
 import Signup from './Pages/SignupPage';
+import Find from './Pages/FindPage';
+import Change from './Pages/ChangePage';
 import Apply from './Pages/ApplyPage';
 import Check from './Pages/CheckPage';
 import Notice from './Pages/NoticePage';
-import Find from './Pages/FindPage';
-import Change from './Pages/ChangePage';
 
 axios.defaults.validateStatus = function (status) {
   return status < 500; // default
@@ -26,12 +26,12 @@ ReactDOM.render(
       <Route path="/login" component={Login} />
       <Route path="/home" component={Home} />
       <Route path="/signup" component={Signup} />
+      <Route path="/find" component={Find} />
+      <Route path="/change" component={Change} />
       <Route path="/apply" component={Apply} />
       <Route path="/check/:id" component={Check} />
       <Route path="/notice" component={Notice} />
-      <Route path="/find" component={Find} />
-      <Route path="/change" component={Change}/>
-      <Redirect path="/login" to="/" />
+      <Redirect path="/" to="/" />
       <Redirect path="/home" to="/" />
       <Redirect path="/change/:id" to="/change"/>
     </Switch>

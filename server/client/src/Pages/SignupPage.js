@@ -66,7 +66,7 @@ function Signup() {
                                         type="text"
                                         name="name"
                                         {...getFieldProps('name')}
-                                        placeholder="Input Name" />
+                                        placeholder="이름" />
                                     {touched.name && errors.name ? (
                                         <div className="invalid-feedback text-left">{errors.name}</div>
                                     ) : null}
@@ -77,7 +77,7 @@ function Signup() {
                                         type="text"
                                         name="id"
                                         {...getFieldProps('id')}
-                                        placeholder="Input Student Id"
+                                        placeholder="학번/교번"
                                     />
                                     {touched.id && errors.id ? (
                                         <div className="invalid-feedback text-left">{errors.id}</div>
@@ -89,7 +89,7 @@ function Signup() {
                                         type="password"
                                         name="password"
                                         {...getFieldProps('password')}
-                                        placeholder="Input Password"
+                                        placeholder="비밀번호"
                                     />
                                     {touched.password && errors.password ? (
                                         <div className="invalid-feedback text-left">{errors.password}</div>
@@ -101,7 +101,7 @@ function Signup() {
                                         type="password"
                                         name="password2"
                                         {...getFieldProps('password2')}
-                                        placeholder="Input Confirm Password"
+                                        placeholder="비밀번호 확인"
                                     />
                                     {touched.password2 && errors.password2 ? (
                                         <div className="invalid-feedback text-left">{errors.password2}</div>
@@ -130,8 +130,8 @@ function Signup() {
                                 <button type="submit" className="btn btn-dark" disabled={isSubmitting}>
                                     Sign Up
                                 </button>
-                                <button><Link to="/login">로그인</Link></button>
-                                <button><Link to="/">홈</Link></button>
+                                <button class="btn btn-light"><Link to="/login">로그인</Link></button>
+                                <button class="btn btn-light"><Link to="/">홈</Link></button>
                             </form>
                         </div>
                     )}

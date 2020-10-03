@@ -6,10 +6,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Link, Redirect } from 'react-router-dom';
 
 function Find() {
-    const [state, setState] = useState(false);
+    const [state, setState] = useState();
 
     if (state) {
-        return <Redirect to="/change" />;
+        return <Redirect to={{
+            pathname: `/change/${localStorage.getItem('_id')}`,
+            state: { id: localStorage.getItem('_id') },
+        }} />;
     }
 
     return (
@@ -29,7 +32,7 @@ function Find() {
                         data: values,
                     }).then(res => {
                         if (res.status === 404) return alert(res.data.error)
-
+                        localStorage.setItem('_id', res.data.users._id)
                         setState(true);
                     })
                         .catch(err => {

@@ -34,5 +34,31 @@ router.post('/', function (req, res, next) {
   })
 });
 
+router.put('/change/:id', function (req, res, next) {
+  console.log('/change put req.body', req.params)
+  User.findOne({ _id: req.params.id }, 'password', function (err, user) {
+    if (err) return res.status(500).json({ error: err });
+    bcrypt.compare(req.body.password, user.password, function (err, result) {
+      if (err) {
+        console.log(err)
+        return res.status(500).json({ error: err });
+      }
+      if (result) {
+        return res.status(404).json({ error: '새로운 비밀번호를 입력해주세요.' })
+      }
+    });
+
+    user.password = req.body.password;
+    user.save()
+      .then((result) => {
+        console.log(result);
+        res.status(201).json(result);
+      })
+      .catch((err) => {
+        console.error(err);
+        next(err);
+      });
+  })
+});
 
 module.exports = router;
