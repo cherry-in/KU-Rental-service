@@ -14,7 +14,7 @@ function Apply() {
                         time: "시간",
                         room: "9-116",
                         name: "종윤",
-                        _id: "5f6fa20001988e5604603870",
+                        _id: "5f786720c45bbf6c68899c51",
                         reason: "study hard",
                         member: "jinju rkyoung",
                         approve: false,
