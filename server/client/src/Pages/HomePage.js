@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Menu from '../Components/Menu';
+import Calendar from '../Components/Calendar';
 import styled from 'styled-components';
 import moment from 'moment';
 import "moment/locale/ko";
@@ -50,8 +51,18 @@ function Home() {
     return (
         <div>
             <Menu />
-            <div className="container">
-                <Drop className="row dropdown mt-5 mb-5">
+            <div className="container mt-3">
+
+                <h2>대관 현황</h2>
+                <p>
+                    <strong>대관 가능 시간</strong>
+                    <ul>
+                        <li>평일: 9시 - 22시/ 예약가능 시간 이후 폐쇄</li>
+                        <li>주말: 이용 불가</li>
+                    </ul>
+                </p>
+
+                <Drop className="row dropdown mt-1 mb-2">
                     <button className="btn btn-lg dropdown-toggle mx-auto col-5" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         기간을 선택해주십시오.
                     </button>
@@ -61,9 +72,36 @@ function Home() {
                         ))}
                     </div>
                 </Drop>
+                <ul className="nav nav-tabs nav-justified mt-4" id="myTab" role="tablist">
+                    <li className="nav-item">
+                        <a className="nav-link active" id="7-tab" data-toggle="tab" href="#7" role="tab"> 7-223 </a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" id="9-tab" data-toggle="tab" href="#9" role="tab"> 9-116 </a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" id="25-tab" data-toggle="tab" href="#25" role="tab"> 25-307 </a>
+                    </li>
+                </ul>
+
+                <div className="tab-content" id="myTabContent">
+                    <div className="tab-pane fade show active" id="7" role="tabpanel">
+                        
+                    {/* <Calendar />
+                    <div className="container mt-1 mb-2"></div> */}
+
+                    </div>
+
+                    <div className="tab-pane fade" id="9" role="tabpanel" aria-labelledby="9-tab">
+                    </div>
+
+                    <div className="tab-pane fade" id="25" role="tabpanel" aria-labelledby="25-tab">
+                    </div>
+
+                </div>
             </div>
         </div>
     )
 }
 
-export default Home
+export default Home;
