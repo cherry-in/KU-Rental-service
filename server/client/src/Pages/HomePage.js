@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Menu from '../Components/Menu';
+import Calendar from '../Components/Calendar';
 import styled from 'styled-components';
+
+const Drop = styled.div`
+    & button {
+        border solid 1px;
+    }
+`
 
 const Schedule = styled.div`
     & ul {
@@ -36,13 +43,14 @@ const Schedule = styled.div`
 `
 
 function Home() {
+    const [click, setState] = useState();
+
     return (
         <div>
             <Menu />
-            <div className="container">
+            <div className="container mt-3">
 
                 <h2>대관 현황</h2>
-
                 <p>
                     <strong>대관 가능 시간</strong>
                     <ul>
@@ -51,144 +59,43 @@ function Home() {
                     </ul>
                 </p>
 
-                <ul className="nav nav-tabs float-right" id="myTab" role="tablist">
+                <Drop className="row dropdown mt-1 mb-2">
+                    <button className="btn btn-lg dropdown-toggle mx-auto col-5" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        기간을 선택해주십시오.
+                    </button>
+                    <div className="dropdown-menu col-5" aria-labelledby="dropdownMenuButton">
+                        <a className="dropdown-item" href="#">10 / 5 ~ 10 / 9</a>
+                        <a className="dropdown-item" href="#">10 / 12 ~ 10 / 16</a>
+                        <a className="dropdown-item" href="#">10 / 19 ~ 10 / 23</a>
+                    </div>
+                </Drop>
+
+                <ul className="nav nav-tabs nav-justified mt-4" id="myTab" role="tablist">
                     <li className="nav-item">
-                        <a className="nav-link active" id="7-tab" data-toggle="tab" href="#7"> 7-223 </a>
+                        <a className="nav-link active" id="7-tab" data-toggle="tab" href="#7" role="tab"> 7-223 </a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" id="9-tab" data-toggle="tab" href="#9"> 9-116 </a>
+                        <a className="nav-link" id="9-tab" data-toggle="tab" href="#9" role="tab"> 9-116 </a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" id="25-tab" data-toggle="tab" href="#25"> 25-307 </a>
+                        <a className="nav-link" id="25-tab" data-toggle="tab" href="#25" role="tab"> 25-307 </a>
                     </li>
                 </ul>
 
                 <div className="tab-content" id="myTabContent">
-                    <div className="tab-pane fade show active" id="7" role="tabpanel" aria-labelledby="7-tab">123</div>
-                    <div className="tab-pane fade" id="9" role="tabpanel" aria-labelledby="9-tab">...</div>
-                    <div className="tab-pane fade" id="25" role="tabpanel" aria-labelledby="252-tab">...</div>
+                    <div className="tab-pane fade show active" id="7" role="tabpanel">
+                        
+                    {/* <Calendar />
+                    <div className="container mt-1 mb-2"></div> */}
 
-                    <Schedule className="row cd-schedule cd-schedule--loading margin-top-lg margin-bottom-lg js-cd-schedule">
-                        <div className="col-12 cd-schedule__events">
-                            <ul>
-                                <li className="cd-schedule__group">
-                                    <div className="cd-schedule__top-info"><span> 시간\요일</span></div>
-                                </li>
-                                <li className="cd-schedule__group">
-                                    <div className="cd-schedule__top-info"><span>월</span></div>
-                                    <ul>
-                                        <li className="cd-schedule__event">
-                                            <a data-start="10:00" data-end="12:00" data-content="event-abs-circuit" data-event="event-1" href="#0">
-                                                <em className="cd-schedule__name">확률론</em>
-                                            </a>
-                                        </li>
-                                        <li className="cd-schedule__event">
-                                            <a data-start="17:00" data-end="18:00" data-content="event-abs-circuit" data-event="event-1" href="#0">
-                                                <em className="cd-schedule__name">수치해석학</em>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="cd-schedule__group">
-                                    <div className="cd-schedule__top-info"><span>화</span></div>
-                                    <ul>
-                                        <li className="cd-schedule__event">
-                                            <a data-start="11:00" data-end="12:00" data-content="event-abs-circuit" data-event="event-1" href="#0">
-                                                <em className="cd-schedule__name">해석학</em>
-                                            </a>
-                                        </li>
-                                        <li className="cd-schedule__event">
-                                            <a data-start="16:00" data-end="18:00" data-content="event-abs-circuit" data-event="event-1" href="#0">
-                                                <em className="cd-schedule__name">수치해석학</em>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="cd-schedule__group">
-                                    <div className="cd-schedule__top-info"><span>수</span></div>
-                                    <ul>
-                                        <li className="cd-schedule__event">
-                                            <a data-start="9:00" data-end="10:00" data-content="event-abs-circuit" data-event="event-1" href="#0">
-                                                <em className="cd-schedule__name">산업수학</em>
-                                            </a>
-                                        </li>
-                                        <li className="cd-schedule__event">
-                                            <a data-start="18:00" data-end="19:00" data-content="event-abs-circuit" data-event="event-1" href="#0">
-                                                <em className="cd-schedule__name">해석학</em>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="cd-schedule__group">
-                                    <div className="cd-schedule__top-info"><span>목</span></div>
-                                    <ul>
-                                        <li className="cd-schedule__event">
-                                            <a data-start="9:00" data-end="11:00" data-content="event-abs-circuit" data-event="event-1" href="#0">
-                                                <em className="cd-schedule__name">해석학</em>
-                                            </a>
-                                        </li>
-                                        <li className="cd-schedule__event">
-                                            <a data-start="11:00" data-end="12:00" data-content="event-abs-circuit" data-event="event-1" href="#0">
-                                                <em className="cd-schedule__name">확률론</em>
-                                            </a>
-                                        </li>
-                                        <li className="cd-schedule__event">
-                                            <a data-start="16:00" data-end="17:00" data-content="event-abs-circuit" data-event="event-1" href="#0">
-                                                <em className="cd-schedule__name">수치해석학</em>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="cd-schedule__group">
-                                    <div className="cd-schedule__top-info"><span>금</span></div>
-                                    <ul>
-                                        <li className="cd-schedule__event">
-                                            <a data-start="13:00" data-end="15:00" data-content="event-abs-circuit" data-event="event-1" href="#0">
-                                                <em className="cd-schedule__name">산업수학</em>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
+                    </div>
 
-                        <div className="col-12 cd-schedule__timeline">
-                            <ul>
-                                <li><span>09:00</span></li>
-                                <li><span>10:00</span></li>
-                                <li><span>11:00</span></li>
-                                <li><span>12:00</span></li>
-                                <li><span>13:00</span></li>
-                                <li><span>14:00</span></li>
-                                <li><span>15:00</span></li>
-                                <li><span>16:00</span></li>
-                                <li><span>17:00</span></li>
-                                <li><span>18:00</span></li>
-                                <li><span>19:00</span></li>
-                                <li><span>20:00</span></li>
-                                <li><span>21:00</span></li>
-                                <li><span>22:00</span></li>
-                            </ul>
-                        </div>
+                    <div className="tab-pane fade" id="9" role="tabpanel" aria-labelledby="9-tab">
+                    </div>
 
-                        {/* <div class="cd-schedule-modal">
-                        <header class="cd-schedule-modal__header">
-                            <div class="cd-schedule-modal__content">
-                                <span class="cd-schedule-modal__date"></span>
-                                <h3 class="cd-schedule-modal__name"></h3>
-                            </div>
+                    <div className="tab-pane fade" id="25" role="tabpanel" aria-labelledby="25-tab">
+                    </div>
 
-                            <div class="cd-schedule-modal__header-bg"></div>
-                        </header>
-
-                        <div class="cd-schedule-modal__body">
-                            <div class="cd-schedule-modal__event-info"></div>
-                            <div class="cd-schedule-modal__body-bg"></div>
-                        </div>
-
-                        <a href="#0" class="cd-schedule-modal__close text-replace">Close</a>
-                    </div> */}
-                    </Schedule>
                 </div>
             </div>
         </div>
