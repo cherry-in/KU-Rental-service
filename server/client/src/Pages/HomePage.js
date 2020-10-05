@@ -9,39 +9,6 @@ const Drop = styled.div`
     }
 `
 
-const Schedule = styled.div`
-    & ul {
-        list-style-type: none;
-    }
-
-    & .cd-schedule__events {
-        width: 100%;
-
-        > ul {
-        display: flex;
-        flex-wrap: nowrap;
-        }
-
-    & .cd-schedule__timeline {
-
-        > ul {
-        line-height: 1em;
-        }
-    }
-
-    & .cd-schedule__group {
-        flex-basis: 0;
-        flex-grow: 1;
-    }
-
-    & .cd-schedule__event {
-        position: absolute;
-        z-index: 3;
-        width: calc(100% + 2px); // top position and height will be set using js
-        left: -1px;
-    }
-`
-
 function Home() {
     const [click, setState] = useState();
 

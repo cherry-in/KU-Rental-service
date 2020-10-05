@@ -6,7 +6,7 @@ module.exports = () => {
             mongoose.set('debug', true);
         }
         mongoose.connect('mongodb://hijinju:highlight@localhost:27017/admin', {
-            dbName: 'KU_Rental',
+            dbName: 'ku_rental',
         }, (error) => {
             if (error) {
                 console.log('몽고디비 연결 에러', error);
