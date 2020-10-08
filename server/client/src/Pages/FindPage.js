@@ -5,47 +5,41 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link, Redirect } from 'react-router-dom';
 
-function Signup() {
-    const [state, setState] = useState(false);
+function Find() {
+    const [state, setState] = useState();
 
     if (state) {
-        return <Redirect to="/login" />;
+        return <Redirect to={{
+            pathname: `/change/${localStorage.getItem('_id')}`,
+            state: { id: localStorage.getItem('_id') },
+        }} />;
     }
 
     return (
         <div className="d-flex flex-column justify-content-between vh-100">
             <Formik
-                initialValues={{ name: '', id: '', password: '', password2: '', question: '', answer: '' }}
+                initialValues={{ id: '', question: '', answer: '' }}
                 validationSchema={Yup.object({
-                    name: Yup.string()
-                        .required('이름을 입력해주세요.'),
                     id: Yup.string()
                         .required('학번을 입력해주세요.'),
-                    password: Yup.string()
-                        .required('비밀번호를 입력해주세요.')
-                        .min(8, '8자 이상 입력해주세요.'),
-                    password2: Yup.string()
-                        .required('비밀번호를 다시 입력해주세요.')
-                        .min(8, '8자 이상 입력해주세요.')
-                        .oneOf([Yup.ref("password"), null], '비밀번호가 일치하지 않습니다.'),
                     answer: Yup.string()
                         .required('답변을 입력해주세요.'),
                 })}
                 onSubmit={(values, { setSubmitting }) => {
                     axios({
                         method: 'post',
-                        url: '/users',
+                        url: '/login/find',
                         data: values,
                     }).then(res => {
                         if (res.status === 404) return alert(res.data.error)
-                        alert("회원가입이 완료되었습니다!")
-
+                        localStorage.setItem('_id', res.data.users._id)
                         setState(true);
                     })
                         .catch(err => {
                             alert(err.error)
                         });
 
+                    console.log(values);
                     setTimeout(() => {
                         setSubmitting(false);
                     }, 400);  // finish the cycle in handler
@@ -62,49 +56,14 @@ function Signup() {
                             <form onSubmit={handleSubmit} className="col-sm-3">
                                 <div className="form-group mb-4">
                                     <input
-                                        className={(touched.name && errors.name ? 'form-control is-invalid' : "form-control")}
-                                        type="text"
-                                        name="name"
-                                        {...getFieldProps('name')}
-                                        placeholder="이름" />
-                                    {touched.name && errors.name ? (
-                                        <div className="invalid-feedback text-left">{errors.name}</div>
-                                    ) : null}
-                                </div>
-                                <div className="form-group mb-4">
-                                    <input
                                         className={(touched.id && errors.id ? 'form-control is-invalid' : "form-control")}
-                                        type="text"
+                                        type="number"
                                         name="id"
                                         {...getFieldProps('id')}
-                                        placeholder="학번/교번"
+                                        placeholder="Input Student Id"
                                     />
                                     {touched.id && errors.id ? (
                                         <div className="invalid-feedback text-left">{errors.id}</div>
-                                    ) : null}
-                                </div>
-                                <div className="form-group mb-4">
-                                    <input
-                                        className={(touched.password && errors.password ? 'form-control is-invalid' : "form-control")}
-                                        type="password"
-                                        name="password"
-                                        {...getFieldProps('password')}
-                                        placeholder="비밀번호"
-                                    />
-                                    {touched.password && errors.password ? (
-                                        <div className="invalid-feedback text-left">{errors.password}</div>
-                                    ) : null}
-                                </div>
-                                <div className="form-group mb-4">
-                                    <input
-                                        className={(touched.password2 && errors.password2 ? 'form-control is-invalid' : "form-control")}
-                                        type="password"
-                                        name="password2"
-                                        {...getFieldProps('password2')}
-                                        placeholder="비밀번호 확인"
-                                    />
-                                    {touched.password2 && errors.password2 ? (
-                                        <div className="invalid-feedback text-left">{errors.password2}</div>
                                     ) : null}
                                 </div>
                                 <div className="form-group mb-4">
@@ -128,10 +87,10 @@ function Signup() {
                                     ) : null}
                                 </div>
                                 <button type="submit" className="btn btn-dark" disabled={isSubmitting}>
-                                    Sign Up
-                                </button>
-                                <button class="btn btn-light"><Link to="/login">로그인</Link></button>
-                                <button class="btn btn-light"><Link to="/">홈</Link></button>
+                                    submit
+                                    </button>
+                                <button><Link to="/login">로그인</Link></button>
+                                <button><Link to="/">홈</Link></button>
                             </form>
                         </div>
                     )}
@@ -141,4 +100,4 @@ function Signup() {
 }
 
 
-export default Signup;
+export default Find;

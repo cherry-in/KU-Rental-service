@@ -171,11 +171,14 @@ function Login() {
                                             />
                                         </div>
                                     </div>
-                                    <button type="submit" className={"btn btn-dark" + (mobile ? " w-100" : " w-20")} disabled={isSubmitting}> Login </button>
-                                </div>
-                                <div className="">
-                                    <Link to="/signup">비밀번호를 잊으셨나요? </Link> /
-                                            <Link to="/signup">  회원이 아니신가요?</Link>
+                                    <button type="submit" className={"btn btn-dark" + (mobile ? " w-100" : " w-20")} disabled={isSubmitting}>
+                                        Login
+                                        </button>
+                                    <button><Link to="/home">홈</Link></button>
+                                    <div></div>
+                                    <Link to="/find">비밀번호를 잊으셨나요?</Link>
+                                    <div></div>
+                                    <Link to="/signup">회원이 아니신가요?</Link>
                                 </div>
                             </form>
                         )}

@@ -13,12 +13,13 @@ const Nav = styled.nav`
 
 function Menu() {
     const [state, setState] = useState()
+    const name = localStorage.getItem('name');
 
     if (state) return <Redirect to="/" />;
 
     function logout() {
-        localStorage.removeItem('token');
-        alert("로그인 화면으로 이동합니다.");
+        localStorage.clear();
+        alert("로그아웃 되었습니다.");
         setState(true);
     }
 
@@ -40,11 +41,15 @@ function Menu() {
                         <Link to="/apply" className="nav-link">대관 신청</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/check" className="nav-link">대관 확인/취소</Link>
+                        <Link to={{
+                            pathname: `/check/${localStorage.getItem('_id')}`,
+                            state: { id: localStorage.getItem('_id') },
+                        }} className="nav-link">
+                            대관 확인/취소</Link>
                     </li>
                 </ul>
                 <div>
-                    <div></div>
+                    <div>{name}님 안녕하세요.</div>
                     <button onClick={logout} type="button">로그아웃</button>
                 </div>
             </div>
