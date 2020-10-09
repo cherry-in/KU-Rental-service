@@ -87,7 +87,7 @@ function Login() {
                                         </div>
                                         <button type="submit" className="btn btn-dark" disabled={isSubmitting}>
                                             Login
-                  </button>
+                                        </button>
                                         <button>
                                             <Link to="/home">gha</Link></button>
                                         <Link to="/signup">비밀번호를 잊으셨나요?</Link>
@@ -97,7 +97,6 @@ function Login() {
                                 </div>
                             )}
                     </Formik>
-
                 </Log>
             </div>
         </div>
