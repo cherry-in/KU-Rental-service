@@ -21,6 +21,30 @@ function Apply(props) {
         }} />;
     }
 
+    function time(starttime) {
+            console.log(starttime)
+            if (starttime == 21) {
+                return (<Field as="select" name="usetime">
+                    <option value="">이용시간을 선택하세요</option>
+                    <option value="1">1시간</option>
+                </Field>)
+            }
+            if (starttime == 20) {
+                return (<Field as="select" name="usetime">
+                    <option value="">이용시간을 선택하세요</option>
+                    <option value="1">1시간</option>
+                    <option value="2">2시간</option>
+                </Field>)
+            }
+            return (<Field as="select" name="usetime">
+                <option value="">이용시간을 선택하세요</option>
+                <option value="1">1시간</option>
+                <option value="2">2시간</option>
+                <option value="3">3시간</option>
+            </Field>)
+        
+    }
+
     function getUser() {
         axios.get(`/users/${props.match.params.id}`, {
             headers: { authorization: localStorage.getItem('token') },
@@ -44,7 +68,8 @@ function Apply(props) {
                 initialValues={{
                     _id: `${props.match.params.id}`,
                     date: '',
-                    time: '',
+                    starttime: '',
+                    usetime: '',
                     room: '',
                     reason: '',
                     students: [
@@ -56,8 +81,6 @@ function Apply(props) {
                 validationSchema={Yup.object({
                     date: Yup.string()
                         .required('날짜를 입력해주세요.'),
-                    time: Yup.string()
-                        .required('시간을 입력해주세요.'),
                     room: Yup.string()
                         .required('강의실 번호를 입력해주세요.'),
                     reason: Yup.string()
@@ -92,7 +115,6 @@ function Apply(props) {
                     isSubmitting,
                 }) => (
                         <div className="row justify-content-center align-items-center">
-                            {console.log(user)}
                             <form onSubmit={handleSubmit} className="col-sm-3">
                                 <div className="form-group mb-4">
                                     <label>대표자</label>
@@ -102,27 +124,37 @@ function Apply(props) {
                                     <label>신청날짜</label>
                                     <input
                                         className={(touched.date && errors.date ? 'form-control is-invalid' : "form-control")}
-                                        type="number"
+                                        type="text"
                                         name="date"
                                         {...getFieldProps('date')}
-                                        placeholder="2020mmdd"
+                                        placeholder="yyyy-mm-dd"
                                     />
                                     {touched.date && errors.date ? (
                                         <div className="invalid-feedback text-left">{errors.date}</div>
                                     ) : null}
                                 </div>
                                 <div className="form-group mb-4">
+                                    <label>이용시작시간</label>
+                                    <Field as="select" name="starttime">
+                                        <option value="">이용시작시간</option>
+                                        <option value="9">9시</option>
+                                        <option value="10">10시</option>
+                                        <option value="11">11시</option>
+                                        <option value="12">12시</option>
+                                        <option value="13">13시</option>
+                                        <option value="14">14시</option>
+                                        <option value="15">15시</option>
+                                        <option value="16">16시</option>
+                                        <option value="17">17시</option>
+                                        <option value="18">18시</option>
+                                        <option value="19">19시</option>
+                                        <option value="20">20시</option>
+                                        <option value="21">21시</option>
+                                    </Field>
+                                </div>
+                                <div className="form-group mb-4">
                                     <label>이용시간</label>
-                                    <input
-                                        className={(touched.time && errors.time ? 'form-control is-invalid' : "form-control")}
-                                        type="text"
-                                        name="time"
-                                        {...getFieldProps('time')}
-                                        placeholder="ex) 11:00~14:00"
-                                    />
-                                    {touched.time && errors.time ? (
-                                        <div className="invalid-feedback text-left">{errors.time}</div>
-                                    ) : null}
+                                    {time(values.starttime)}
                                 </div>
                                 <div className="form-group mb-4">
                                     <label>강의실</label>

@@ -8,11 +8,13 @@ router.post('/', function (req, res, next) {
     console.log('/reserve post req.body', req.body)
 
     const reserve = new Reserve({
-        id: req.body._id,
+        user: req.body._id,
         date: req.body.date,
-        time: req.body.time,
+        starttime: Number(req.body.starttime),
+        usetime: Number(req.body.usetime),
+        start: `${req.body.date}T`+`${req.body.starttime}:00:00`,
+        end: `${req.body.date}T`+`${Number(req.body.starttime)+Number(req.body.usetime)}:00:00`,
         room: req.body.room,
-        name: req.body.name,
         reason: req.body.reason,
         students: req.body.students,
         approve: req.body.approve,
@@ -33,7 +35,8 @@ router.post('/', function (req, res, next) {
 // router.get('/:_id', verifyToken, function (req, res, next) {
 router.get('/:_id', function (req, res, next) {
     console.log('/reserves get req.params', req.params)
-    Reserve.find({ id: req.params._id }, function (err, reserve) {
+    Reserve.find({ user: req.params._id }, function (err, reserve) {
+        console.log('id.name',reserve)
         if (err) return res.status(500).json({ error: err });
         console.log('reserve list',reserve)
         res.status(201).json(reserve);

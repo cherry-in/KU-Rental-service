@@ -7,7 +7,7 @@ function Check(props) {
     useEffect(() => {
         getReserve();
     }, [])
-    
+
     function getReserve() {
         axios.get(`/reserves/${props.match.params.id}`, {
             headers: { authorization: localStorage.getItem('token') },
@@ -55,10 +55,10 @@ function Check(props) {
                             return (
                                 <tr key={index}>
                                     <td>{reserve.date}</td>
-                                    <td>{reserve.time}</td>
+                                    <td>{reserve.starttime}시~{(Number(reserve.starttime) + reserve.usetime)}시</td>
                                     <td>{reserve.room}</td>
                                     <td>{reserve.num}</td>
-                                    <td>{reserve.approve?"사용허가":"글쎄..."}</td>
+                                    <td>{reserve.approve ? "사용허가" : "글쎄..."}</td>
                                     <td>
                                         <button onClick={() => remove(index)} className="btn btn-danger">
                                             취소
