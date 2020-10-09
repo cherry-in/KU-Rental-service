@@ -27,8 +27,8 @@ const reserveSchema = new Schema({
     type: String,
 
   },
-  member: {
-    type: String,
+  students: {
+    type: Array,
 
   },
   approve: {

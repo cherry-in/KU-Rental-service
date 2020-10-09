@@ -5,7 +5,7 @@ module.exports = () => {
         if (process.env.NODE_ENV !== 'production') {
             mongoose.set('debug', true);
         }
-        mongoose.connect('mongodb://hyj:hyj3657@localhost:27017/admin', {
+        mongoose.connect('mongodb://cherry:1q2w3e4r@localhost:27017/admin', {
             dbName: 'ku_rental', useNewUrlParser: true, useUnifiedTopology: true,
         }, (error) => {
             if (error) {

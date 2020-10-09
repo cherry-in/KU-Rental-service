@@ -34,6 +34,15 @@ router.post('/', function (req, res, next) {
   })
 });
 
+router.get('/:_id', function (req, res, next) {
+  console.log('/users get req.params', req.params)
+  User.findOne({ _id: req.params._id }, function (err, user) {
+    if (err) return res.status(500).json({ error: err });
+    res.status(201).json(user);
+  })
+})
+
+
 router.put('/change/:id', function (req, res, next) {
   console.log('/change put req.body', req.params)
   User.findOne({ _id: req.params.id }, 'password', function (err, user) {

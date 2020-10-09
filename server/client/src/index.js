@@ -29,7 +29,7 @@ ReactDOM.render(
       <Route path="/signup" component={Signup} />
       <Route path="/find" component={Find} />
       <Route path="/change" component={Change} />
-      <Route path="/apply" component={Apply} />
+      <Route path="/apply/:id" component={Apply} />
       <Route path="/check/:id" component={Check} />
       <Route path="/notice" component={Notice} />
       <Redirect path="/" to="/" />
