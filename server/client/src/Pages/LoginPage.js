@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link, Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
@@ -18,7 +18,7 @@ const Asd = styled.div`
     &.mobile {
         height : 20vh;
         display : flex;
-
+        padding:0;
     }
     
     & .mob-head {
@@ -26,14 +26,13 @@ const Asd = styled.div`
         flex-direction: row;
         height : 100%;
         width: 100%;
-        justify-content: center;
-        align-content: center;
+        justify-content: space-evenly;
+
     }
 
     & .mob-img {
-        max-width:100%;
-        max-height:100%;
-        }
+        max-width: 30vw;
+    }
 `
 
 const Asdf = styled.div`
@@ -45,7 +44,6 @@ const Asdf = styled.div`
     &.mob-formik {
         height : 80vh;
         width: 100%;
-        padding: 0;
         display: flex; 
         justify-content: center;
         align-items: center; 
@@ -59,10 +57,14 @@ const Asdf = styled.div`
     }
 
     & .mobb {
-        height: 30vh;
+        height: 35vh;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+    }
+
+    & .webb {
+        flex-direction: column;
     }
 
     & .qwer {
@@ -77,8 +79,8 @@ const Asdf = styled.div`
         width: 80%;
         justify-content: space-between;
         align-content: space-around;
-        display: flex;
         flex-direction: column;
+        display: flex;
     }
 
     & .mob-input-form {
@@ -102,16 +104,16 @@ function Login() {
         return <Redirect to="/home" />;
     }
     return (
-        <div className="row vw-100 vh-100">
-            <Asd className={"col-md-4 px-0" + (mobile ? " mobile" : " web")}>
-                <div className={mobile ? " mob-head" : ""}>
-                    <img className={mobile ? " mob-img" : "img-fluid"} src={Logo} />
-                    <div className="d-flex justify-content-center">
-                        <h1 className="font-weight-bold text-white align-self-center">고려대학교<br />대관 서비스</h1>
+        <div className="row vw-100 vh-100 m-0">
+            <Asd className={"col-md-4 col-12" + (mobile ? " mobile" : " web")}>
+                <div className={mobile ? "mob-head" : ""}>
+                    <img className={mobile ? "mob-img" : "img-fluid"} src={Logo} />
+                    <div className={"d-flex " + (mobile ? "align-items-center" : "justify-content-center")}>
+                        <h1 className="font-weight-bold text-white">고려대학교<br />대관 서비스</h1>
                     </div>
                 </div>
             </Asd>
-            <Asdf className={"col-md-8 col-12" + (mobile ? " mob-formik" : " web-formik")}>
+            <Asdf className={"col-md-8 col-12" + (mobile ? " mob-formik p-0" : " web-formik")}>
                 <Formik
                     initialValues={{ id: '', password: '' }}
                     validationSchema={Yup.object({
@@ -131,6 +133,7 @@ function Login() {
 
                             localStorage.setItem('token', res.data.token);
                             localStorage.setItem('id', res.data.users._id);
+                            localStorage.setItem('name', res.data.users.name);
                             setState(true);
                         })
                             .catch(err => {
@@ -149,10 +152,10 @@ function Login() {
                         getFieldProps,  // contain values, handleChange, handleBlur
                         isSubmitting,
                     }) => (
-                            <form onSubmit={handleSubmit} className={mobile ? "w-90 h-50vh" : ""}>
+                            <form onSubmit={handleSubmit} className={mobile ? "w-75 h-50vh" : "d-flex webb"}>
                                 <div className={mobile ? "mobb" : "qwer"}>
                                     <div className={(mobile ? "mob-" : "web-") + "input-form"}>
-                                        <div className={"form-group m-0" + (mobile ? " mb-3" : "")}>
+                                        <div className={"form-group m-0" + (mobile ? " mb-2" : "")}>
                                             <input
                                                 className={(touched.id && errors.id ? 'form-control is-invalid' : "form-control")}
                                                 type="number"
@@ -171,17 +174,15 @@ function Login() {
                                             />
                                         </div>
                                     </div>
-                                    <button type="submit" className={"btn btn-dark" + (mobile ? " w-100" : " w-20")} disabled={isSubmitting}>
-                                        Login
-                                        </button>
-                                    <button><Link to="/home">홈</Link></button>
-                                    <div></div>
-                                    <Link to="/find">비밀번호를 잊으셨나요?</Link>
-                                    <div></div>
-                                    <Link to="/signup">회원이 아니신가요?</Link>
+                                    <button type="submit" className={"btn btn-dark" + (mobile ? " w-100" : " w-20")} disabled={isSubmitting}> Login </button>
                                 </div>
+
+                                <div><Link to="/find">비밀번호를 잊으셨나요?</Link></div>
+                                <div><Link to="/signup">회원이 아니신가요?</Link></div>
+
                             </form>
                         )}
+
                 </Formik>
             </Asdf>
         </div >

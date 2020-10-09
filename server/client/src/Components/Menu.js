@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const Nav = styled.nav`
     background-color: #7B031D;
-    max-height : 50px;
+    height: 6vh;
 
     a {
         color: #ffffff;
@@ -35,6 +35,7 @@ function Menu() {
                         <Link to="/notice" className="nav-link">공지사항</Link>
                     </li>
                     <li className="nav-item">
+                        {console.log(name)}
                         <Link to="/home" className="nav-link">대관 현황</Link>
                     </li>
                     <li className="nav-item">
