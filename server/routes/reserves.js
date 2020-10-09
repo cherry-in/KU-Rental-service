@@ -8,15 +8,15 @@ router.post('/', function (req, res, next) {
     console.log('/reserve post req.body', req.body)
 
     const reserve = new Reserve({
+        id: req.body._id,
         date: req.body.date,
         time: req.body.time,
         room: req.body.room,
         name: req.body.name,
-        id: req.body._id,
         reason: req.body.reason,
-        member: req.body.member,
+        students: req.body.students,
         approve: req.body.approve,
-        num: req.body.num,
+        num: req.body.students.length + 1,
     });
 
     reserve.save()

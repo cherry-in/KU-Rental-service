@@ -4,6 +4,10 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 
 function Check(props) {
+    const [reserve, setReserve] = useState([]);
+    useEffect(() => {
+        getReserve();
+    }, [])
     
     function getReserve() {
         axios.get(`/reserves/${props.match.params.id}`, {
@@ -24,7 +28,7 @@ function Check(props) {
         axios.delete(`/reserves/${reserve[index]._id}`)
             .then(res => {
                 if (res.status === 404) return alert(res.data.error)
-                alert("삭제되었습니다!")
+                alert("삭제되었습니다!");
                 getReserve();
             })
             .catch(err => {
@@ -32,22 +36,18 @@ function Check(props) {
             });
     };
 
-    const [reserve, setReserve] = useState([]);
-    useEffect(() => {
-        getReserve();
-    }, [])
-
     return (
         <div>
             <Menu />
-            <div className="">check
+            <div className="">
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>아이디</th>
-                            <th>이름</th>
                             <th>날짜</th>
+                            <th>시간</th>
                             <th>강의실</th>
+                            <th>사용인원</th>
+                            <th>승인여부</th>
                             <th>예약취소</th>
                         </tr>
                     </thead>
@@ -55,10 +55,11 @@ function Check(props) {
                         {reserve.map((reserve, index) => {
                             return (
                                 <tr key={index}>
-                                    <td>{props.match.params.id}</td>
-                                    <td>{reserve.name}</td>
                                     <td>{reserve.date}</td>
+                                    <td>{reserve.time}</td>
                                     <td>{reserve.room}</td>
+                                    <td>{reserve.num}</td>
+                                    <td>{reserve.approve?"사용허가":"글쎄..."}</td>
                                     <td>
                                         <button onClick={() => remove(index)} className="btn btn-danger">
                                             취소

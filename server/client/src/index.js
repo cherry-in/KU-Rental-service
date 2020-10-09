@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap';
+// import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
 import { PrivateRoute } from './Components/PrivateRoute';
 
@@ -28,7 +29,7 @@ ReactDOM.render(
       <Route path="/signup" component={Signup} />
       <Route path="/find" component={Find} />
       <Route path="/change" component={Change} />
-      <Route path="/apply" component={Apply} />
+      <Route path="/apply/:id" component={Apply} />
       <Route path="/check/:id" component={Check} />
       <Route path="/notice" component={Notice} />
       <Redirect path="/" to="/" />
