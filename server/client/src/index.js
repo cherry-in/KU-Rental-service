@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap';
+// import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
 import { PrivateRoute } from './Components/PrivateRoute';
 
