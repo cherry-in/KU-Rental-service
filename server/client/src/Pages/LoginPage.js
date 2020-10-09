@@ -109,7 +109,7 @@ function Login() {
                 <div className={mobile ? "mob-head" : ""}>
                     <img className={mobile ? "mob-img" : "img-fluid"} src={Logo} />
                     <div className={"d-flex " + (mobile ? "align-items-center" : "justify-content-center")}>
-                        <h1 className="font-weight-bold text-white">고려대학교<br />대관 서비스</h1>
+                        <h1 className="font-weight-bold text-white text-center">고려대학교<br/>대관 서비스</h1>
                     </div>
                 </div>
             </Asd>
@@ -132,7 +132,7 @@ function Login() {
                             if (res.status === 404) return alert(res.data.error)
 
                             localStorage.setItem('token', res.data.token);
-                            localStorage.setItem('id', res.data.users._id);
+                            localStorage.setItem('_id', res.data.users._id);
                             localStorage.setItem('name', res.data.users.name);
                             setState(true);
                         })

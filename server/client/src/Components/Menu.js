@@ -9,6 +9,10 @@ const Nav = styled.nav`
     a {
         color: #ffffff;
     }
+
+    & .logoutBtn:hover {
+        text-decoration: underline;
+    }
 `
 
 function Menu() {
@@ -49,9 +53,13 @@ function Menu() {
                             대관 확인/취소</Link>
                     </li>
                 </ul>
-                <div>
-                    <div>{name}님 안녕하세요.</div>
-                    <button onClick={logout} type="button">로그아웃</button>
+                <div className="h-100 mr-3">
+                    <div className="text-white text-right font-weight-light"><small>{name}님 안녕하세요</small></div>
+                    <div className="text-white text-right font-weight-light"><small>
+                        <Link to={{
+                            pathname: `/change/${localStorage.getItem('_id')}`,
+                            state: { id: localStorage.getItem('_id') },
+                        }}>비밀번호 변경</Link> / <span className="logoutBtn" onClick={logout} >로그아웃</span></small></div>
                 </div>
             </div>
         </Nav>
