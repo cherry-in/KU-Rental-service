@@ -1,24 +1,45 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Calendar from '@toast-ui/react-calendar';
 import "tui-calendar/dist/tui-calendar.css";
 import "tui-date-picker/dist/tui-date-picker.css";
 import "tui-time-picker/dist/tui-time-picker.css";
-
-function Cal() {
-  const [start, setStart] = useState(new Date());
-  const [end, setEnd] = useState(new Date(new Date().setMinutes(start.getMinutes() + 30)));;
-
+  
+function Cal(calledday) {
+  const calendarRef = useRef();
+  const [day, setDay] = useState(calledday + "15:00:00");
   const [myTheme, setMyTheme] = useState({
     'common.dayname.color': '#333',
     'common.today.color': '#333',
-    'common.creationGuide.backgroundColor': 'rgba(81, 92, 230, 0.05)',
+    // 'common.creationGuide.color': 'white',
+    'common.creationGuide.backgroundColor': 'gray',
+    // Theme object to extends default dark theme.
   });
 
-  // Calendar.prototype.openCreationPopup = function (schedule) {
-  //   if (this._openCreationPopup) {
-  //     this._openCreationPopup(schedule);
-  //   }
-  // };
+  useEffect(() => {
+    const cal = calendarRef.current.getInstance();
+    cal.setDate(new Date(day));
+    cal.changeView('week', false);
+    // cal.today(new Date(day));
+
+    // calendar.on('clickSchedule', function (event) {
+    //   const schedule = event.schedule;
+
+    //   if (lastClickSchedule) {
+    //     calendar.updateSchedule(lastClickSchedule.id, lastClickSchedule.calendarId, {
+    //       isFocused: false,
+    //     });
+    //   }
+    //   calendar.updateSchedule(schedule.id, schedule.calendarId, {
+    //     isFocused: true,
+    //   });
+
+    //   lastClickSchedule = schedule;
+    //   // open detail view
+
+    //   return (console.log(isFocused))
+    // });
+
+  }, [day])
 
   return (
     <Calendar
@@ -36,6 +57,11 @@ function Cal() {
       disableDblClick={false}
       disableClick={true}
       isReadOnly={false}
+            // template={
+      //   popupIsAllDay=function {
+      //     return display: "none"
+      //   }
+      // }
       schedules={[
         {
           id: '1',
@@ -72,10 +98,11 @@ function Cal() {
       ]}
       useDetailPopup
       useCreationPopup
+      view={"week"}
       week={{
+        workweek: true,
         hourStart: 8,
-        hourEnd: 23,
-        workweek: true
+        hourEnd: 23
       }}
     />
   )
