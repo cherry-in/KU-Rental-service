@@ -46,7 +46,7 @@ function Apply() {
                             <div className="row justify-content-center align-items-center">
                                 <form onSubmit={handleSubmit} className="col-sm-3">
                                     <button type="submit" className="btn btn-dark" disabled={isSubmitting}>
-                                        Sign Up
+                                    신청
                                 </button>
                                 </form>
                             </div>
