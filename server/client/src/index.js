@@ -34,6 +34,7 @@ ReactDOM.render(
       <Redirect path="/" to="/" />
       <Redirect path="/home" to="/" />
       <Redirect path="/change/:id" to="/change"/>
+      <Redirect path="/check/:id" to="/check"/>
     </Switch>
   </Router>,
   document.getElementById('root')
