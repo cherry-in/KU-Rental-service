@@ -16,9 +16,9 @@ function Cal(calledday) {
   });
 
   useEffect(() => {
-    const cal = calendarRef.current.getInstance();
-    cal.setDate(new Date(day));
-    cal.changeView('week', false);
+    // const cal = calendarRef.current.getInstance();
+    // cal.setDate(new Date(day));
+    // cal.changeView('week', false);
     // cal.today(new Date(day));
 
     // calendar.on('clickSchedule', function (event) {
