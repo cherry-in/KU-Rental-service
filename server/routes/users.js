@@ -40,7 +40,7 @@ router.get('/:_id', function (req, res, next) {
     if (err) return res.status(500).json({ error: err });
     res.status(201).json(user);
   })
-})
+});
 
 
 router.put('/change/:id', function (req, res, next) {

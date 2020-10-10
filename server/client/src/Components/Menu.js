@@ -51,6 +51,13 @@ function Menu() {
                         }} className="nav-link">
                             대관 확인/취소</Link>
                     </li>
+                    <li className="nav-item">
+                        <Link to={{
+                            pathname: `/acheck/${localStorage.getItem('_id')}`,
+                            state: { id: localStorage.getItem('_id') },
+                        }} className="nav-link">
+                            대관 확인/취소(관리자)</Link>
+                    </li>
                 </ul>
                 <div>
                     <div>{name}님 안녕하세요.</div>
