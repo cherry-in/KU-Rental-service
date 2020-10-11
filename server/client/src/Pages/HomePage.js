@@ -65,7 +65,6 @@ function Home() {
 
     return (
         <div>
-            {console.log(sendDate)}
             <Menu />
             <div className="container mt-3">
                 <h2>대관 현황</h2>
