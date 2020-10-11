@@ -33,7 +33,7 @@ ReactDOM.render(
       <Route path="/apply/:id" component={Apply} />
       <Route path="/check/:id" component={Check} />
       <Route path="/notice" component={Notice} />
-      <Route path="/acheck" component={ACheck} />
+      <Route path="/acheck/:id" component={ACheck} />
       <Redirect path="/" to="/" />
       <Redirect path="/home" to="/" />
       <Redirect path="/change/:id" to="/change"/>

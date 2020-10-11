@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import Menu from '../Components/Menu';
 import axios from 'axios';
+import { Link, Redirect } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 
 function ACheck(props) {
+  const [state, setState] = useState()
   const [reserve, setReserve] = useState([]);
   useEffect(() => {
-    getReserve();
+    getReserve(); 
   }, [])
 
   function getReserve() {
-    axios.get(`/admin/`, { 
-      // headers: { authorization: localStorage.getItem('token') },
+    axios.get(`/users/admin/${props.match.params.id}`, { 
+       headers: { authorization: localStorage.getItem('token') },
     })
       .then(res => {
-        if (res.status !== 201) {
-          alert(res.data.error);
+        if (res.status === 404) {
+          alert(res.data.error)
+          setState(true);
         }
         console.log(res.data);
         setReserve(res.data);
@@ -24,6 +27,8 @@ function ACheck(props) {
         alert(err.error)
       });
   }
+  if (state) return <Redirect to="/home" />;
+
   function remove(index) {
     axios.delete(`/reserves/${reserve[index]._id}`)
       .then(res => {
@@ -37,7 +42,7 @@ function ACheck(props) {
   };
 
   function admit(index) {
-    axios.put(`/reserves/${reserve[index].approve}`)
+    axios.put(`/reserves/${reserve[index]._id}`)
       .then(res => {
         if (res.status === 404) return alert(res.data.error)
         alert("승인되었습니다!");
@@ -67,7 +72,7 @@ function ACheck(props) {
             {reserve.map((reserve, index) => {
               return (
                 <tr key={index}>
-                  <td>{reserve.user}</td>
+                  <td>{reserve.user.name}</td>
                   <td>{reserve.date}</td>
                   <td>{reserve.time}</td>
                   <td>{reserve.room}</td>

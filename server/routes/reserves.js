@@ -46,8 +46,7 @@ router.get('/:_id', function (req, res, next) {
 });
 
 router.get('/admin/:_id', function (req, res, next) {
-    console.log('/reserves get req.params', req.params)
-    
+    console.log('/reserves/admin get req.params', req.params)
     Reserve.find({ approve: false }).populate('user').exec(function (err, reserve) {
         if (err) return res.status(500).json({ error: err });
         console.log('reserve list', reserve)
@@ -74,7 +73,7 @@ router.delete('/:_id', function (req, res, next) {
 
 router.put('/:id', function (req, res, next) {
     console.log('/reserves put req.body', req.params)
-    User.findOne({ _id: req.params.id }, 'password', function (err, reserve) {
+    Reserve.findOne({ _id: req.params.id }, 'approve', function (err, reserve) {
         if (err) return res.status(500).json({ error: err });
         reserve.approve = true;
         reserve.save()
