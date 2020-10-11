@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "@toast-ui/react-calendar": "^1.0.5",
     "axios": "^0.20.0",
+    "bcrypt": "^5.0.0",
     "bootstrap": "^4.5.2",
     "formik": "^2.1.5",
     "jquery": "^3.5.1",
@@ -27,7 +28,6 @@
     "eject": "react-scripts eject",
     "proxy": "http://localhost:3030"
   },
-  "proxy": "http://localhost:3030",
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -42,5 +42,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:3030"
 }

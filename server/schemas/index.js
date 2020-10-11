@@ -5,8 +5,8 @@ module.exports = () => {
         if (process.env.NODE_ENV !== 'production') {
             mongoose.set('debug', true);
         }
-        mongoose.connect('mongodb://hijinju:highlight@localhost:27017/admin', {
-            dbName: 'ku_rental',
+        mongoose.connect('mongodb://kimpen:kim65811025@localhost:27017/admin', {
+            dbName: 'ku_rental', useNewUrlParser: true, useUnifiedTopology: true,
         }, (error) => {
             if (error) {
                 console.log('몽고디비 연결 에러', error);
