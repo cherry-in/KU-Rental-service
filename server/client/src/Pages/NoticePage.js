@@ -84,4 +84,4 @@ function Notice() {
     )
 }
 
-export default Notice
+export default Notice;
