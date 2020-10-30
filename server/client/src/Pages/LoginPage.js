@@ -4,10 +4,10 @@ import { Link, Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.css';
 import Logo from '../icon.png';
+import { Container, Row } from 'react-bootstrap';
 
-const Asd = styled.div`
+const Col_1 = styled.div`
     background-color: #7B031D;
 
     &.web {
@@ -35,7 +35,7 @@ const Asd = styled.div`
     }
 `
 
-const Asdf = styled.div`
+const Col_2 = styled.div`
     background-color: rgb(239, 218, 200);
     a {
         color : #7B031D;
@@ -104,88 +104,90 @@ function Login() {
         return <Redirect to="/home" />;
     }
     return (
-        <div className="row vw-100 vh-100 m-0">
-            <Asd className={"col-md-4 col-12" + (mobile ? " mobile" : " web")}>
-                <div className={mobile ? "mob-head" : ""}>
-                    <img className={mobile ? "mob-img" : "img-fluid"} src={Logo} />
-                    <div className={"d-flex " + (mobile ? "align-items-center" : "justify-content-center")}>
-                        <h1 className="font-weight-bold text-white text-center">고려대학교<br/>대관 서비스</h1>
+        <Container fluid className="p-0">
+            <Row className="vw-100 vh-100 m-0" >
+                <Col_1 className={"col-md-4 col-12" + (mobile ? " mobile" : " web")}>
+                    <div className={mobile ? "mob-head" : ""}>
+                        <img className={mobile ? "mob-img" : "img-fluid"} src={Logo} />
+                        <div className={"d-flex " + (mobile ? "align-items-center" : "justify-content-center")}>
+                            <h1 className="font-weight-bold text-white text-center">고려대학교<br />대관 서비스</h1>
+                        </div>
                     </div>
-                </div>
-            </Asd>
-            <Asdf className={"col-md-8 col-12" + (mobile ? " mob-formik p-0" : " web-formik")}>
-                <Formik
-                    initialValues={{ id: '', password: '' }}
-                    validationSchema={Yup.object({
-                        id: Yup.string()
-                            .required('학번을 입력해주세요.'),
-                        password: Yup.string()
-                            .required('비밀번호를 입력해주세요.')
-                            .min(8, '8자 이상 입력해주세요.'),
-                    })}
-                    onSubmit={(values, { setSubmitting }) => {
-                        axios({
-                            method: 'post',
-                            url: '/login',
-                            data: values,
-                        }).then(res => {
-                            if (res.status === 404) return alert(res.data.error)
+                </Col_1>
+                <Col_2 className={"col-md-8 col-12" + (mobile ? " mob-formik p-0" : " web-formik")}>
+                    <Formik
+                        initialValues={{ id: '', password: '' }}
+                        validationSchema={Yup.object({
+                            id: Yup.string()
+                                .required('학번을 입력해주세요.'),
+                            password: Yup.string()
+                                .required('비밀번호를 입력해주세요.')
+                                .min(8, '8자 이상 입력해주세요.'),
+                        })}
+                        onSubmit={(values, { setSubmitting }) => {
+                            axios({
+                                method: 'post',
+                                url: '/login',
+                                data: values,
+                            }).then(res => {
+                                if (res.status === 404) return alert(res.data.error)
 
-                            localStorage.setItem('token', res.data.token);
-                            localStorage.setItem('_id', res.data.users._id);
-                            localStorage.setItem('name', res.data.users.name);
-                            setState(true);
-                        })
-                            .catch(err => {
-                                alert(err.error)
-                            });
+                                localStorage.setItem('token', res.data.token);
+                                localStorage.setItem('_id', res.data.users._id);
+                                localStorage.setItem('name', res.data.users.name);
+                                setState(true);
+                            })
+                                .catch(err => {
+                                    alert(err.error)
+                                });
 
-                        setTimeout(() => {
-                            setSubmitting(false);
-                        }, 400);  // finish the cycle in handler
-                    }}
-                >
-                    {({
-                        errors,
-                        touched,
-                        handleSubmit,
-                        getFieldProps,  // contain values, handleChange, handleBlur
-                        isSubmitting,
-                    }) => (
-                            <form onSubmit={handleSubmit} className={mobile ? "w-75 h-50vh" : "d-flex webb"}>
-                                <div className={mobile ? "mobb" : "qwer"}>
-                                    <div className={(mobile ? "mob-" : "web-") + "input-form"}>
-                                        <div className={"form-group m-0" + (mobile ? " mb-2" : "")}>
-                                            <input
-                                                className={(touched.id && errors.id ? 'form-control is-invalid' : "form-control")}
-                                                type="number"
-                                                name="id"
-                                                {...getFieldProps('id')}
-                                                placeholder="Input Student Id"
-                                            />
+                            setTimeout(() => {
+                                setSubmitting(false);
+                            }, 400);  // finish the cycle in handler
+                        }}
+                    >
+                        {({
+                            errors,
+                            touched,
+                            handleSubmit,
+                            getFieldProps,  // contain values, handleChange, handleBlur
+                            isSubmitting,
+                        }) => (
+                                <form onSubmit={handleSubmit} className={mobile ? "w-75 h-50vh" : "d-flex webb"}>
+                                    <div className={mobile ? "mobb" : "qwer"}>
+                                        <div className={(mobile ? "mob-" : "web-") + "input-form"}>
+                                            <div className={"form-group m-0" + (mobile ? " mb-2" : "")}>
+                                                <input
+                                                    className={(touched.id && errors.id ? 'form-control is-invalid' : "form-control")}
+                                                    type="number"
+                                                    name="id"
+                                                    {...getFieldProps('id')}
+                                                    placeholder="Input Student Id"
+                                                />
+                                            </div>
+                                            <div className="form-group m-0">
+                                                <input
+                                                    className={(touched.password && errors.password ? 'form-control is-invalid' : "form-control")}
+                                                    type="password"
+                                                    name="password"
+                                                    {...getFieldProps('password')}
+                                                    placeholder="Input Password"
+                                                />
+                                            </div>
                                         </div>
-                                        <div className="form-group m-0">
-                                            <input
-                                                className={(touched.password && errors.password ? 'form-control is-invalid' : "form-control")}
-                                                type="password"
-                                                name="password"
-                                                {...getFieldProps('password')}
-                                                placeholder="Input Password"
-                                            />
-                                        </div>
+                                        <button type="submit" className={"btn btn-dark" + (mobile ? " w-100" : " w-20")} disabled={isSubmitting}> Login </button>
                                     </div>
-                                    <button type="submit" className={"btn btn-dark" + (mobile ? " w-100" : " w-20")} disabled={isSubmitting}> Login </button>
-                                </div>
 
-                                <div><Link to="/find">비밀번호를 잊으셨나요?</Link></div>
-                                <div><Link to="/signup">회원이 아니신가요?</Link></div>
+                                    <div><Link to="/find">비밀번호를 잊으셨나요?</Link></div>
+                                    <div><Link to="/signup">회원이 아니신가요?</Link></div>
 
-                            </form>
-                        )}
+                                </form>
+                            )}
+                    </Formik>
+                </Col_2>
+            </Row>
+        </Container>
 
-                </Formik>
-            </Asdf>
-        </div >
     )
 }
 
