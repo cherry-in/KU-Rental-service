@@ -59,7 +59,7 @@ function Check(props) {
                                     <td>{reserve.starttime}시~{(Number(reserve.starttime) + reserve.usetime)}시</td>
                                     <td>{reserve.room}</td>
                                     <td>{reserve.num}</td>
-                                    <td>{reserve.approve ? "승인" : "미승인"}</td>
+                                    <td>{reserve.check ? (reserve.approve ? "사용가능" : "사용불가") : "승인대기중"}</td>
                                     <td>
                                         <button onClick={() => remove(index)} className="btn btn-danger">
                                             취소

@@ -39,7 +39,10 @@ const reserveSchema = new Schema({
   approve: {
     type: Boolean,
     default: false,
-
+  },
+  check: {
+    type: Boolean,
+    default: false,
   },
   num: {
     type: Number,

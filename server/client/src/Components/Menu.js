@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
@@ -17,7 +18,12 @@ const Nav = styled.nav`
 
 function Menu() {
     const [state, setState] = useState()
+    const [user, setUser] = useState({ role: "" })
     const name = localStorage.getItem('name');
+
+    useEffect(() => {
+        acheck();
+    }, [])
 
     if (state) return <Redirect to="/" />;
 
@@ -25,6 +31,17 @@ function Menu() {
         localStorage.clear();
         alert("로그아웃 되었습니다.");
         setState(true);
+    }
+
+    function acheck() {
+        axios.get(`/users/${localStorage.getItem('_id')}`)
+            .then(res => {
+                if (res.data.role == "admin") {
+                    setUser(res.data)
+                }
+            }).catch(err => {
+                alert(err.error)
+            });
     }
 
     return (
@@ -54,20 +71,21 @@ function Menu() {
                         }} className="nav-link">
                             대관 확인/취소</Link>
                     </li>
-                    <li className="nav-item">
-                        <Link to={{
-                            pathname: `/acheck/${localStorage.getItem('_id')}`,
-                            state: { id: localStorage.getItem('_id') },
-                        }} className="nav-link">
-                            대관 확인/취소(관리자)</Link>
-                    </li>
+                    {user.role === "admin" ? (
+                        <li className="nav-item">
+                            <Link to={{
+                                pathname: `/acheck/${localStorage.getItem('_id')}`,
+                                state: { id: localStorage.getItem('_id') },
+                            }} className="nav-link">
+                                대관 확인/취소(관리자)</Link>
+                        </li>) : null}
                 </ul>
                 <div className="h-100 mr-3">
                     <div className="text-white text-right font-weight-light"><small>{name}님 안녕하세요</small></div>
                     <div className="text-white text-right font-weight-light"><small>
                         <Link to={{
-                            pathname: `/change/${localStorage.getItem('_id')}`,
-                            state: { id: localStorage.getItem('_id') },
+                            pathname: `/change/${user._id}`,
+                            state: { id: user._id },
                         }}>비밀번호 변경</Link> / <span className="logoutBtn" onClick={logout} >로그아웃</span></small></div>
                 </div>
             </div>
