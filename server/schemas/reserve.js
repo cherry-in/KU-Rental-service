@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const { Types: { ObjectId } } = Schema;
 const reserveSchema = new Schema({
-  id: {
+  user: {
     type: ObjectId,
     required: true,
     ref: 'User',
@@ -11,7 +11,16 @@ const reserveSchema = new Schema({
   date: {
     type: String,
   },
-  time: {
+  starttime: {
+    type: Number,
+  },
+  usetime: {
+    type: Number,
+  },
+  start: {
+    type: String,
+  },
+  end: {
     type: String,
 
   },
@@ -19,16 +28,12 @@ const reserveSchema = new Schema({
     type: String,
 
   },
-  name: { //대표자 이름
-    type: String,
-
-  },
   reason: {
     type: String,
 
   },
-  member: {
-    type: String,
+  students: {
+    type: Array,
 
   },
   approve: {
@@ -39,8 +44,6 @@ const reserveSchema = new Schema({
   num: {
     type: Number,
   },
-
-
 });
 
 module.exports = mongoose.model('Reserve', reserveSchema);

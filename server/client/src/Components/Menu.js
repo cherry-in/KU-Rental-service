@@ -39,11 +39,13 @@ function Menu() {
                         <Link to="/notice" className="nav-link">공지사항</Link>
                     </li>
                     <li className="nav-item">
-                        {console.log(name)}
                         <Link to="/home" className="nav-link">대관 현황</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/apply" className="nav-link">대관 신청</Link>
+                        <Link to={{
+                            pathname: `/apply/${localStorage.getItem('_id')}`,
+                            state: { id: localStorage.getItem('_id') },
+                        }} className="nav-link">대관 신청</Link>
                     </li>
                     <li className="nav-item">
                         <Link to={{
@@ -51,6 +53,13 @@ function Menu() {
                             state: { id: localStorage.getItem('_id') },
                         }} className="nav-link">
                             대관 확인/취소</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to={{
+                            pathname: `/acheck/${localStorage.getItem('_id')}`,
+                            state: { id: localStorage.getItem('_id') },
+                        }} className="nav-link">
+                            대관 확인/취소(관리자)</Link>
                     </li>
                 </ul>
                 <div className="h-100 mr-3">

@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Menu from '../Components/Menu';
-import List from '../Components/List';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.css';
 
 function Check(props) {
+    const [reserve, setReserve] = useState([]);
+    useEffect(() => {
+        getReserve();
+    }, [])
+
     function getReserve() {
         axios.get(`/reserves/${props.match.params.id}`, {
             headers: { authorization: localStorage.getItem('token') },
@@ -19,18 +24,53 @@ function Check(props) {
                 alert(err.error)
             });
     }
+    function remove(index) {
+        axios.delete(`/reserves/${reserve[index]._id}`)
+            .then(res => {
+                if (res.status === 404) return alert(res.data.error)
+                alert("삭제되었습니다!");
+                getReserve();
+            })
+            .catch(err => {
+                alert(err.error)
+            });
+    };
 
-    const [reserve, setReserve] = useState([]);
-    useEffect(() => {
-        getReserve();
-    }, [])
     return (
         <div>
             <Menu />
-            <div className="container">check
-            {reserve.map((reserve, index) =>
-                <List id={props.match.params.id} index={index} date={reserve.date} name={reserve.name} room={reserve.room} time={reserve.time} num={reserve.num} _id={reserve._id}/>
-            )}
+            <div className="">
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th>날짜</th>
+                            <th>시간</th>
+                            <th>강의실</th>
+                            <th>사용인원</th>
+                            <th>승인여부</th>
+                            <th>예약취소</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {reserve.map((reserve, index) => {
+                            return (
+                                <tr key={index}>
+                                    <td>{reserve.date}</td>
+                                    <td>{reserve.starttime}시~{(Number(reserve.starttime) + reserve.usetime)}시</td>
+                                    <td>{reserve.room}</td>
+                                    <td>{reserve.num}</td>
+                                    <td>{reserve.approve ? "승인" : "미승인"}</td>
+                                    <td>
+                                        <button onClick={() => remove(index)} className="btn btn-danger">
+                                            취소
+                                        </button>
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+
             </div>
         </div>
     )
