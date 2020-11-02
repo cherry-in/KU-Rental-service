@@ -12,6 +12,7 @@ const loginRouter = require('./routes/login');
 const reservesRouter = require('./routes/reserves');
 const noticeRouter = require('./routes/notices');
 const connect = require('./schemas');
+const writesRouter = require('./routes/writes');
 
 const app = express();
 connect();
@@ -31,6 +32,7 @@ app.use('/users', usersRouter, reservesRouter);
 app.use('/login', loginRouter);
 app.use('/reserves', reservesRouter);
 app.use('/notices', noticeRouter);
+app.use('/writes', writesRouter);
 
 app.listen(port, () => console.log(port));
 

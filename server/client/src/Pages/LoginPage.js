@@ -37,11 +37,12 @@ const Col_1 = styled.div`
 
 const Col_2 = styled.div`
     background-color: rgb(239, 218, 200);
+
     a {
         color : #7B031D;
     }
 
-    &.mob-formik {
+    & .mob-formik {
         height : 80vh;
         width: 100%;
         display: flex; 
@@ -49,14 +50,14 @@ const Col_2 = styled.div`
         align-items: center; 
     }
 
-    &.web-formik {
+    & .web-form {
         height: 100%;
         display: flex; 
         align-items: center; 
         justify-content: center;
     }
 
-    & .mobb {
+    & .mob-container {
         height: 35vh;
         display: flex;
         flex-direction: column;
@@ -67,7 +68,7 @@ const Col_2 = styled.div`
         flex-direction: column;
     }
 
-    & .qwer {
+    & .web-container {
         display: flex;
         justify-content: space-between;
         height: 12vh;
@@ -84,7 +85,10 @@ const Col_2 = styled.div`
     }
 
     & .mob-input-form {
-      
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
     }
 `
 
@@ -105,7 +109,7 @@ function Login() {
     }
     return (
         <Container fluid className="p-0">
-            <Row className="vw-100 vh-100 m-0" >
+            <Row className="vw-100 vh-100 m-0 " >
                 <Col_1 className={"col-md-4 col-12" + (mobile ? " mobile" : " web")}>
                     <div className={mobile ? "mob-head" : ""}>
                         <img className={mobile ? "mob-img" : "img-fluid"} src={Logo} />
@@ -114,7 +118,7 @@ function Login() {
                         </div>
                     </div>
                 </Col_1>
-                <Col_2 className={"col-md-8 col-12" + (mobile ? " mob-formik p-0" : " web-formik")}>
+                <Col_2 className="col-md-8 col-12" >
                     <Formik
                         initialValues={{ id: '', password: '' }}
                         validationSchema={Yup.object({
@@ -153,35 +157,37 @@ function Login() {
                             getFieldProps,  // contain values, handleChange, handleBlur
                             isSubmitting,
                         }) => (
-                                <form onSubmit={handleSubmit} className={mobile ? "w-75 h-50vh" : "d-flex webb"}>
-                                    <div className={mobile ? "mobb" : "qwer"}>
-                                        <div className={(mobile ? "mob-" : "web-") + "input-form"}>
-                                            <div className={"form-group m-0" + (mobile ? " mb-2" : "")}>
-                                                <input
-                                                    className={(touched.id && errors.id ? 'form-control is-invalid' : "form-control")}
-                                                    type="number"
-                                                    name="id"
-                                                    {...getFieldProps('id')}
-                                                    placeholder="Input Student Id"
-                                                />
+                                <div className={mobile ? " mob-formik p-0" : " web-form"}>
+                                    <form onSubmit={handleSubmit} className={mobile ? "w-75 h-50vh" : "d-flex webb"}>
+                                        <div className={mobile ? "mob-container" : "web-container"}>
+                                            <div className={mobile ? "mob-input-form h-100" : "web-input-form"}>
+                                                <div className={"form-group m-0" + (mobile ? " mb-2" : "")}>
+                                                    <input
+                                                        className={(touched.id && errors.id ? 'form-control is-invalid' : "form-control")}
+                                                        type="number"
+                                                        name="id"
+                                                        {...getFieldProps('id')}
+                                                        placeholder="Input Student Id"
+                                                    />
+                                                </div>
+                                                <div className="form-group h-80 m-0">
+                                                    <input
+                                                        className={(touched.password && errors.password ? 'form-control is-invalid' : "form-control")}
+                                                        type="password"
+                                                        name="password"
+                                                        {...getFieldProps('password')}
+                                                        placeholder="Input Password"
+                                                    />
+                                                </div>
                                             </div>
-                                            <div className="form-group m-0">
-                                                <input
-                                                    className={(touched.password && errors.password ? 'form-control is-invalid' : "form-control")}
-                                                    type="password"
-                                                    name="password"
-                                                    {...getFieldProps('password')}
-                                                    placeholder="Input Password"
-                                                />
-                                            </div>
+                                            <button type="submit" className={"btn btn-dark" + (mobile ? " w-100" : " w-20")} disabled={isSubmitting}> Login </button>
                                         </div>
-                                        <button type="submit" className={"btn btn-dark" + (mobile ? " w-100" : " w-20")} disabled={isSubmitting}> Login </button>
-                                    </div>
 
-                                    <div><Link to="/find">비밀번호를 잊으셨나요?</Link></div>
-                                    <div><Link to="/signup">회원이 아니신가요?</Link></div>
+                                        <div><Link to="/find">비밀번호를 잊으셨나요?</Link></div>
+                                        <div><Link to="/signup">회원이 아니신가요?</Link></div>
 
-                                </form>
+                                    </form>
+                                </div>
                             )}
                     </Formik>
                 </Col_2>

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Field, Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.css';
 import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -40,7 +39,6 @@ function Signup() {
     if (state) {
         return <Redirect to="/login" />;
     }
-
     return (
         <div className="vh-100">
             <Nav className="navbar sticky-top navbar-expand-md">
@@ -171,8 +169,7 @@ function Signup() {
                                                 placeholder="Input answer" />
                                         </div>
                                         <button type="submit" className="btn btn-dark" disabled={isSubmitting}>회원가입</button>
-                                        <button class="btn btn-light"><Link to="/login">로그인</Link></button>
-                                        <button class="btn btn-light"><Link to="/">홈</Link></button>
+                                        <button class="btn btn-light"><Link to="/login">로그인하러 가기</Link></button>
                                     </form>
                                 )}
                         </Formik>
