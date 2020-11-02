@@ -5,8 +5,8 @@ import "tui-date-picker/dist/tui-date-picker.css";
 import "tui-time-picker/dist/tui-time-picker.css";
 
 function Cal(calledday) {
-  const calendarRef = useRef(null);
-  const [day, setDay] = useState(calledday + "15:00:00");
+  const calendarRef = useRef();
+  const [day, setDay] = useState(calledday);
   const [myTheme, setMyTheme] = useState({
     'common.dayname.color': '#333',
     'common.today.color': '#333',
@@ -126,7 +126,6 @@ function Cal(calledday) {
           end: '2020-10-08T15:00:00',
         }
       ]}
-
       scheduleView={['time']}
       taskView={false}
       theme={myTheme}
