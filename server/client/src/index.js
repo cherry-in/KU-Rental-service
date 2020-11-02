@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import * as serviceWorker from './serviceWorker';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
@@ -16,13 +16,14 @@ import Apply from './Pages/ApplyPage';
 import Check from './Pages/CheckPage';
 import Notice from './Pages/NoticePage';
 import ACheck from './Pages/ACheckPage';
+import Write from './Pages/WritePage';
 
 axios.defaults.validateStatus = function (status) {
   return status < 500; // default
 }
 
 ReactDOM.render(
-<Router>
+  <Router>
     <Switch>
       <PrivateRoute exact path="/" component={Home} />
       <Route path="/login" component={Login} />
@@ -32,11 +33,12 @@ ReactDOM.render(
       <Route path="/change" component={Change} />
       <Route path="/apply/:id" component={Apply} />
       <Route path="/check/:id" component={Check} />
+      <Route path="/write" component={Write} />
       <Route path="/notice" component={Notice} />
       <Route path="/acheck/:id" component={ACheck} />
-      <Redirect path="/" to="/" />
       <Redirect path="/home" to="/" />
-      <Redirect path="/change/:id" to="/change"/>
+      <Redirect path="/change/:id" to="/change" />
+      <Redirect path="/notice" to="/notice" />
     </Switch>
   </Router>,
   document.getElementById('root')
