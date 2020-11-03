@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.css';
 import { Link, Redirect } from 'react-router-dom';
 
 function Change(props) {

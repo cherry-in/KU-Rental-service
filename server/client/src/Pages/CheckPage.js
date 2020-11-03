@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Menu from '../Components/Menu';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.css';
 
 function Check(props) {
     const [reserve, setReserve] = useState([]);
