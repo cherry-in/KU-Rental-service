@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-<<<<<<< HEAD
-=======
 import Menu from '../Components/Menu';
->>>>>>> origin/hyj
 import { Link, Redirect } from 'react-router-dom';
 import { Container, Button, Col } from 'react-bootstrap';
 import styled from 'styled-components';
