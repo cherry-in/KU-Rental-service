@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Menu from '../Components/Menu';
 import axios from 'axios';
-import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { Container, Row, Col, Card, Navbar, Accordion, Button } from 'react-bootstrap';
 
 function Notice() {
     const [notices, setNotices] = useState([]);
@@ -27,9 +28,8 @@ function Notice() {
         axios.get(`/notices`)
             .then(res => {
                 if (res.status !== 201) {
-                    alert(res.data.error);
+                    // alert(res.data.error);
                 }
-                console.log(res.data);
                 setNotices(res.data);
             })
             .catch(err => {
@@ -38,33 +38,31 @@ function Notice() {
     }
     return (
         <div>
-            <Menu />
-            <div className="container-fluid">
-                <div className="row justify-content-center vw-100 vh-90">
-                    <div className="col-md-7 col-12">
-
-                        <h2 className="p-3 border-bottom">공지사항</h2>
-
-                        <div id="accordion w-90 pt-1">
+            {(localStorage.getItem("token") !== null) ? (
+                <Menu />
+            ) : (
+                    <Menu expand="md" variant="dark">
+                        <Navbar.Brand>회원가입</Navbar.Brand>
+                    </Menu>
+                )}
+            <Container fluid>
+                <Row className="justify-content-center vw-100 vh-90">
+                    <Col md={7}>
+                        <h2 className="p-3 border-bottom">공지사항 <Link to="/write">글 작성</Link></h2>
+                        <Accordion>
                             {notices.map((notice, index) =>
-                                <div className="card">
-                                    <div className="card-header collapsed card-link w-100 row m-0 p-1" id={"Hnotice_" + index} data-toggle="collapse" href={"#notice_" + index}>
-                                        <div>
-                                            <div className="col-6 p-0">{notice.notice_title}</div>
-                                            <div className="col-3 p-0 text-center">{notice.notice_author}</div>
-                                            <div className="col-3 p-0 text-right">{dateForm(notice.post_date)}</div>
-                                        </div>
-                                    </div>
-                                    <div id={"notice_" + index} aria-labelledby={"Hnotice_" + index} className="collapse" data-parent="#accordion">
-                                        <div className="card-body">{notice.notice_content}</div>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-
-                    </div>
-                </div >
-            </div >
+                                <Card>
+                                    <Card.Header>
+                                        <Accordion.Toggle as={Button} variant="link" eventKey={index + 1}>{notice.notice_title} <span className="text-right">{dateForm(notice.post_date)}</span></Accordion.Toggle>
+                                    </Card.Header>
+                                    <Accordion.Collapse eventKey={index + 1}>
+                                        <Card.Body>{notice.notice_content}</Card.Body>
+                                    </Accordion.Collapse>
+                                </Card>)}
+                        </Accordion>
+                    </Col>
+                </Row>
+            </Container>
         </div>
     )
 }
