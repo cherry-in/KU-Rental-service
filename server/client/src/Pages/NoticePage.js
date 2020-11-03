@@ -55,10 +55,15 @@ function Notice() {
             <Container fluid>
                 <Row className="justify-content-center vw-100 vh-90">
                     <Col md={7}>
-                        <h2 className="p-3 border-bottom">공지사항
-                        {user.role === "admin" ? (
-                                <Link to="/write">글 작성</Link>) : null}</h2>
-
+                        <div className="p-3 border-bottom justify-content space-between">
+                            <div>
+                                <h2>공지사항</h2>
+                            </div>
+                            <div>
+                                {user.role === "admin" ? (
+                                    <Link to="/write">글 작성</Link>) : null}
+                            </div>
+                        </div>
                         <Accordion>
                             {notices.map((notice, index) =>
                                 <Card>
