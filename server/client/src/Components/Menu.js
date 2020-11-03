@@ -41,7 +41,7 @@ function Menu() {
     if (state) return <Redirect to="/" />
     return (
         <MENU expand="md" variant="dark">
-            <Navbar.Brand href="#">대관 서비스</Navbar.Brand>
+            <Navbar.Brand as={Link} to="/home">대관 서비스</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
