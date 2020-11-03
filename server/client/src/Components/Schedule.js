@@ -13,9 +13,7 @@ function Cal(props) {
   const [myTheme, setMyTheme] = useState({
     'common.dayname.color': '#333',
     'common.today.color': '#333',
-    // 'common.creationGuide.color': 'white',
     'common.creationGuide.backgroundColor': 'gray',
-    // Theme object to extends default dark theme.
   });
 
   function getReserve(room) {
@@ -30,7 +28,6 @@ function Cal(props) {
           calendarId: 'Subject',
           category: 'time',
         }))
-        console.log("room list", res.data);
         setReserve(reserves);
       })
       .catch(err => {
@@ -65,19 +62,17 @@ function Cal(props) {
 
   function setRenderRangeText() {
     const cal = calendarRef.current.getInstance();
-    // const renderRange = document.getElementById('renderRange');
     let html = [];
     html.push(moment(cal.getDateRangeStart().getTime()).format('YYYY.MM.DD'));
     html.push(' ~ ');
     html.push(moment(cal.getDateRangeEnd().getTime()).format(' MM.DD'));
     setPeriod(html.join(''))
-    // cal.render();
   }
 
   useEffect(() => {
     setRenderRangeText();
     getReserve(props.room);
-  }, [])
+  }, [props.room])
 
   return (
     <div>
@@ -108,11 +103,6 @@ function Cal(props) {
         disableDblClick={false}
         disableClick={true}
         isReadOnly={true}
-        // template={
-        //   popupIsAllDay=function {
-        //     return display: "none"
-        //   }
-        // }
         schedules={reserve}
         scheduleView={['time']}
         taskView={false}

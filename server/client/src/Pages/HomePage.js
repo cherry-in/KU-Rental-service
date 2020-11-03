@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Menu from '../Components/Menu';
 import Schedule from '../Components/Schedule';
-// import styled from 'styled-components';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 
-// const Tab = styled.ul`
-//     & a, a:hover, a:active {
-//         color: black;
-//     }
-// `
-
 function Home() {
+    const [key, setKey] = useState('9-116');
+
     return (
         <div>
             <Menu />
@@ -24,39 +19,17 @@ function Home() {
                         <li>주말: 이용 불가</li>
                     </ul>
                 </p>
-                <Tabs defaultActiveKey="9-116" id="uncontrolled-tab-example">
+                <Tabs defaultActiveKey="9-116" id="uncontrolled-tab-example" onSelect={(k) => setKey(k)}>
                     <Tab eventKey="9-116" title="9-116">
-                        <Schedule room={"9-116"} />
+                        <Schedule room={key}/>
                     </Tab>
                     <Tab eventKey="7-234" title="7-234">
-                        <Schedule room={"7-234"} />
+                        <Schedule room={key}/>
                     </Tab>
                     <Tab eventKey="25-101" title="25-101">
-                        <Schedule room={"25-101"} />
+                        <Schedule room={key}/>
                     </Tab>
                 </Tabs>
-                {/* <Tab className="nav nav-tabs nav-justified mt-4" id="myTab" role="tablist" >
-                    <li className="nav-item">
-                        <a className="nav-link active" id="7-tab" data-toggle="tab" href="#tab-7" role="tab" aria-controls="7" aria-selected="true"> 7-223 </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" id="9-tab" data-toggle="tab" href="#tab-9" role="tab" aria-controls="9" aria-selected="false"> 9-116 </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" id="25-tab" data-toggle="tab" href="#tab-25" role="tab" aria-controls="25" aria-selected="false"> 25-101 </a>
-                    </li>
-                </Tab>
-                <div className="tab-content row justify-content-center" id="myTabContent" >
-                    <div className="tab-pane fade show active col-md-11 col-12" id="tab-7" role="tabpanel" aria-labelledby="7-tab">
-                        <Schedule schedules={sched1}/>
-                    </div>
-                    <div className="tab-pane fade show col-md-11 col-12" id="tab-9" role="tabpanel" aria-labelledby="9-tab">
-                        <Schedule schedules={sched2}/>
-                    </div>
-                    <div className="tab-pane fade show col-md-11 col-12" id="tab-25" role="tabpanel" aria-labelledby="25-tab">
-                        <Schedule schedules={sched3}/>
-                    </div>
-                </div> */}
                 <h3>유의사항</h3>
                 <p>
                     <ul>
