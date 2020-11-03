@@ -52,21 +52,6 @@ function Write() {
                             getFieldProps,  // contain values, handleChange, handleBlur
                             isSubmitting,
                         }) => (
-                                // <Form onSubmit={handleSubmit}>
-                                //     <Form.Group>
-                                //         <Form.Label variant={touched.name && errors.name ? "danger" : ""}>제목</Form.Label>
-                                //         <Form.Control className={(touched.name && errors.name ? 'form-control is-invalid' : "form-control")}
-                                //             type="text"
-                                //             placeholder="제목"
-                                //             title="title"
-                                //             {...getFieldProps('title')} />
-                                //     </Form.Group>
-                                //     <Form.Group>
-                                //         <Form.Label>내용</Form.Label>
-                                //         <Form.Control as="textarea" rows={10} />
-                                //     </Form.Group>
-                                // </Form>
-
                                 <form onSubmit={handleSubmit} className="d-flex flex-column">
                                     <div className="form-group">
                                         <div className={touched.name && errors.name ? "text-danger" : ""}>제목</div>

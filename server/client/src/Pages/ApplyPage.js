@@ -166,13 +166,12 @@ function Apply(props) {
 
                                         <div className="form-group mb-4">
                                             <div className={touched.room && errors.room ? "text-danger" : ""}>강의실</div>
-                                            <input
-                                                className={(touched.room && errors.room ? 'form-control is-invalid' : "form-control")}
-                                                type="text"
-                                                name="room"
-                                                {...getFieldProps('room')}
-                                                placeholder="bn-nnn"
-                                            />
+                                            <Field as="select" name="room">
+                                                <option value="">강의실을 선택하세요</option>
+                                                <option value="9-116">9-116</option>
+                                                <option value="7-234">7-234</option>
+                                                <option value="25-101">25-101</option>
+                                            </Field>
                                         </div>
 
                                         <div className="form-group mb-4">
@@ -190,27 +189,26 @@ function Apply(props) {
                                             <FieldArray name="students">
                                                 {({ insert, remove, push }) => (
                                                     <div>
-                                                        <label>이용자</label>
-                                                        {
-                                                            values.students.map((student, index) => (
-                                                                <Row key={index}>
-                                                                        <Field
-                                                                            name={`students.${index}.member`}
-                                                                            placeholder="이용자 성함을 입력하세요."
-                                                                            type="text"
-                                                                        />
-                                                                        <ErrorMessage
-                                                                            name={`friends.${index}.name`}
-                                                                            component="div"
-                                                                            className="field-error"
-                                                                        />
-                                                                        <button
-                                                                            type="button"
-                                                                            className="secondary"
-                                                                            onClick={() => remove(index)}
-                                                                        >X</button>
-                                                                </Row>
-                                                            ))}
+                                                        <div className={touched.date && errors.date ? "text-danger" : ""}>이용자</div>
+                                                        {values.students.map((student, index) => (
+                                                            <Row key={index}>
+                                                                <Field
+                                                                    name={`students.${index}.member`}
+                                                                    placeholder="이용자 성함을 입력하세요."
+                                                                    type="text"
+                                                                />
+                                                                <ErrorMessage
+                                                                    name={`friends.${index}.name`}
+                                                                    component="div"
+                                                                    className="field-error"
+                                                                />
+                                                                <button
+                                                                    type="button"
+                                                                    className="secondary"
+                                                                    onClick={() => remove(index)}
+                                                                >X</button>
+                                                            </Row>
+                                                        ))}
                                                         <button
                                                             type="button"
                                                             className="btn btn-primary"
@@ -222,10 +220,9 @@ function Apply(props) {
                                         </div>
                                         <button type="submit" className="btn btn-dark" disabled={isSubmitting}>
                                             신청하기
-                                </button>
+                                        </button>
                                     </form>
                                 )}
-
                         </Formik>
                     </Col>
                 </Row>

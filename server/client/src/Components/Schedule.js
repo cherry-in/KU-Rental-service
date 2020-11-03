@@ -3,107 +3,127 @@ import Calendar from '@toast-ui/react-calendar';
 import "tui-calendar/dist/tui-calendar.css";
 import "tui-date-picker/dist/tui-date-picker.css";
 import "tui-time-picker/dist/tui-time-picker.css";
-  
-function Cal(calledday) {
-  const calendarRef = useRef();
-  const [day, setDay] = useState(calledday);
+import moment from 'moment';
+import axios from 'axios';
+
+function Cal(props) {
+  const calendarRef = useRef(null);
+  const [reserve, setReserve] = useState([]);
+  const [period, setPeriod] = useState();
   const [myTheme, setMyTheme] = useState({
     'common.dayname.color': '#333',
     'common.today.color': '#333',
-    // 'common.creationGuide.color': 'white',
     'common.creationGuide.backgroundColor': 'gray',
-    // Theme object to extends default dark theme.
   });
 
+  function getReserve(room) {
+    axios.get(`/reserves/room/${room}`, {
+      headers: { authorization: localStorage.getItem('token') },
+    })
+      .then(res => {
+        const reserves = res.data.map(item => ({
+          id: item._id,
+          start: item.start,
+          end: item.end,
+          calendarId: 'Subject',
+          category: 'time',
+        }))
+        setReserve(reserves);
+      })
+      .catch(err => {
+        alert(err.error)
+      });
+  }
+
+  function getDataAction(target) {
+    return target.dataset ? target.dataset.action : target.getAttribute('data-action');
+  }
+
+  function onClickNavi(e) {
+    const cal = calendarRef.current.getInstance();
+    const action = getDataAction(e.target);
+
+    switch (action) {
+      case 'move-prev':
+        cal.prev();
+        break;
+      case 'move-next':
+        cal.next();
+        break;
+      case 'move-today':
+        cal.today();
+        break;
+      default:
+        return;
+    }
+
+    setRenderRangeText();
+  }
+
+  function setRenderRangeText() {
+    const cal = calendarRef.current.getInstance();
+    let html = [];
+    html.push(moment(cal.getDateRangeStart().getTime()).format('YYYY.MM.DD'));
+    html.push(' ~ ');
+    html.push(moment(cal.getDateRangeEnd().getTime()).format(' MM.DD'));
+    setPeriod(html.join(''))
+  }
+
   useEffect(() => {
-    // const cal = calendarRef.current.getInstance();
-    // cal.setDate(new Date(day));
-    // cal.changeView('week', false);
-    // cal.today(new Date(day));
-
-    // calendar.on('clickSchedule', function (event) {
-    //   const schedule = event.schedule;
-
-    //   if (lastClickSchedule) {
-    //     calendar.updateSchedule(lastClickSchedule.id, lastClickSchedule.calendarId, {
-    //       isFocused: false,
-    //     });
-    //   }
-    //   calendar.updateSchedule(schedule.id, schedule.calendarId, {
-    //     isFocused: true,
-    //   });
-
-    //   lastClickSchedule = schedule;
-    //   // open detail view
-
-    //   return (console.log(isFocused))
-    // });
-
-  }, [day])
+    setRenderRangeText();
+    getReserve(props.room);
+  }, [props.room])
 
   return (
-    <Calendar
-      height="100%"
-      calendars={[
-        {
-          id: 'Subject',
-          bgColor: '#a9a9a9',
-          borderColor: '#a9a9a9',
-          isReadOnly: 'true'
-        }
-      ]}
-      
-      view="week"
-      disableDblClick={false}
-      disableClick={true}
-      isReadOnly={false}
-            // template={
-      //   popupIsAllDay=function {
-      //     return display: "none"
-      //   }
-      // }
-      schedules={[
-        {
-          id: '1',
-          calendarId: 'Subject',
-          category: 'time',
-          start: '2020-10-05T11:00:00',
-          end: '2020-10-05T12:00:00',
-        },
-        {
-          id: '2',
-          calendarId: 'Subject',
-          category: 'time',
-          start: '2020-10-09T10:00:00',
-          end: '2020-10-09T11:00:00',
-        },
-        {
-          id: '3',
-          calendarId: 'Subject',
-          category: 'time',
-          start: '2020-10-08T11:00:00',
-          end: '2020-10-08T15:00:00',
-        }
-      ]}
-      scheduleView={['time']}
-      taskView={false}
-      theme={myTheme}
-      timezones={[
-        {
-          timezoneOffset: 540,
-          displayLabel: 'GMT+09:00',
-          tooltip: 'Seoul'
-        },
-      ]}
-      useDetailPopup
-      useCreationPopup
-      view={"week"}
-      week={{
-        workweek: true,
-        hourStart: 8,
-        hourEnd: 23
-      }}
-    />
+    <div>
+      <div id="menu">
+        <span id="menu-navi" onClick={(e) => onClickNavi(e)}>
+          <button type="button" className="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
+          <button type="button" className="btn btn-default btn-sm move-day" data-action="move-prev">
+            <i class="calendar-icon ic-arrow-line-left" data-action="move-prev"></i>
+          </button>
+          <button type="button" className="btn btn-default btn-sm move-day" data-action="move-next">
+            <i className="calendar-icon ic-arrow-line-right" data-action="move-next"></i>
+          </button>
+        </span>
+        <span id="renderRange" className="render-range" style={{ height: "5em" }}>{period}</span>
+      </div>
+      <Calendar
+        ref={calendarRef}
+        height="100%"
+        calendars={[
+          {
+            id: 'Subject',
+            bgColor: '#a9a9a9',
+            borderColor: '#a9a9a9',
+            isReadOnly: 'true'
+          }
+        ]}
+        view="week"
+        disableDblClick={false}
+        disableClick={true}
+        isReadOnly={true}
+        schedules={reserve}
+        scheduleView={['time']}
+        taskView={false}
+        theme={myTheme}
+        timezones={[
+          {
+            timezoneOffset: 540,
+            displayLabel: 'GMT+09:00',
+            tooltip: 'Seoul'
+          },
+        ]}
+        useDetailPopup
+        useCreationPopup
+        view={"week"}
+        week={{
+          workweek: true,
+          hourStart: 8,
+          hourEnd: 23
+        }}
+      />
+    </div>
   )
 }
 
