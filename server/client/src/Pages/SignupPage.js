@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
-import { Col, Container, Navbar } from 'react-bootstrap';
+import { Col, Container, Navbar, Button } from 'react-bootstrap';
 
 const Menu = styled(Navbar)`
     background-color: #7B031D;
@@ -46,7 +46,7 @@ function Signup() {
             </Menu>
             <Container fluid>
                 <Wow className="row justify-content-center">
-                    <Col md={4} className="d-flex align-items-center h-100">
+                <Col md={3} xs={11} className="p-0">
                         <Formik
                             initialValues={{ name: '', id: '', password: '', password2: '', question: '', answer: '' }}
                             validationSchema={Yup.object({
@@ -154,8 +154,8 @@ function Signup() {
                                                 {...getFieldProps('answer')}
                                                 placeholder="Input answer" />
                                         </div>
-                                        <button type="submit" className="btn btn-dark" disabled={isSubmitting}>회원가입</button>
-                                        <button class="btn btn-light"><Link to="/login">로그인하러 가기</Link></button>
+                                        <Button type="submit" variant="secondary" disabled={isSubmitting}>회원가입</Button>
+                                        <Button variant="outline-secondary" as={Link} to="/login">로그인하러 가기</Button>
                                     </form>
                                 )}
                         </Formik>

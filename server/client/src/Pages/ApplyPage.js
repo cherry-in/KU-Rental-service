@@ -22,27 +22,26 @@ function Apply(props) {
     }
 
     function time(starttime) {
-            console.log(starttime)
-            if (starttime == 21) {
-                return (<Field as="select" name="usetime">
-                    <option value="">이용시간을 선택하세요</option>
-                    <option value="1">1시간</option>
-                </Field>)
-            }
-            if (starttime == 20) {
-                return (<Field as="select" name="usetime">
-                    <option value="">이용시간을 선택하세요</option>
-                    <option value="1">1시간</option>
-                    <option value="2">2시간</option>
-                </Field>)
-            }
+        if (starttime == 21) {
+            return (<Field as="select" name="usetime">
+                <option value="">이용시간을 선택하세요</option>
+                <option value="1">1시간</option>
+            </Field>)
+        }
+        if (starttime == 20) {
             return (<Field as="select" name="usetime">
                 <option value="">이용시간을 선택하세요</option>
                 <option value="1">1시간</option>
                 <option value="2">2시간</option>
-                <option value="3">3시간</option>
             </Field>)
-        
+        }
+        return (<Field as="select" name="usetime">
+            <option value="">이용시간을 선택하세요</option>
+            <option value="1">1시간</option>
+            <option value="2">2시간</option>
+            <option value="3">3시간</option>
+        </Field>)
+
     }
 
     function getUser() {
@@ -93,17 +92,21 @@ function Apply(props) {
                         url: '/reserves',
                         data: values
                     }).then(res => {
-                        if (res.status === 404) return alert(res.data.error)
+                        if (res.status === 404) {
+                            alert(res.data.error)
+                            return window.location.reload();
+                        }
                         alert("신청이 완료되었습니다!");
                         setState(true);
+                        console.log("res.data", res.data)
                     })
                         .catch(err => {
                             alert(err.error)
                         });
 
-                    // setTimeout(() => {
-                    //     setSubmitting(false);
-                    // }, 400);  // finish the cycle in handler
+                    setTimeout(() => {
+                        setSubmitting(false);
+                    }, 400);  // finish the cycle in handler
                 }}
             >
                 {({
@@ -208,7 +211,6 @@ function Apply(props) {
                                                                 >
                                                                     X
                                                                         </button>
-
                                                             </div>
                                                         </div>
                                                     ))}

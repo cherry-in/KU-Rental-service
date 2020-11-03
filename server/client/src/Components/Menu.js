@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
-import { Navbar, Nav, NavDropdown, NavLink } from 'react-bootstrap';
+import { Navbar, Nav, NavLink } from 'react-bootstrap';
+import axios from 'axios';
 
 const MENU = styled(Navbar)`
     background-color: #7B031D;
@@ -13,12 +14,28 @@ const MENU = styled(Navbar)`
 
 function Menu() {
     const [state, setState] = useState()
+    const [user, setUser] = useState({ role: "" })
     const name = localStorage.getItem('name');
 
     function logout() {
         localStorage.clear();
         alert("로그아웃 되었습니다.");
         setState(true);
+    }
+
+    useEffect(() => {
+        acheck();
+    }, [])
+
+    function acheck() {
+        axios.get(`/users/${localStorage.getItem('_id')}`)
+            .then(res => {
+                if (res.data.role == "admin") {
+                    setUser(res.data)
+                }
+            }).catch(err => {
+                alert(err.error)
+            });
     }
 
     if (state) return <Redirect to="/" />
@@ -42,11 +59,12 @@ function Menu() {
                     }} className="nav-link">
                         대관 확인/취소</NavLink>
 
-                    <NavLink as={Link} to={{
-                        pathname: `/acheck/${localStorage.getItem('_id')}`,
-                        state: { id: localStorage.getItem('_id') },
-                    }} className="nav-link">
-                        대관 확인/취소(관리자)</NavLink>
+                    {user.role === "admin" ? (
+                        <NavLink as={Link} to={{
+                            pathname: `/acheck/${localStorage.getItem('_id')}`,
+                            state: { id: localStorage.getItem('_id') },
+                        }} className="nav-link">
+                            대관 확인/취소(관리자)</NavLink>) : null}
                 </Nav>
                 <Nav >
                     <NavLink>
