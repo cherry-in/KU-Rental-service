@@ -28,7 +28,7 @@ function Notice() {
         axios.get(`/notices`)
             .then(res => {
                 if (res.status !== 201) {
-                    alert(res.data.error);
+                    // alert(res.data.error);
                 }
                 setNotices(res.data);
             })
