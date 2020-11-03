@@ -67,11 +67,8 @@ function Write() {
                                     <div className="form-group ">
                                         {/*  mb-4 */}
                                         <div className={touched.name && errors.name ? "text-danger" : ""}>내용</div>
-                                        <input className={(touched.name && errors.name ? 'form-control is-invalid' : "form-control")}
-                                            type="text"
-                                            content="content"
-                                            {...getFieldProps('content')}
-                                            placeholder="내용" />
+                                        <Field as="textarea" rows={8} cols={175}
+                                        {...getFieldProps('content')} />
                                     </div>
                                     <button type="submit" className="btn btn-dark" disabled={isSubmitting}>공지 등록</button>
                                 </form>

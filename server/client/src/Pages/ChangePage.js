@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import Menu from '../Components/Menu';
 import { Link, Redirect } from 'react-router-dom';
-import { Container, Button, Col } from 'react-bootstrap';
+import { Container, Button, Navbar, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 
 const Check = styled.div`
@@ -30,7 +30,13 @@ function Change(props) {
   // console.log(props)
   return (
     <div className="">
-      <Menu />
+      {(localStorage.getItem("token") !== null) ? (
+                <Menu />
+            ) : (
+                    <Menu expand="md" variant="dark">
+                        <Navbar.Brand>회원가입</Navbar.Brand>
+                    </Menu>
+                )}
       <Container fluid className="p-0 vh-90">
         <Check className="row justify-content-center m-0">
           <Col md={4} className="pt-5">

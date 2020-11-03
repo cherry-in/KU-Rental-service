@@ -38,8 +38,8 @@ router.post('/', function (req, res, next) {
         const strt = new Date(reserve.start)
         const endt = new Date(reserve.end)
         const reserveArr = reserves.map(item => (
-            (strt >= new Date(item.start) && strt <= new Date(item.end)) ||
-                (endt >= new Date(item.start) && endt <= new Date(item.end)) ?
+            (strt >= new Date(item.start) && strt < new Date(item.end)) ||
+                (endt > new Date(item.start) && endt <= new Date(item.end)) ?
                 "item" :
                 null
         ))
