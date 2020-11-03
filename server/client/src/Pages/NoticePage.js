@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Menu from '../Components/Menu';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Container, Row, Col, Card, Accordion, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Navbar, Accordion, Button } from 'react-bootstrap';
 
 function Notice() {
     const [notices, setNotices] = useState([]);
@@ -38,7 +38,13 @@ function Notice() {
     }
     return (
         <div>
-            <Menu />
+            {(localStorage.getItem("token") !== null) ? (
+                <Menu />
+            ) : (
+                    <Menu expand="md" variant="dark">
+                        <Navbar.Brand>회원가입</Navbar.Brand>
+                    </Menu>
+                )}
             <Container fluid>
                 <Row className="justify-content-center vw-100 vh-90">
                     <Col md={7}>
