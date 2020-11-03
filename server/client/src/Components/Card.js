@@ -53,7 +53,7 @@ function Notice({ card_index, title, date, content }) {
                 <Col md={2} xs={4} className="p-0" >{dateForm(date)}</Col>
             </Card.Header>
             <Accordion.Collapse eventKey={card_index + 1}>
-                <Text><pre className="text-overflow-ellipsis w-100 white-space-initial">{content}</pre></Text>
+                <Text><pre className="text-overflow-ellipsis w-100 whiteSpace-initial">{content}</pre></Text>
             </Accordion.Collapse>
         </Card >
     )
