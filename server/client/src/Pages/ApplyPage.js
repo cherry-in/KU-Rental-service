@@ -125,7 +125,6 @@ function Apply(props) {
                                         </h3>
 
                                         <div className="form-group">
-
                                             <div className={touched.date && errors.date ? "text-danger" : ""}>신청날짜</div>
                                             <input
                                                 className={(touched.date && errors.date ? 'form-control is-invalid' : "form-control")}

@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import Menu from '../Components/Menu';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Field, Formik } from 'formik';
 
 function Write() {
@@ -67,7 +67,7 @@ function Write() {
                                 //     </Form.Group>
                                 // </Form>
 
-                                <form onSubmit={handleSubmit}>
+                                <form onSubmit={handleSubmit} className="d-flex flex-column">
                                     <div className="form-group">
                                         <div className={touched.name && errors.name ? "text-danger" : ""}>제목</div>
                                         <input className={(touched.name && errors.name ? 'form-control is-invalid' : "form-control")}
@@ -79,14 +79,10 @@ function Write() {
 
                                     <div className="form-group ">
                                         <div className={touched.name && errors.name ? "text-danger" : ""}>내용</div>
-                                        <input className={(touched.name && errors.name ? 'form-control is-invalid' : "form-control")}
-                                            type="text"
-                                            content="content"
-                                            {...getFieldProps('content')}
-                                            placeholder="내용" />
+                                        <Field as="textarea" rows={8} style={{ "min-width": "100%" }}
+                                        {...getFieldProps('content')} />
                                     </div>
-
-                                    <button type="submit" className="btn btn-dark" disabled={isSubmitting}>공지 등록</button>
+                                    <Button className="mb-2" variant="dark" type="submit" disabled={isSubmitting}>공지 등록</Button>
                                 </form>
                             )}
                         </Formik>
