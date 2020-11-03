@@ -211,7 +211,6 @@ function Apply(props) {
                                                                 >
                                                                     X
                                                                         </button>
-
                                                             </div>
                                                         </div>
                                                     ))}

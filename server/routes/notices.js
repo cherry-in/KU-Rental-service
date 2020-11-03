@@ -10,6 +10,7 @@ router.get('/', function (req, res, next) {
         })
         .catch((err) => {
             console.error(err);
+
             next(err);
         });
     // res.status(404).json({error:"없음."})

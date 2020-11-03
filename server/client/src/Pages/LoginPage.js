@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import Logo from '../icon.png';
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row, Button } from 'react-bootstrap';
 
 const Col_1 = styled.div`
     background-color: #7B031D;
@@ -37,11 +37,12 @@ const Col_1 = styled.div`
 
 const Col_2 = styled.div`
     background-color: rgb(239, 218, 200);
+
     a {
         color : #7B031D;
     }
 
-    &.mob-formik {
+    & .mob-formik {
         height : 80vh;
         width: 100%;
         display: flex; 
@@ -49,42 +50,40 @@ const Col_2 = styled.div`
         align-items: center; 
     }
 
-    &.web-formik {
+    & .web-form {
         height: 100%;
         display: flex; 
         align-items: center; 
         justify-content: center;
     }
 
-    & .mobb {
-        height: 35vh;
+    & .mob-container {
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
     }
 
     & .webb {
         flex-direction: column;
     }
 
-    & .qwer {
+    & .web-container {
         display: flex;
-        justify-content: space-between;
         height: 12vh;
         width: 30vw;
-        margin-bottom: 25px;
     }
 
     & .web-input-form {
         width: 80%;
-        justify-content: space-between;
-        align-content: space-around;
-        flex-direction: column;
         display: flex;
+        flex-direction: column;
+        justify-content: space-around;
     }
 
     & .mob-input-form {
-      
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
     }
 `
 
@@ -105,7 +104,7 @@ function Login() {
     }
     return (
         <Container fluid className="p-0">
-            <Row className="vw-100 vh-100 m-0" >
+            <Row className="vw-100 vh-100 m-0 " >
                 <Col_1 className={"col-md-4 col-12" + (mobile ? " mobile" : " web")}>
                     <div className={mobile ? "mob-head" : ""}>
                         <img className={mobile ? "mob-img" : "img-fluid"} src={Logo} />
@@ -114,7 +113,7 @@ function Login() {
                         </div>
                     </div>
                 </Col_1>
-                <Col_2 className={"col-md-8 col-12" + (mobile ? " mob-formik p-0" : " web-formik")}>
+                <Col_2 className="col-md-8 col-12" >
                     <Formik
                         initialValues={{ id: '', password: '' }}
                         validationSchema={Yup.object({
@@ -153,35 +152,37 @@ function Login() {
                             getFieldProps,  // contain values, handleChange, handleBlur
                             isSubmitting,
                         }) => (
-                                <form onSubmit={handleSubmit} className={mobile ? "w-75 h-50vh" : "d-flex webb"}>
-                                    <div className={mobile ? "mobb" : "qwer"}>
-                                        <div className={(mobile ? "mob-" : "web-") + "input-form"}>
-                                            <div className={"form-group m-0" + (mobile ? " mb-2" : "")}>
-                                                <input
-                                                    className={(touched.id && errors.id ? 'form-control is-invalid' : "form-control")}
-                                                    type="number"
-                                                    name="id"
-                                                    {...getFieldProps('id')}
-                                                    placeholder="Input Student Id"
-                                                />
+                                <div className={mobile ? " mob-formik p-0" : " web-form"}>
+                                    <form onSubmit={handleSubmit} className={mobile ? "w-75" : "d-flex webb"}>
+                                        <div className={mobile ? "mob-container" : "web-container"}>
+                                            <div className={mobile ? "mob-input-form" : "web-input-form mr-2"}>
+                                                <div className={"form-group m-0" + (mobile ? " mb-2" : " ")}>
+                                                    <input
+                                                        className={(touched.id && errors.id ? 'form-control is-invalid' : "form-control")}
+                                                        type="number"
+                                                        name="id"
+                                                        {...getFieldProps('id')}
+                                                        placeholder="Input Student Id"
+                                                    />
+                                                </div>
+                                                <div className={"form-group m-0"+ (mobile ? " mb-2" : " ")}>
+                                                    <input
+                                                        className={(touched.password && errors.password ? 'form-control is-invalid' : "form-control")}
+                                                        type="password"
+                                                        name="password"
+                                                        {...getFieldProps('password')}
+                                                        placeholder="Input Password"
+                                                    />
+                                                </div>
                                             </div>
-                                            <div className="form-group m-0">
-                                                <input
-                                                    className={(touched.password && errors.password ? 'form-control is-invalid' : "form-control")}
-                                                    type="password"
-                                                    name="password"
-                                                    {...getFieldProps('password')}
-                                                    placeholder="Input Password"
-                                                />
-                                            </div>
+                                            <Button type="submit" variant="dark" className={mobile ? " w-100" : " w-20"} disabled={isSubmitting}> Login </Button>
                                         </div>
-                                        <button type="submit" className={"btn btn-dark" + (mobile ? " w-100" : " w-20")} disabled={isSubmitting}> Login </button>
-                                    </div>
 
-                                    <div><Link to="/find">비밀번호를 잊으셨나요?</Link></div>
-                                    <div><Link to="/signup">회원이 아니신가요?</Link></div>
+                                        <div><Link to="/find">비밀번호를 잊으셨나요?</Link></div>
+                                        <div><Link to="/signup">회원이 아니신가요?</Link></div>
 
-                                </form>
+                                    </form>
+                                </div>
                             )}
                     </Formik>
                 </Col_2>
