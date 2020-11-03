@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import Logo from '../icon.png';
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row, Button } from 'react-bootstrap';
 
 const Col_1 = styled.div`
     background-color: #7B031D;
@@ -58,10 +58,8 @@ const Col_2 = styled.div`
     }
 
     & .mob-container {
-        height: 35vh;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
     }
 
     & .webb {
@@ -70,18 +68,15 @@ const Col_2 = styled.div`
 
     & .web-container {
         display: flex;
-        justify-content: space-between;
         height: 12vh;
         width: 30vw;
-        margin-bottom: 25px;
     }
 
     & .web-input-form {
         width: 80%;
-        justify-content: space-between;
-        align-content: space-around;
-        flex-direction: column;
         display: flex;
+        flex-direction: column;
+        justify-content: space-around;
     }
 
     & .mob-input-form {
@@ -158,10 +153,10 @@ function Login() {
                             isSubmitting,
                         }) => (
                                 <div className={mobile ? " mob-formik p-0" : " web-form"}>
-                                    <form onSubmit={handleSubmit} className={mobile ? "w-75 h-50vh" : "d-flex webb"}>
+                                    <form onSubmit={handleSubmit} className={mobile ? "w-75" : "d-flex webb"}>
                                         <div className={mobile ? "mob-container" : "web-container"}>
-                                            <div className={mobile ? "mob-input-form h-100" : "web-input-form"}>
-                                                <div className={"form-group m-0" + (mobile ? " mb-2" : "")}>
+                                            <div className={mobile ? "mob-input-form" : "web-input-form mr-2"}>
+                                                <div className={"form-group m-0" + (mobile ? " mb-2" : " ")}>
                                                     <input
                                                         className={(touched.id && errors.id ? 'form-control is-invalid' : "form-control")}
                                                         type="number"
@@ -170,7 +165,7 @@ function Login() {
                                                         placeholder="Input Student Id"
                                                     />
                                                 </div>
-                                                <div className="form-group h-80 m-0">
+                                                <div className={"form-group m-0"+ (mobile ? " mb-2" : " ")}>
                                                     <input
                                                         className={(touched.password && errors.password ? 'form-control is-invalid' : "form-control")}
                                                         type="password"
@@ -180,7 +175,7 @@ function Login() {
                                                     />
                                                 </div>
                                             </div>
-                                            <button type="submit" className={"btn btn-dark" + (mobile ? " w-100" : " w-20")} disabled={isSubmitting}> Login </button>
+                                            <Button type="submit" variant="dark" className={mobile ? " w-100" : " w-20"} disabled={isSubmitting}> Login </Button>
                                         </div>
 
                                         <div><Link to="/find">비밀번호를 잊으셨나요?</Link></div>
