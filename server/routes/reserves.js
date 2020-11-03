@@ -41,7 +41,6 @@ router.get('/:_id', function (req, res, next) {
         if (err) return res.status(500).json({ error: err });
         console.log('reserve list', reserve)
         res.status(201).json(reserve);
-
     })
 });
 

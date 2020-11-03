@@ -22,24 +22,19 @@ const reserveSchema = new Schema({
   },
   end: {
     type: String,
-
   },
   room: {
     type: String,
-
   },
   reason: {
     type: String,
-
   },
   students: {
     type: Array,
-
   },
   approve: {
     type: Boolean,
     default: false,
-
   },
   num: {
     type: Number,
