@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Menu from '../Components/Menu';
 import Schedule from '../Components/Schedule';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 
@@ -12,55 +12,6 @@ import Tab from 'react-bootstrap/Tab';
 // `
 
 function Home() {
-    const [sched1, setSched1] = useState();
-    const [sched2, setSched2] = useState();
-    const [sched3, setSched3] = useState();
-
-    useEffect(() => {
-        const dd = [{
-            id: '1',
-            calendarId: 'Subject',
-            category: 'time',
-            start: '2020-11-02T11:00:00',
-            end: '2020-11-02T12:00:00',
-        }, {
-            id: '2',
-            calendarId: 'Subject',
-            category: 'time',
-            start: '2020-11-03T10:00:00',
-            end: '2020-11-03T11:00:00',
-        }];
-        setSched1(dd)
-        const dd2 = [{
-            id: '3',
-            calendarId: 'Subject',
-            category: 'time',
-            start: '2020-11-03T12:00:00',
-            end: '2020-11-03T13:00:00',
-        }, {
-            id: '4',
-            calendarId: 'Subject',
-            category: 'time',
-            start: '2020-11-04T10:00:00',
-            end: '2020-11-04T11:00:00',
-        }];
-        setSched2(dd2)
-        const dd3 = [{
-            id: '5',
-            calendarId: 'Subject',
-            category: 'time',
-            start: '2020-11-04T12:00:00',
-            end: '2020-11-04T13:00:00',
-        }, {
-            id: '6',
-            calendarId: 'Subject',
-            category: 'time',
-            start: '2020-11-05T10:00:00',
-            end: '2020-11-05T11:00:00',
-        }];
-        setSched3(dd3)
-    }, []);
-
     return (
         <div>
             <Menu />
@@ -75,24 +26,35 @@ function Home() {
                 </p>
                 <Tabs defaultActiveKey="9-116" id="uncontrolled-tab-example">
                     <Tab eventKey="9-116" title="9-116">
-                        <Schedule schedules={sched1} />
+                        <Schedule room={"9-116"} />
                     </Tab>
                     <Tab eventKey="7-234" title="7-234">
-                        <Schedule schedules={sched2} />
+                        <Schedule room={"7-234"} />
                     </Tab>
                     <Tab eventKey="25-101" title="25-101">
-                        <Schedule schedules={sched3} />
+                        <Schedule room={"25-101"} />
                     </Tab>
                 </Tabs>
-                {/* <Tab className="nav nav-tabs nav-justified mt-4" id="myTab" role="tablist" style={show ? {} : { display: "none" }}>
+                {/* <Tab className="nav nav-tabs nav-justified mt-4" id="myTab" role="tablist" >
                     <li className="nav-item">
                         <a className="nav-link active" id="7-tab" data-toggle="tab" href="#tab-7" role="tab" aria-controls="7" aria-selected="true"> 7-223 </a>
                     </li>
+                    <li className="nav-item">
+                        <a className="nav-link" id="9-tab" data-toggle="tab" href="#tab-9" role="tab" aria-controls="9" aria-selected="false"> 9-116 </a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" id="25-tab" data-toggle="tab" href="#tab-25" role="tab" aria-controls="25" aria-selected="false"> 25-101 </a>
+                    </li>
                 </Tab>
-                <div className="tab-content row justify-content-center" id="myTabContent" style={show ? {} : { display: "none" }}>
+                <div className="tab-content row justify-content-center" id="myTabContent" >
                     <div className="tab-pane fade show active col-md-11 col-12" id="tab-7" role="tabpanel" aria-labelledby="7-tab">
-                        <Schedule day={sendDate} schedules={sched1}/>
-                        {console.log(sched1)}
+                        <Schedule schedules={sched1}/>
+                    </div>
+                    <div className="tab-pane fade show col-md-11 col-12" id="tab-9" role="tabpanel" aria-labelledby="9-tab">
+                        <Schedule schedules={sched2}/>
+                    </div>
+                    <div className="tab-pane fade show col-md-11 col-12" id="tab-25" role="tabpanel" aria-labelledby="25-tab">
+                        <Schedule schedules={sched3}/>
                     </div>
                 </div> */}
                 <h3>유의사항</h3>
