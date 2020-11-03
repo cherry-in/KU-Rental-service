@@ -190,25 +190,26 @@ function Apply(props) {
                                                 {({ insert, remove, push }) => (
                                                     <div>
                                                         <div className={touched.date && errors.date ? "text-danger" : ""}>이용자</div>
-                                                        {values.students.map((student, index) => (
-                                                            <Row key={index}>
-                                                                <Field
-                                                                    name={`students.${index}.member`}
-                                                                    placeholder="이용자 성함을 입력하세요."
-                                                                    type="text"
-                                                                />
-                                                                <ErrorMessage
-                                                                    name={`friends.${index}.name`}
-                                                                    component="div"
-                                                                    className="field-error"
-                                                                />
-                                                                <button
-                                                                    type="button"
-                                                                    className="secondary"
-                                                                    onClick={() => remove(index)}
-                                                                >X</button>
-                                                            </Row>
-                                                        ))}
+                                                            {values.students.map((student, index) => (
+                                                                <div key={index}>
+                                                                    <Field
+                                                                        name={`students.${index}.member`}
+                                                                        placeholder="이용자 성함을 입력하세요."
+                                                                        type="text"
+                                                                    />
+                                                                    <ErrorMessage
+                                                                        name={`friends.${index}.name`}
+                                                                        component="div"
+                                                                        className="field-error"
+                                                                    />
+                                                                    <button
+                                                                        type="button"
+                                                                        className="secondary"
+                                                                        onClick={() => remove(index)}
+                                                                    >X</button>
+                                                                </div>
+                                                            ))}
+
                                                         <button
                                                             type="button"
                                                             className="btn btn-primary"
