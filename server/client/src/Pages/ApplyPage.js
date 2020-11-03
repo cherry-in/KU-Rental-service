@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Formik, Field, ErrorMessage, FieldArray } from 'formik';
 import Menu from '../Components/Menu';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.css';
 import * as Yup from 'yup';
 import { Redirect } from 'react-router-dom';
 

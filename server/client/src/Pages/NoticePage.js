@@ -6,10 +6,23 @@ import { Container, Row, Col, Card, Accordion, Button } from 'react-bootstrap';
 
 function Notice() {
     const [notices, setNotices] = useState([]);
+    const [user, setUser] = useState({ role: "" })
 
     useEffect(() => {
+        acheck();
         getNotice();
     }, []);
+
+    function acheck() {
+        axios.get(`/users/${localStorage.getItem('_id')}`)
+            .then(res => {
+                if (res.data.role == "admin") {
+                    setUser(res.data)
+                }
+            }).catch(err => {
+                alert(err.error)
+            });
+    }
 
     function dateForm(day) {
         const post_day = new Date(day);
@@ -42,7 +55,10 @@ function Notice() {
             <Container fluid>
                 <Row className="justify-content-center vw-100 vh-90">
                     <Col md={7}>
-                        <h2 className="p-3 border-bottom">공지사항 <Link to="/write">글 작성</Link></h2>
+                        <h2 className="p-3 border-bottom">공지사항
+                        {user.role === "admin" ? (
+                                <Link to="/write">글 작성</Link>) : null}</h2>
+
                         <Accordion>
                             {notices.map((notice, index) =>
                                 <Card>
