@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Menu from '../Components/Menu';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Card, Accordion, Button } from 'react-bootstrap';
 
 function Notice() {
+    const [show, setShow] = useState(false);
     const [notices, setNotices] = useState([]);
     const [user, setUser] = useState({ role: "" })
 
@@ -49,6 +50,7 @@ function Notice() {
                 alert(err.error)
             });
     }
+
     return (
         <div>
             <Menu />
@@ -63,11 +65,12 @@ function Notice() {
                         <Accordion>
                             {notices.map((notice, index) =>
                                 <Card>
-                                    <Card.Header>
-                                        <Accordion.Toggle as={Button} variant="link" eventKey={index + 1}>{notice.notice_title} <span className="text-right">{dateForm(notice.post_date)}</span></Accordion.Toggle>
+                                    <Card.Header className="d-flex justify-content-between">
+                                        <Accordion.Toggle as={Button} variant="link" eventKey={index + 1} className={"d-inline-block " + (show ? "text-wrap" : "text-truncate")} onClick={() => setShow(!show)}>{notice.notice_title}</Accordion.Toggle>
+                                        <span className="d-flex align-items-center" style={{ width: "50%" }}>{dateForm(notice.post_date)}</span>
                                     </Card.Header>
                                     <Accordion.Collapse eventKey={index + 1}>
-                                        <Card.Body>{notice.notice_content}</Card.Body>
+                                        <Card.Body><pre>{notice.notice_content}</pre></Card.Body>
                                     </Accordion.Collapse>
                                 </Card>)}
                         </Accordion>
