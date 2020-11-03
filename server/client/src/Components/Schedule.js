@@ -5,6 +5,9 @@ import "tui-date-picker/dist/tui-date-picker.css";
 import "tui-time-picker/dist/tui-time-picker.css";
 import moment from 'moment';
 import axios from 'axios';
+import { Image, Button } from 'react-bootstrap';
+import leftArrow from '../caret-left-fill.svg';
+import rightArrow from '../caret-right-fill.svg';
 
 function Cal(props) {
   const calendarRef = useRef(null);
@@ -76,17 +79,17 @@ function Cal(props) {
 
   return (
     <div>
-      <div id="menu">
+      <div id="menu" className="p-2">
         <span id="menu-navi" onClick={(e) => onClickNavi(e)}>
-          <button type="button" className="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
-          <button type="button" className="btn btn-default btn-sm move-day" data-action="move-prev">
-            <i class="calendar-icon ic-arrow-line-left" data-action="move-prev"></i>
-          </button>
-          <button type="button" className="btn btn-default btn-sm move-day" data-action="move-next">
-            <i className="calendar-icon ic-arrow-line-right" data-action="move-next"></i>
-          </button>
+          <Button variant="default" size="sm" className="move-today" data-action="move-today">Today</Button>
+          <Button variant="default" size="sm" className="move-day" data-action="move-prev">
+            <Image class="calendar-icon" src={leftArrow} data-action="move-prev"></Image>
+          </Button>
+          <Button variant="default" size="sm" className="move-day" data-action="move-next">
+            <Image className="calendar-icon" src={rightArrow} data-action="move-next"></Image>
+          </Button>
         </span>
-        <span id="renderRange" className="render-range" style={{ height: "5em" }}>{period}</span>
+        <span id="renderRange" className="render-range ml-2" style={{ height: "5em" }}>{period}</span>
       </div>
       <Calendar
         ref={calendarRef}

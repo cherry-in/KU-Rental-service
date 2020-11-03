@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Menu from '../Components/Menu';
 import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.css';
 
 function ACheck(props) {
   const [state, setState] = useState()

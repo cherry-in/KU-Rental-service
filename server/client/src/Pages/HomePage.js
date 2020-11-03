@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Menu from '../Components/Menu';
 import Schedule from '../Components/Schedule';
-import Tabs from 'react-bootstrap/Tabs';
-import Tab from 'react-bootstrap/Tab';
+import { Container, Tabs, Tab } from 'react-bootstrap';
 
 function Home() {
     const [key, setKey] = useState('9-116');
@@ -10,7 +9,7 @@ function Home() {
     return (
         <div>
             <Menu />
-            <div className="container mt-3">
+            <Container className="col-md-10 mt-3">
                 <h2>대관 현황</h2>
                 <p>
                     <strong>대관 가능 시간</strong>
@@ -41,7 +40,7 @@ function Home() {
                 <div className="bg-white">
                     <h6>고려대학교 대관시스템</h6>
                 </div>
-            </div>
+            </Container>
         </div>
     )
 }
