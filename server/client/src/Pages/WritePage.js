@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import Menu from '../Components/Menu';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Field, Formik } from 'formik';
 
 function Write() {
@@ -18,7 +18,7 @@ function Write() {
             <Menu />
             <Container fluid>
                 <Row className="justify-content-center">
-                    <Col md={12} xl={8} style={{ height: "35em" }}>
+                    <Col md={5} xs={11} className="pt-3" >
                         <Formik
                             initialValues={{ title: '', content: '' }}
                             validationSchema={Yup.object({
@@ -52,11 +52,8 @@ function Write() {
                             getFieldProps,  // contain values, handleChange, handleBlur
                             isSubmitting,
                         }) => (
-                                <form onSubmit={handleSubmit} className="asd">
-                                    {/* col-sm-3 */}
-
+                                <form onSubmit={handleSubmit} className="d-flex flex-column">
                                     <div className="form-group">
-                                        {/*  mb-4 */}
                                         <div className={touched.name && errors.name ? "text-danger" : ""}>제목</div>
                                         <input className={(touched.name && errors.name ? 'form-control is-invalid' : "form-control")}
                                             type="text"
@@ -64,16 +61,13 @@ function Write() {
                                             {...getFieldProps('title')}
                                             placeholder="제목" />
                                     </div>
+
                                     <div className="form-group ">
-                                        {/*  mb-4 */}
                                         <div className={touched.name && errors.name ? "text-danger" : ""}>내용</div>
-                                        <input className={(touched.name && errors.name ? 'form-control is-invalid' : "form-control")}
-                                            type="text"
-                                            content="content"
-                                            {...getFieldProps('content')}
-                                            placeholder="내용" />
+                                        <Field as="textarea" rows={8} style={{ "min-width": "100%" }}
+                                        {...getFieldProps('content')} />
                                     </div>
-                                    <button type="submit" className="btn btn-dark" disabled={isSubmitting}>공지 등록</button>
+                                    <Button className="mb-2" variant="dark" type="submit" disabled={isSubmitting}>공지 등록</Button>
                                 </form>
                             )}
                         </Formik>
@@ -83,5 +77,5 @@ function Write() {
         </div>
     )
 }
- 
+
 export default Write

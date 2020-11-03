@@ -25,11 +25,6 @@ const Wow = styled.div`
         content: '비밀번호가 일치하지 않습니다.';
         color: red;
     }
-
-    & .asd {
-        display: flex;
-        flex-direction: column;
-    }
 `
 
 function Signup() {
@@ -46,7 +41,7 @@ function Signup() {
             </Menu>
             <Container fluid>
                 <Wow className="row justify-content-center">
-                <Col md={3} xs={11} className="p-0">
+                    <Col md={3} xs={11} className="p-0">
                         <Formik
                             initialValues={{ name: '', id: '', password: '', password2: '', question: '', answer: '' }}
                             validationSchema={Yup.object({
@@ -91,7 +86,7 @@ function Signup() {
                                 getFieldProps,  // contain values, handleChange, handleBlur
                                 isSubmitting,
                             }) => (
-                                    < form onSubmit={handleSubmit} className="asd">
+                                    <form onSubmit={handleSubmit} className="d-flex flex-column pt-3">
                                         <div className="form-group ">
                                             <div className={touched.name && errors.name ? "text-danger" : ""}>이름을 입력하세요</div>
                                             <input
@@ -154,7 +149,7 @@ function Signup() {
                                                 {...getFieldProps('answer')}
                                                 placeholder="Input answer" />
                                         </div>
-                                        <Button type="submit" variant="secondary" disabled={isSubmitting}>회원가입</Button>
+                                        <Button type="submit" variant="secondary" className="mb-2" disabled={isSubmitting}>회원가입</Button>
                                         <Button variant="outline-secondary" as={Link} to="/login">로그인하러 가기</Button>
                                     </form>
                                 )}

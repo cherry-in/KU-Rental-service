@@ -3,12 +3,12 @@ import Menu from '../Components/Menu';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Card, Accordion, Button } from 'react-bootstrap';
+import CARD from '../Components/Card';
 
 function Notice() {
     const [show, setShow] = useState(false);
     const [notices, setNotices] = useState([]);
     const [user, setUser] = useState({ role: "" })
-    const [a ,setA ] = useState([]);
 
     useEffect(() => {
         acheck();
@@ -24,19 +24,6 @@ function Notice() {
             }).catch(err => {
                 alert(err.error)
             });
-    }
-
-    function dateForm(day) {
-        const post_day = new Date(day);
-        let year = post_day.getFullYear();
-        let month = post_day.getMonth() + 1;
-        let date = post_day.getDate();
-
-        month = month < 10 ? '0' + month : month;
-        date = date < 10 ? '0' + date : date;
-
-        const new_date = year + "-" + month + "-" + date;
-        return new_date
     }
 
     function getNotice() {
@@ -58,22 +45,11 @@ function Notice() {
             <Container fluid>
                 <Row className="justify-content-center vw-100 vh-90">
                     <Col md={7}>
-                        <div className="px-3 pt-3 mb-3 border-bottom d-flex justify-content-between align-items-end">
-                            <h2>공지사항</h2>
-                            {user.role === "admin" ? (
-                                <Link to="/write">글 작성</Link>) : null}
-                        </div>
+                        <h2 className="p-3 border-bottom d-flex justify-content-between">공지사항 {user.role === "admin" ? (
+                            <Button as={Link} to="/write">글 작성</Button>) : null}</h2>
                         <Accordion>
-                            {notices.map((notice, index) =>
-                                <Card>
-                                    <Card.Header className="d-flex justify-content-space-between">
-                                        <Accordion.Toggle as={Button} variant="link" eventKey={index + 1} className={"d-inline-block " + (show ? "text-wrap" : "text-truncate")} onClick={() => setShow(!show)}>{notice.notice_title}</Accordion.Toggle>
-                                        <span className="d-flex align-items-center" style={{ width: "50%" }}>{dateForm(notice.post_date)}</span>
-                                    </Card.Header>
-                                    <Accordion.Collapse eventKey={index + 1}>
-                                        <Card.Body><pre>{notice.notice_content}</pre></Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>)}
+                            {notices.map((notice, index) => <CARD card_index={index} title={notice.notice_title} date={notice.post_date} content={notice.notice_content} />
+                            )}
                         </Accordion>
                     </Col>
                 </Row>
