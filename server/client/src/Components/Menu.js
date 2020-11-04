@@ -28,8 +28,10 @@ function Menu() {
     }, [])
 
     function acheck() {
-        axios.get(`/users/${localStorage.getItem('_id')}`)
-            .then(res => {
+        axios.get(`/users/${localStorage.getItem('_id')}`, {
+            headers: { authorization: localStorage.getItem('token') },
+        }).then(res => {
+                console.log(res.data)
                 if (res.data.role == "admin") {
                     setUser(res.data)
                 }
@@ -59,12 +61,12 @@ function Menu() {
                     }} className="nav-link">
                         대관 확인/취소</NavLink>
 
-                    {user.role === "admin" ? (
+                    {/* {user.role === "admin" ? (
                         <NavLink as={Link} to={{
                             pathname: `/acheck/${localStorage.getItem('_id')}`,
                             state: { id: localStorage.getItem('_id') },
                         }} className="nav-link">
-                            대관 확인/취소(관리자)</NavLink>) : null}
+                            대관 확인/취소(관리자)</NavLink>) : null} */}
                 </Nav>
                 <Nav >
                     <NavLink>

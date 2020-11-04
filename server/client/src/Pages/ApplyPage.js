@@ -7,14 +7,14 @@ import { Redirect } from 'react-router-dom';
 import { Col, Container, Row } from 'react-bootstrap';
 
 function Apply(props) {
-    const [state, setState] = useState();
+    const [state, setState] = useState({ok:""});
     const [user, setUser] = useState({ name: "" });
 
     useEffect(() => {
         getUser();
     }, [])
-
-    if (state) {
+    if (state.ok==="no") return <Redirect to="/" />;
+    if (state.ok==="ok") {
         return <Redirect to={{
             pathname: `/check/${props.match.params.id}`,
             state: { id: props.match.params.id },
@@ -50,6 +50,8 @@ function Apply(props) {
             .then(res => {
                 if (res.status !== 201) {
                     alert(res.data.error);
+                    localStorage.clear();
+                    setState({ok:"no"});
                 }
                 console.log(res.data);
                 setUser(res.data);
@@ -97,7 +99,7 @@ function Apply(props) {
                                         return window.location.reload();
                                     }
                                     alert("신청이 완료되었습니다!");
-                                    setState(true);
+                                    setState({ok:"ok"});
                                     console.log("res.data", res.data)
                                 })
                                     .catch(err => {
