@@ -7,6 +7,16 @@ const router = express.Router();
 
 router.post('/', function (req, res, next) {
     console.log('/reserve post req.body', req.body)
+
+    let num = req.body.students.length + 1;
+    for (let ele of req.body.students) {
+        if (ele.member === '') {
+            num -= 1;
+        };
+    };
+
+    if (req.body.roomInfo > num) return res.status(404).json({ error: "사용할 강의실의 최소 인원을 맞춰주세요." })
+
     const reserve = new Reserve({
         user: req.body._id,
         date: req.body.date,
@@ -69,7 +79,6 @@ router.get('/room/:room', function (req, res, next) {
     })
 })
 
-// router.get('/:_id', verifyToken, function (req, res, next) {
 router.get('/:_id', function (req, res, next) {
     console.log('/reserves get req.params', req.params)
     Reserve.find({ user: req.params._id }, function (err, reserve) {

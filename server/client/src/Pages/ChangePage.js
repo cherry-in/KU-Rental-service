@@ -9,7 +9,6 @@ import styled from 'styled-components';
 
 const Check = styled.div`
   
-
   & #reCheck::after {
     content: '새로운 비밀번호를 다시 입력하세요';
   }

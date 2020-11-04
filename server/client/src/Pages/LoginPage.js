@@ -159,7 +159,7 @@ function Login() {
                                                 <div className={"form-group m-0" + (mobile ? " mb-2" : " ")}>
                                                     <input
                                                         className={(touched.id && errors.id ? 'form-control is-invalid' : "form-control")}
-                                                        type="number"
+                                                        type="text"
                                                         name="id"
                                                         {...getFieldProps('id')}
                                                         placeholder="Input Student Id"

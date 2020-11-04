@@ -9,6 +9,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 function Apply(props) {
     const [state, setState] = useState();
     const [user, setUser] = useState({ name: "" });
+    const [room_Num, setRoom_Num] = useState({ "9-116": 5, "7-234": 7, "25-101": 10 });
 
     useEffect(() => {
         getUser();
@@ -59,6 +60,14 @@ function Apply(props) {
             });
     }
 
+    function addRoomInfo(values) {
+        for (let room in room_Num) {
+            if (room === values.room) {
+                values.roomInfo = room_Num[room]
+            }
+        };
+    }
+
     return (
         <div>
             <Menu />
@@ -86,7 +95,7 @@ function Apply(props) {
                                     .required('대관목적을 입력해주세요.'),
                             })}
                             onSubmit={(values, { setSubmitting }) => {
-                                console.log(values)
+                                addRoomInfo(values);
                                 axios({
                                     method: 'post',
                                     url: '/reserves',
