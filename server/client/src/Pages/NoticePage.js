@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Menu from '../Components/Menu';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Container, Row, Col, Card, Accordion, Button } from 'react-bootstrap';
 import CARD from '../Components/Card';
 
@@ -9,15 +9,25 @@ function Notice() {
     const [show, setShow] = useState(false);
     const [notices, setNotices] = useState([]);
     const [user, setUser] = useState({ role: "" })
+    const [state, setState] = useState()
 
     useEffect(() => {
         acheck();
         getNotice();
     }, []);
 
+    if (state) return <Redirect to="/" />;
+
     function acheck() {
-        axios.get(`/users/${localStorage.getItem('_id')}`)
+        axios.get(`/users/${localStorage.getItem('_id')}`, {
+            headers: { authorization: localStorage.getItem('token') },
+        })
             .then(res => {
+                if (res.status !== 201) {
+                    alert(res.data.error);
+                    localStorage.clear();
+                    setState(true);
+                }
                 if (res.data.role == "admin") {
                     setUser(res.data)
                 }

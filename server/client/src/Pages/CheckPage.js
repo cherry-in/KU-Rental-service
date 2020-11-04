@@ -1,23 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import Menu from '../Components/Menu';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import Table from 'react-bootstrap/Table'
+import { Container } from 'react-bootstrap';
+import styled from 'styled-components';
+
+const Ta = styled(Table)`
+margin-top: 0.5em;
+
+  & th, & td {
+    padding: 0;
+    vertical-align: middle;
+    font-size: 0.9rem;
+    margin-left : auto; margin-right : auto;
+    border-spacing: initial;
+  };
+
+  & tr {
+    display: d-flex;
+    width: 150px;
+  };
+
+  & td {
+    align-items: center;
+    margin: 10px;
+  };
+
+`
 
 function Check(props) {
     const [reserve, setReserve] = useState([]);
+    const [state, setState] = useState()
     useEffect(() => {
         getReserve();
     }, [])
+
+    if (state) return <Redirect to="/" />;
 
     function getReserve() {
         axios.get(`/reserves/${props.match.params.id}`, {
             headers: { authorization: localStorage.getItem('token') },
         })
             .then(res => {
-                if (res.status !== 201) {
+                if (res.status === 404) {
                     alert(res.data.error);
                 }
+                if (res.status === 419) {
+                    alert(res.data.error);
+                    localStorage.clear();
+                    setState(true);
+                }
                 console.log(res.data);
-                setReserve(res.data);
+                const reserves=res.data.filter(function(item) {
+                        return item !== '';
+                      });
+                setReserve(reserves);
             })
             .catch(err => {
                 alert(err.error)
@@ -38,29 +76,29 @@ function Check(props) {
     return (
         <div>
             <Menu />
-            <div className="">
-                <table className="table">
-                    <thead>
+            <Container fluid>
+                <Ta responsive="lg ml-2rem">
+                    <thead className="thead-light">
                         <tr>
-                            <th>날짜</th>
-                            <th>시간</th>
-                            <th>강의실</th>
-                            <th>사용인원</th>
-                            <th>승인여부</th>
-                            <th>예약취소</th>
+                            <th className="text-center">날짜</th>
+                            <th className="text-center">시간</th>
+                            <th className="text-center">강의실</th>
+                            <th className="text-center">사용인원</th>
+                            {/* <th>승인여부</th> */}
+                            <th className="text-center">예약취소</th>
                         </tr>
                     </thead>
                     <tbody>
                         {reserve.map((reserve, index) => {
                             return (
                                 <tr key={index}>
-                                    <td>{reserve.date}</td>
-                                    <td>{reserve.starttime}시~{(Number(reserve.starttime) + reserve.usetime)}시</td>
-                                    <td>{reserve.room}</td>
-                                    <td>{reserve.num}</td>
-                                    <td>{reserve.check ? (reserve.approve ? "사용가능" : "사용불가") : "승인대기중"}</td>
-                                    <td>
-                                        <button onClick={() => remove(index)} className="btn btn-danger">
+                                    <td className="text-center">{reserve.date}</td>
+                                    <td className="text-center">{reserve.starttime}시~{(Number(reserve.starttime) + reserve.usetime)}시</td>
+                                    <td className="text-center">{reserve.room}</td>
+                                    <td className="text-center">{reserve.num}</td>
+                                    {/* <td>{reserve.check ? (reserve.approve ? "사용가능" : "사용불가") : "승인대기중"}</td> */}
+                                    <td className="text-center">
+                                        <button onClick={() => remove(index)} className="btn btn-danger btn-sm">
                                             취소
                                         </button>
                                     </td>
@@ -68,9 +106,8 @@ function Check(props) {
                             )
                         })}
                     </tbody>
-                </table>
-
-            </div>
+                </Ta>
+            </Container>
         </div>
     )
 }

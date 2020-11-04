@@ -1,10 +1,34 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 import Menu from '../Components/Menu';
 import Schedule from '../Components/Schedule';
 import { Container, Tabs, Tab } from 'react-bootstrap';
 
 function Home() {
     const [key, setKey] = useState('9-116');
+    const [state, setState] = useState()
+
+    useEffect(() => {
+        tcheck();
+    }, []);
+
+    if (state) return <Redirect to="/" />;
+
+    function tcheck() {
+        axios.get(`/users/${localStorage.getItem('_id')}`, {
+            headers: { authorization: localStorage.getItem('token') },
+        })
+            .then(res => {
+                if (res.status !== 201) {
+                    alert(res.data.error);
+                    localStorage.clear();
+                    setState(true);
+                }
+            }).catch(err => {
+                alert(err.error)
+            });
+    }
 
     return (
         <div>
@@ -28,13 +52,13 @@ function Home() {
                 </p>
                 <Tabs defaultActiveKey="9-116" id="uncontrolled-tab-example" onSelect={(k) => setKey(k)}>
                     <Tab eventKey="9-116" title="9-116">
-                        <Schedule room={key}/>
+                        <Schedule room={key} />
                     </Tab>
                     <Tab eventKey="7-234" title="7-234">
-                        <Schedule room={key}/>
+                        <Schedule room={key} />
                     </Tab>
                     <Tab eventKey="25-101" title="25-101">
-                        <Schedule room={key}/>
+                        <Schedule room={key} />
                     </Tab>
                 </Tabs>
             </Container>

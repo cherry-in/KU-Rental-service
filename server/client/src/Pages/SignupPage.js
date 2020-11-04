@@ -67,7 +67,6 @@ function Signup() {
                                 }).then(res => {
                                     if (res.status === 404) return alert(res.data.error)
                                     alert("회원가입이 완료되었습니다!")
-
                                     setState(true);
                                 })
                                     .catch(err => {
