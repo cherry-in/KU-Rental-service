@@ -26,7 +26,7 @@ function ACheck(props) {
         alert(err.error)
       });
   }
-  if (state) return <Redirect to="/home" />;
+  if (state) return <Redirect to="/" />;
 
   function remove(index) {
     // axios.delete(`/reserves/${reserve[index]._id}`)
