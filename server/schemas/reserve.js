@@ -9,7 +9,8 @@ const reserveSchema = new Schema({
     ref: 'User',
   },
   date: {
-    type: String,
+    type: Date,
+    default: Date.now
   },
   starttime: {
     type: Number,

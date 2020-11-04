@@ -5,16 +5,22 @@ import axios from 'axios';
 import * as Yup from 'yup';
 import { Redirect } from 'react-router-dom';
 import { Col, Container, Row } from 'react-bootstrap';
+import DatePicker, { registerLocale } from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import ko from 'date-fns/locale/ko';
+
+registerLocale("ko", ko);
 
 function Apply(props) {
-    const [state, setState] = useState({ok:""});
+    const [state, setState] = useState({ ok: "" });
     const [user, setUser] = useState({ name: "" });
+    //const [date, setDate] = useState(new Date());
 
     useEffect(() => {
         getUser();
     }, [])
-    if (state.ok==="no") return <Redirect to="/" />;
-    if (state.ok==="ok") {
+    if (state.ok === "no") return <Redirect to="/" />;
+    if (state.ok === "ok") {
         return <Redirect to={{
             pathname: `/check/${props.match.params.id}`,
             state: { id: props.match.params.id },
@@ -51,7 +57,7 @@ function Apply(props) {
                 if (res.status !== 201) {
                     alert(res.data.error);
                     localStorage.clear();
-                    setState({ok:"no"});
+                    setState({ ok: "no" });
                 }
                 console.log(res.data);
                 setUser(res.data);
@@ -70,7 +76,7 @@ function Apply(props) {
                         <Formik
                             initialValues={{
                                 _id: `${props.match.params.id}`,
-                                date: '',
+                                date: new Date(),
                                 starttime: '',
                                 usetime: '',
                                 room: '',
@@ -82,8 +88,8 @@ function Apply(props) {
                                 ],
                             }}
                             validationSchema={Yup.object({
-                                date: Yup.string()
-                                    .required('날짜를 입력해주세요.'),
+                                /*date: Yup.string()
+                                    .required('날짜를 입력해주세요.'),*/
                                 reason: Yup.string()
                                     .required('대관목적을 입력해주세요.'),
                             })}
@@ -99,7 +105,7 @@ function Apply(props) {
                                         return window.location.reload();
                                     }
                                     alert("신청이 완료되었습니다!");
-                                    setState({ok:"ok"});
+                                    setState({ ok: "ok" });
                                     console.log("res.data", res.data)
                                 })
                                     .catch(err => {
@@ -117,6 +123,7 @@ function Apply(props) {
                                 values,
                                 handleSubmit,
                                 getFieldProps,
+                                setFieldValue,
                                 isSubmitting,
                             }) => (
                                     <form onSubmit={handleSubmit} className="d-flex flex-column">
@@ -125,14 +132,23 @@ function Apply(props) {
                                         </h3>
 
                                         <div className="form-group">
-                                            <div className={touched.date && errors.date ? "text-danger" : ""}>신청날짜</div>
+                                            <DatePicker
+                                                locale="ko"
+                                                selected={values.date}
+                                                name="date"
+                                                onChange={date => setFieldValue('date', date)}
+                                                dateFormat="yyyy.MM.dd(eee)"
+                                                placeholderText="yyyy-mm-dd"
+                                                minDate={new Date()}
+                                            />
+                                            {/*<div className={touched.date && errors.date ? "text-danger" : ""}>신청날짜</div>
                                             <input
                                                 className={(touched.date && errors.date ? 'form-control is-invalid' : "form-control")}
                                                 type="text"
                                                 name="date"
                                                 {...getFieldProps('date')}
                                                 placeholder="yyyy-mm-dd"
-                                            />
+                                            />*/}
                                         </div>
 
                                         <div className="form-group mb-4">
