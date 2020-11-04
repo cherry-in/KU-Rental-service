@@ -1,23 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import Menu from '../Components/Menu';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 function Check(props) {
     const [reserve, setReserve] = useState([]);
+    const [state, setState] = useState()
     useEffect(() => {
         getReserve();
     }, [])
+
+    if (state) return <Redirect to="/" />;
 
     function getReserve() {
         axios.get(`/reserves/${props.match.params.id}`, {
             headers: { authorization: localStorage.getItem('token') },
         })
             .then(res => {
-                if (res.status !== 201) {
+                if (res.status === 404) {
                     alert(res.data.error);
                 }
+                if (res.status === 419) {
+                    alert(res.data.error);
+                    localStorage.clear();
+                    setState(true);
+                }
                 console.log(res.data);
-                setReserve(res.data);
+                const reserves=res.data.filter(function(item) {
+                        return item !== '';
+                      });
+                setReserve(reserves);
             })
             .catch(err => {
                 alert(err.error)
