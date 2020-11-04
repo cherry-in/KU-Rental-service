@@ -47,18 +47,9 @@ function ACheck(props) {
         alert(err.error)
       });
   }
-  if (state) return <Redirect to="/home" />;
+  if (state) return <Redirect to="/" />;
 
   function remove(index) {
-    // axios.delete(`/reserves/${reserve[index]._id}`)
-    //   .then(res => {
-    //     if (res.status === 404) return alert(res.data.error)
-    //     alert("삭제되었습니다!");
-    //     getReserve();
-    //   })
-    //   .catch(err => {
-    //     alert(err.error)
-    //   });
     axios.put(`/reserves/${reserve[index]._id}`)
       .then(res => {
         if (res.status === 404) return alert(res.data.error)

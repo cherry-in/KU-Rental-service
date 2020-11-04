@@ -17,7 +17,8 @@ router.post('/', function (req, res, next) {
         room: req.body.room,
         reason: req.body.reason,
         students: req.body.students,
-        approve: req.body.approve,
+        approve: true,
+        check: true,
         num: req.body.students.length + 1,
     });
 
@@ -38,8 +39,8 @@ router.post('/', function (req, res, next) {
         const strt = new Date(reserve.start)
         const endt = new Date(reserve.end)
         const reserveArr = reserves.map(item => (
-            (strt >= new Date(item.start) && strt <= new Date(item.end)) ||
-                (endt >= new Date(item.start) && endt <= new Date(item.end)) ?
+            (strt >= new Date(item.start) && strt < new Date(item.end)) ||
+                (endt > new Date(item.start) && endt <= new Date(item.end)) ?
                 "item" :
                 null
         ))
@@ -70,15 +71,25 @@ router.get('/room/:room', function (req, res, next) {
 })
 
 // router.get('/:_id', verifyToken, function (req, res, next) {
-router.get('/:_id', function (req, res, next) {
+router.get('/:_id', verifyToken, function (req, res, next) {
     console.log('/reserves get req.params', req.params)
     Reserve.find({ user: req.params._id }, function (err, reserve) {
         if (err) return res.status(500).json({ error: err });
-        res.status(201).json(reserve);
+        // console.log(reserve, Date.now())
+        const reserves = reserve.map(item => (
+            new Date(item.end) >= Date.now() ? item : ""
+        ));
+
+        if (!reserves) {
+            console.log("no신청")
+            res.status(404).json({error: "신청내역이 없습니다."})
+        }
+        console.log("reserves",reserves)
+        res.status(201).json(reserves);
     })
 });
 
-router.get('/admin/:_id', function (req, res, next) {
+router.get('/admin/:_id', verifyToken, function (req, res, next) {
     console.log('/reserves/admin get req.params', req.params)
     Reserve.find({ approve: false }).populate('user').exec(function (err, reserve) {
         if (err) return res.status(500).json({ error: err });
