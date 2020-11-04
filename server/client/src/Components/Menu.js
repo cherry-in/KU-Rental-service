@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { Navbar, Nav, NavLink } from 'react-bootstrap';
-import axios from 'axios';
 
 const MENU = styled(Navbar)`
     background-color: #7B031D;

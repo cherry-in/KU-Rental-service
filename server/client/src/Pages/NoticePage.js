@@ -6,10 +6,23 @@ import { Container, Row, Col, Card, Accordion, Button } from 'react-bootstrap';
 
 function Notice() {
     const [notices, setNotices] = useState([]);
+    const [user, setUser] = useState({ role: "" })
 
     useEffect(() => {
+        acheck();
         getNotice();
     }, []);
+
+    function acheck() {
+        axios.get(`/users/${localStorage.getItem('_id')}`)
+            .then(res => {
+                if (res.data.role == "admin") {
+                    setUser(res.data)
+                }
+            }).catch(err => {
+                alert(err.error)
+            });
+    }
 
     function dateForm(day) {
         const post_day = new Date(day);
@@ -38,16 +51,30 @@ function Notice() {
     }
     return (
         <div>
+            <style type="text/css">
+                {`
+    .hidden {
+        display: block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+    `}
+            </style>
             <Menu />
             <Container fluid>
                 <Row className="justify-content-center vw-100 vh-90">
                     <Col md={7}>
-                        <h2 className="p-3 border-bottom">공지사항 <Link to="/write">글 작성</Link></h2>
+                        <div className="px-3 pt-3 mb-3 border-bottom d-flex justify-content-between align-items-end">
+                            <h2>공지사항</h2>
+                            {user.role === "admin" ? (
+                                <Link to="/write">글 작성</Link>) : null}
+                        </div>
                         <Accordion>
                             {notices.map((notice, index) =>
                                 <Card>
                                     <Card.Header>
-                                        <Accordion.Toggle as={Button} variant="link" eventKey={index + 1}>{notice.notice_title} <span className="text-right">{dateForm(notice.post_date)}</span></Accordion.Toggle>
+                                        <Accordion.Toggle as={Button} variant="link hidden" eventKey={index + 1}>{notice.notice_title} <span className="text-right">{dateForm(notice.post_date)}</span></Accordion.Toggle>
                                     </Card.Header>
                                     <Accordion.Collapse eventKey={index + 1}>
                                         <Card.Body>{notice.notice_content}</Card.Body>

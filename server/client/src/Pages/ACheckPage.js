@@ -2,10 +2,31 @@ import React, { useState, useEffect } from 'react';
 import Menu from '../Components/Menu';
 import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
+import { Container, Table } from 'react-bootstrap';
+import styled from 'styled-components';
+
+const Ta = styled(Table)`
+  & th, & td {
+    padding: 0;
+    vertical-align: middle;
+  };
+
+  & tr {
+    display: d-flex;
+    width: 50px;
+  };
+
+  & td {
+    align-items: center;
+    width: 70px;
+  };
+  
+`
 
 function ACheck(props) {
   const [state, setState] = useState()
   const [reserve, setReserve] = useState([]);
+
   useEffect(() => {
     getReserve();
   }, [])
@@ -66,16 +87,17 @@ function ACheck(props) {
   return (
     <div>
       <Menu />
-      <div className="">
-        <table className="table">
-          <thead>
+      <Container fluid>
+        <Ta responsive="lg">
+          <thead className="thead-light">
+            
             <tr>
               <th>대표자</th>
               <th>날짜</th>
               <th>시간</th>
               <th>강의실</th>
-              <th>사용인원</th>
-              <th>승인여부</th>
+              <th>사용 인원</th>
+              <th>승인 여부</th>
             </tr>
           </thead>
           <tbody>
@@ -89,10 +111,10 @@ function ACheck(props) {
                     <td>{reserve.room}</td>
                     <td>{reserve.num}</td>
                     <td>
-                      <button onClick={() => admit(index)} className="btn btn-primary">
+                      <button onClick={() => admit(index)} className="btn btn-primary btn-sm">
                         승인
                     </button>
-                      <button onClick={() => remove(index)} className="btn btn-danger">
+                      <button onClick={() => remove(index)} className="btn btn-danger btn-sm">
                         거절
                     </button>
                     </td>
@@ -100,9 +122,8 @@ function ACheck(props) {
                 )
               })) : <div>최근 대관 신청 내역이 없습니다.</div>}
           </tbody>
-        </table>
-
-      </div>
+        </Ta>
+      </Container>
     </div>
   )
 }
