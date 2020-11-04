@@ -37,7 +37,7 @@ function Home() {
                         <li><strong style={{ color: "red" }}>대관 시간 이외 강의실을 이용하다 적발될 경우 한달 간 강의실 이용이 불가합니다.</strong></li>
                     </ul>
                 </p>
-            </div>
+            </Container>
         </div>
     )
 }
