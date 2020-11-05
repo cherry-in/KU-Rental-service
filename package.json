@@ -1,0 +1,23 @@
+{
+  "name": "qna-service-competition",
+  "version": "1.0.0",
+  "description": "고려대학교 세종캠퍼스 학술정보원 주최 공모전",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node ./server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://compmath.korea.ac.kr/gitlab/research/qna-service-competition.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^4.2.0",
+    "mongoose": "^5.10.12"
+  }
+}
