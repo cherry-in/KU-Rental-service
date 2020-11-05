@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import Menu from '../Components/Menu';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Container, Button, Navbar, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 
