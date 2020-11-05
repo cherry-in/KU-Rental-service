@@ -137,7 +137,7 @@ function Apply(props) {
                                                 selected={values.date}
                                                 name="date"
                                                 onChange={date => setFieldValue('date', date)}
-                                                dateFormat="yyyy.MM.dd(eee)"
+                                                dateFormat="yyyy.MM.dd"
                                                 placeholderText="yyyy-mm-dd"
                                                 minDate={new Date()}
                                             />

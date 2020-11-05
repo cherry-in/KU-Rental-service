@@ -35,14 +35,11 @@ router.post('/', function (req, res, next) {
                     console.error(err);
                     next(err);
                 });
-        }
-        const strt = new Date(reserve.start)
-        const endt = new Date(reserve.end)
+        };
         const reserveArr = reserves.map(item => (
-            (strt >= new Date(item.start) && strt < new Date(item.end)) ||
-                (endt > new Date(item.start) && endt <= new Date(item.end)) ?
-                "item" :
-                null
+            (reserve.start >= item.start && reserve.start < item.end) ||
+                (reserve.end > item.start && reserve.end <= item.end) ?
+                "item" : null
         ))
         console.log("array", reserveArr)
         if (!reserveArr.includes("item")) {
@@ -75,16 +72,21 @@ router.get('/:_id', verifyToken, function (req, res, next) {
     console.log('/reserves get req.params', req.params)
     Reserve.find({ user: req.params._id }, function (err, reserve) {
         if (err) return res.status(500).json({ error: err });
-        // console.log(reserve, Date.now())
+        console.log('/change date', new Date())
         const reserves = reserve.map(item => (
-            new Date(item.end) >= Date.now() ? item : ""
+            //console.log('/item', item),
+            console.log('/item end',item.end),
+            console.log('type check',typeof item.end),
+            console.log('type2 check',typeof new Date()),
+            console.log('/now', new Date()),
+            item.end >= new Date() ? item : ""
         ));
 
         if (!reserves) {
-            console.log("no신청")
-            res.status(404).json({error: "신청내역이 없습니다."})
+            console.log("no신청") 
+            res.status(404).json({ error: "신청내역이 없습니다." })
         }
-        console.log("reserves",reserves)
+        console.log("reserves", reserves)
         res.status(201).json(reserves);
     })
 });
