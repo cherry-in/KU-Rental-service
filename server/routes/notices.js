@@ -18,7 +18,6 @@ router.get('/', function (req, res, next) {
 router.get('/:id', function (req, res, next) {
     Notice.findOne({ _id: req.params.id }, function (err, notice) {
         if (err) return res.status(500).json({ error: err });
-        console.log("FindOne", notice)
         res.status(201).json(notice);
     })
 });

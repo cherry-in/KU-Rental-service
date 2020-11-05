@@ -55,7 +55,6 @@ function Apply(props) {
                     localStorage.clear();
                     setState({ok:"no"});
                 }
-                console.log(res.data);
                 setUser(res.data);
             })
             .catch(err => {
@@ -110,7 +109,6 @@ function Apply(props) {
                                     }
                                     alert("신청이 완료되었습니다!");
                                     setState({ok:"ok"});
-                                    console.log("res.data", res.data)
                                 })
                                     .catch(err => {
                                         alert(err.error)
@@ -179,9 +177,9 @@ function Apply(props) {
                                             <div className={touched.room && errors.room ? "text-danger" : ""}>강의실</div>
                                             <Field as="select" name="room" className="col-6">
                                                 <option value="">강의실 선택</option>
-                                                <option value="9-116">9-116</option>
-                                                <option value="7-234">7-234</option>
-                                                <option value="25-101">25-101</option>
+                                                <option value="9-116">9-116 (5명)</option>
+                                                <option value="7-234">7-234 (7명)</option>
+                                                <option value="25-101">25-101 (10명)</option>
                                             </Field>
                                         </div>
 
@@ -198,7 +196,7 @@ function Apply(props) {
 
                                         <div className="form-group mb-4">
                                             <FieldArray name="students">
-                                                {({ insert, remove, push }) => (
+                                                {({ remove, push }) => (
                                                     <div>
                                                         <div className={touched.date && errors.date ? "text-danger" : ""}>이용자</div>
                                                         {values.students.map((student, index) => (

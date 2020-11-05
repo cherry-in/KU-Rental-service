@@ -11,7 +11,6 @@ const noticeSchema = new Schema({
     },
     notice_author: {
         type: String,
-        // default: "나야나"
         required: true,
     },
     post_date: {

@@ -8,7 +8,6 @@ import { Container, Button, Navbar, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 
 const Check = styled.div`
-  
   & #reCheck::after {
     content: '새로운 비밀번호를 다시 입력하세요';
   }
@@ -26,7 +25,7 @@ function Change(props) {
   if (state) {
     return <Redirect to="/" />;
   }
-  // console.log(props)
+
   return (
     <div className="">
       {(localStorage.getItem("token") !== null) ? (
@@ -103,13 +102,10 @@ function Change(props) {
                 )}
             </Formik>
           </Col>
-
         </Check>
-
       </Container>
     </div >
   );
 }
 
-
-export default Change;
+export default Change

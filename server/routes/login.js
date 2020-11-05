@@ -2,7 +2,6 @@ const express = require('express');
 const User = require('../schemas/user');
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
-const user = require('../schemas/user');
 
 const router = express.Router();
 
@@ -66,4 +65,5 @@ router.post('/find', function (req, res, next) {
         return res.status(404).json({error: '질문을 다시 선택해주세요.'});
     })
 });
+
 module.exports = router;

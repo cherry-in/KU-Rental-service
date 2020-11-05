@@ -17,6 +17,7 @@ import Check from './Pages/CheckPage';
 import Notice from './Pages/NoticePage';
 import ACheck from './Pages/ACheckPage';
 import Write from './Pages/WritePage';
+import Modify from './Pages/ModifyPage';
 
 axios.defaults.validateStatus = function (status) {
   return status < 500; // default
@@ -33,7 +34,7 @@ ReactDOM.render(
       <Route path="/change" component={Change} />
       <Route path="/apply/:id" component={Apply} />
       <Route path="/check/:id" component={Check} />
-      <Route path="/write/revise/:id" component={Write} />
+      <Route path="/modify/:id" component={Modify} />
       <Route path="/write" component={Write} />
       <Route path="/notice" component={Notice} />
       <Route path="/acheck/:id" component={ACheck} />

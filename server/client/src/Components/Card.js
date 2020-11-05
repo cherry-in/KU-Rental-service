@@ -73,7 +73,7 @@ function Notice({ card_id, card_index, title, date, content, admin }) {
                     })}
                     {admin === "admin" ? (
                         <div className="d-flex justify-content-end">
-                            <Button variant="primary" size="sm" as={Link} to={`/write/revise/${card_id}`}>수정</Button>
+                            <Button variant="primary" size="sm" as={Link} to={`/modify/${card_id}`}>수정</Button>
                             <Button variant="danger" size="sm" onClick={() => remove(card_id)}>삭제</Button>
                         </div>) : null}
                 </Text>

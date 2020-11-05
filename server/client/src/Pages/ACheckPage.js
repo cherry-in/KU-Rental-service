@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Menu from '../Components/Menu';
 import axios from 'axios';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Container, Table } from 'react-bootstrap';
 import styled from 'styled-components';
 
@@ -20,7 +20,6 @@ const Ta = styled(Table)`
     align-items: center;
     width: 70px;
   };
-  
 `
 
 function ACheck(props) {
@@ -40,7 +39,6 @@ function ACheck(props) {
           alert(res.data.error)
           setState(true);
         }
-        console.log(res.data);
         setReserve(res.data);
       })
       .catch(err => {
@@ -81,7 +79,6 @@ function ACheck(props) {
       <Container fluid>
         <Ta responsive="lg">
           <thead className="thead-light">
-            
             <tr>
               <th>대표자</th>
               <th>날짜</th>

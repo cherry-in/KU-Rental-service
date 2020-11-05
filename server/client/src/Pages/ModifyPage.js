@@ -6,13 +6,15 @@ import axios from 'axios';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Field, Formik } from 'formik';
 
-function Write() {
+function Modify({ match }) {
     const [state, setState] = useState(false);
+    const [modification, setModification] = useState({ title: "", content: "" });
     const [isadmin, setIsadmin] = useState({ ok: "" });
-    const [user, setUser] = useState({ name: "" })
+    const [user, setUser] = useState({ name: "", role: "" })
 
     useEffect(() => {
         acheck();
+        getOne(match.params.id);
     }, [])
 
     if (isadmin.ok === "no") return <Redirect to="/" />;
@@ -21,6 +23,21 @@ function Write() {
         return <Redirect to="/notice" />;
     }
 
+    function getOne(id) {
+        if (id) {
+            axios.get(`/notices/${match.params.id}`)
+                .then(res => {
+                    if (res.status !== 201) {
+                        alert(res.data.error);
+                    }
+                    setModification({ title: res.data.notice_title, content: res.data.notice_content })
+                })
+                .catch(err => {
+                    alert(err.error)
+                });
+        }
+    };
+
     function acheck() {
         axios.get(`/users/admin/${localStorage.getItem('_id')}`, {
             headers: { authorization: localStorage.getItem('token') },
@@ -28,10 +45,10 @@ function Write() {
             .then(res => {
                 if (res.status !== 201) {
                     alert(res.data.error);
-                    console.log(res.data)
                     setIsadmin({ ok: "no" });
                 }
-                setUser({ name: res.data.name })
+                setUser({ name: res.data.name, role: res.data.role })
+
             }).catch(err => {
                 alert(err.error)
             });
@@ -41,10 +58,11 @@ function Write() {
         <div>
             <Menu />
             <Container fluid>
+                {console.log(modification)}
                 <Row className="justify-content-center">
                     <Col md={5} xs={11} className="pt-3" >
                         <Formik
-                            initialValues={{ name: user.name, title: '', content: '' }}
+                            initialValues={{ name: user.name, title: modification.title, content: modification.content }}
                             enableReinitialize={true}
                             validationSchema={Yup.object({
                                 title: Yup.string()
@@ -53,16 +71,16 @@ function Write() {
                                     .required('내용을 입력해주세요.'),
                             })}
                             onSubmit={(values, { setSubmitting }) => {
-                                console.log(values)
                                 axios({
-                                    method: 'post',
-                                    url: '/writes',
+                                    method: 'put',
+                                    url: `/writes/${match.params.id}`,
                                     data: values,
-                                }).then(res => {
-                                    if (res.status === 404) return alert(res.data.error)
-                                    alert("공지 등록이 완료되었습니다.")
-                                    setState(true);
                                 })
+                                    .then(res => {
+                                        if (res.status === 404) return alert(res.data.error)
+                                        alert("공지 수정이 완료되었습니다.")
+                                        setState(true);
+                                    })
                                     .catch(err => {
                                         alert(err.error)
                                     });
@@ -85,14 +103,14 @@ function Write() {
                                             type="text"
                                             title="title"
                                             {...getFieldProps('title')}
-                                            placeholder="제목" />
+                                            disabled />
                                     </div>
                                     <div className="form-group">
                                         <div className={touched.name && errors.name ? "text-danger" : ""}>내용</div>
                                         <Field as="textarea" rows={8} style={{ "min-width": "100%" }}
                                             {...getFieldProps('content')} />
                                     </div>
-                                    <Button className="mb-2" variant="dark" type="submit" disabled={isSubmitting}>공지 등록</Button>
+                                    <Button className="mb-2" variant="dark" type="submit" disabled={isSubmitting}>공지 수정</Button>
                                 </form>
                             )}
                         </Formik>
@@ -103,4 +121,4 @@ function Write() {
     )
 }
 
-export default Write
+export default Modify

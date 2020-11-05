@@ -27,7 +27,6 @@ const Col_1 = styled.div`
         height : 100%;
         width: 100%;
         justify-content: space-evenly;
-
     }
 
     & .mob-img {
@@ -177,10 +176,8 @@ function Login() {
                                             </div>
                                             <Button type="submit" variant="dark" className={mobile ? " w-100" : " w-20"} disabled={isSubmitting}> Login </Button>
                                         </div>
-
                                         <div><Link to="/find">비밀번호를 잊으셨나요?</Link></div>
                                         <div><Link to="/signup">회원이 아니신가요?</Link></div>
-
                                     </form>
                                 </div>
                             )}
@@ -188,8 +185,7 @@ function Login() {
                 </Col_2>
             </Row>
         </Container>
-
     )
 }
 
-export default Login;
+export default Login

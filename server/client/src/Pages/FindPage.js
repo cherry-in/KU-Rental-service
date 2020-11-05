@@ -23,6 +23,7 @@ function Find() {
             state: { id: localStorage.getItem('_id') },
         }} />;
     }
+
     return (
         <div className="vh-100">
             <Menu expand="md" variant="dark">
@@ -111,4 +112,4 @@ function Find() {
 }
 
 
-export default Find;
+export default Find

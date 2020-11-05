@@ -31,7 +31,6 @@ function Menu() {
         axios.get(`/users/${localStorage.getItem('_id')}`, {
             headers: { authorization: localStorage.getItem('token') },
         }).then(res => {
-                console.log(res.data)
                 if (res.data.role == "admin") {
                     setUser(res.data)
                 }

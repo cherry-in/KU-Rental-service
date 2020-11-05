@@ -6,7 +6,7 @@ import { Container, Table } from 'react-bootstrap';
 import styled from 'styled-components';
 
 const Ta = styled(Table)`
-margin-top: 0.5em;
+  margin-top: 0.5em;
 
   & th, & td {
     padding: 0;
@@ -49,7 +49,6 @@ function Check(props) {
                     localStorage.clear();
                     setState(true);
                 }
-                console.log(res.data);
                 const reserves = res.data.filter(function(item) {
                         return item !== '';
                       });

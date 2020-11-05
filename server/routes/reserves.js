@@ -1,5 +1,4 @@
 const express = require('express');
-const User = require('../schemas/user');
 const Reserve = require('../schemas/reserve');
 const { verifyToken } = require('./middlewares');
 

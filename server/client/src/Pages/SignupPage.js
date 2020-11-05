@@ -157,8 +157,7 @@ function Signup() {
                 </Wow>
             </Container>
         </div >
-
     );
 }
 
-export default Signup;
+export default Signup

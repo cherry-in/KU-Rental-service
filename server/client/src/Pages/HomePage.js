@@ -45,7 +45,7 @@ function Home() {
                 <p>
                     <strong>유의사항</strong>
                     <ul className="pl-4">
-                        <li>강의실을 대관하는 대표자를 기준으로 최대 주 6시간까지 대관이 가능합니다.</li>
+                        <li>강의실 사용시 최소인원 수에 맞춰서 명단 작성이 필요합니다.</li>
                         <li>1회 대관시 최대 3시간까지 이용이 가능합니다. (1시간 단위로 대관 가능)</li>
                         <li><strong style={{ color: "red" }}>대관 시간 이외 강의실을 이용하다 적발될 경우 한달 간 강의실 이용이 불가합니다.</strong></li>
                     </ul>
@@ -66,4 +66,4 @@ function Home() {
     )
 }
 
-export default Home;
+export default Home
