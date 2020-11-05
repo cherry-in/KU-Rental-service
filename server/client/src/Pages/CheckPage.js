@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Menu from '../Components/Menu';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import Table from 'react-bootstrap/Table'
-import { Container } from 'react-bootstrap';
+import { Container, Table } from 'react-bootstrap';
 import styled from 'styled-components';
 
 const Ta = styled(Table)`
@@ -26,7 +25,6 @@ margin-top: 0.5em;
     align-items: center;
     margin: 10px;
   };
-
 `
 
 function Check(props) {
@@ -52,7 +50,7 @@ function Check(props) {
                     setState(true);
                 }
                 console.log(res.data);
-                const reserves=res.data.filter(function(item) {
+                const reserves = res.data.filter(function(item) {
                         return item !== '';
                       });
                 setReserve(reserves);

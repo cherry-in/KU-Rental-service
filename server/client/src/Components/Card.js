@@ -1,5 +1,7 @@
-import React, { useState, useContext } from 'react';
-import { Card, Accordion, Col, AccordionContext, useAccordionToggle } from 'react-bootstrap';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { Card, Accordion, Col, AccordionContext, useAccordionToggle, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 
 const Text = styled(Card.Body)`
@@ -11,7 +13,7 @@ const Text = styled(Card.Body)`
     }
 `
 
-function Notice({ card_index, title, date, content }) {
+function Notice({ card_id, card_index, title, date, content, admin }) {
     function ContextAwareToggle({ children, eventKey, callback }) {
         const currentEventKey = useContext(AccordionContext);
 
@@ -44,6 +46,18 @@ function Notice({ card_index, title, date, content }) {
         return new_date
     }
 
+    function remove (card_id) {
+        axios.delete(`/notices/${card_id}`)
+            .then(res => {
+                if (res.status === 404) return alert(res.data.error)
+                alert("삭제되었습니다!");
+                window.location.reload();
+            })
+            .catch(err => {
+                alert(err.error)
+            });
+    }
+
     return (
         <Card className="w-100">
             <Card.Header className="row flex-row py-3">
@@ -53,9 +67,16 @@ function Notice({ card_index, title, date, content }) {
                 <Col md={2} xs={4} className="p-0" >{dateForm(date)}</Col>
             </Card.Header>
             <Accordion.Collapse eventKey={card_index + 1}>
-                <Text>{content.split("\n").map((i, key) => {
-                    return <div key={key}>{i}</div>;
-                })}</Text>
+                <Text>
+                    {content.split("\n").map((i, key) => {
+                        return <div key={key}>{i}</div>;
+                    })}
+                    {admin === "admin" ? (
+                        <div className="d-flex justify-content-end">
+                            <Button variant="primary" size="sm" as={Link} to={`/write/revise/${card_id}`}>수정</Button>
+                            <Button variant="danger" size="sm" onClick={() => remove(card_id)}>삭제</Button>
+                        </div>) : null}
+                </Text>
             </Accordion.Collapse>
         </Card >
     )

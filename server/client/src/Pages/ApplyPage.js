@@ -14,6 +14,7 @@ function Apply(props) {
     useEffect(() => {
         getUser();
     }, [])
+    
     if (state.ok==="no") return <Redirect to="/" />;
     if (state.ok==="ok") {
         return <Redirect to={{

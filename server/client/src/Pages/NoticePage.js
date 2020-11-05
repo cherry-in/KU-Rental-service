@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Menu from '../Components/Menu';
 import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
-import { Container, Row, Col, Card, Accordion, Button } from 'react-bootstrap';
+import { Container, Row, Col, Accordion, Button } from 'react-bootstrap';
 import CARD from '../Components/Card';
 
 function Notice() {
-    const [show, setShow] = useState(false);
     const [notices, setNotices] = useState([]);
     const [user, setUser] = useState({ role: "" })
     const [state, setState] = useState()
@@ -40,7 +39,7 @@ function Notice() {
         axios.get(`/notices`)
             .then(res => {
                 if (res.status !== 201) {
-                    // alert(res.data.error);
+                    alert(res.data.error);
                 }
                 setNotices(res.data);
             })
@@ -58,7 +57,7 @@ function Notice() {
                         <h2 className="p-3 border-bottom d-flex justify-content-between">공지사항 {user.role === "admin" ? (
                             <Button as={Link} to="/write">글 작성</Button>) : null}</h2>
                         <Accordion>
-                            {notices.map((notice, index) => <CARD card_index={index} title={notice.notice_title} date={notice.post_date} content={notice.notice_content} />
+                            {notices.map((notice, index) => <CARD card_id={notice._id} card_index={index} title={notice.notice_title} date={notice.post_date} content={notice.notice_content} admin={user.role} />
                             )}
                         </Accordion>
                     </Col>
