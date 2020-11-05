@@ -140,6 +140,8 @@ function Apply(props) {
                                                 dateFormat="yyyy.MM.dd"
                                                 placeholderText="yyyy-mm-dd"
                                                 minDate={new Date()}
+                                                disabledDays={[{ daysOfWeek: [0, 6] }]}
+                                                
                                             />
                                             {/*<div className={touched.date && errors.date ? "text-danger" : ""}>신청날짜</div>
                                             <input
