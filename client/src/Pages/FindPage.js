@@ -43,7 +43,7 @@ function Find() {
                             onSubmit={(values, { setSubmitting }) => {
                                 axios({
                                     method: 'post',
-                                    url: '/api/login/find',
+                                    url: '/app/rental/api/login/find',
                                     data: values,
                                 }).then(res => {
                                     if (res.status === 404) return alert(res.data.error)

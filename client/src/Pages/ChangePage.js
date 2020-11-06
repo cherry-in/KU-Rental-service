@@ -50,7 +50,7 @@ function Change(props) {
                   .oneOf([Yup.ref("password"), null], '비밀번호가 일치하지 않습니다.'),
               })}
               onSubmit={(values, { setSubmitting }) => {
-                axios.put(`/api/users/change/${props.location.state.id}`, { ...values },
+                axios.put(`/app/rental/api/users/change/${props.location.state.id}`, { ...values },
                 )
                   .then(res => {
                     console.log(res.data);

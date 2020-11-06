@@ -18,7 +18,7 @@ function Notice() {
     if (state) return <Redirect to="/" />;
 
     function acheck() {
-        axios.get(`/api/users/${localStorage.getItem('_id')}`, {
+        axios.get(`/app/rental/api/users/${localStorage.getItem('_id')}`, {
             headers: { authorization: localStorage.getItem('token') },
         })
             .then(res => {
@@ -36,7 +36,7 @@ function Notice() {
     }
     
     function remove (card_id) {
-      axios.delete(`/api/notices/${card_id}`)
+      axios.delete(`/app/rental/api/notices/${card_id}`)
           .then(res => {
               if (res.status === 404) return alert(res.data.error)
               alert("삭제되었습니다!");
@@ -49,7 +49,7 @@ function Notice() {
 
 
     function getNotice() {
-        axios.get(`/api/notices`)
+        axios.get(`/app/rental/api/notices`)
             .then(res => {
               console.log('res.data=', res.data)
                 if (res.status !== 201) {

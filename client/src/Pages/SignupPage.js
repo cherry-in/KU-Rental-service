@@ -62,7 +62,7 @@ function Signup() {
               onSubmit={(values, { setSubmitting }) => {
                 axios({
                   method: 'post',
-                  url: '/api/users',
+                  url: '/app/rental/api/users',
                   data: values,
                 }).then(res => {
                   if (res.status === 404) return alert(res.data.error)

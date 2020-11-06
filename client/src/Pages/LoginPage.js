@@ -125,7 +125,7 @@ function Login() {
                         onSubmit={(values, { setSubmitting }) => {
                             axios({
                                 method: 'post',
-                                url: '/api/login',
+                                url: '/app/rental/api/login',
                                 data: values,
                             }).then(res => {
                                 if (res.status === 404) return alert(res.data.error)
