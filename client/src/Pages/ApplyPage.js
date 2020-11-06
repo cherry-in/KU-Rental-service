@@ -10,6 +10,7 @@ function Apply(props) {
     const [state, setState] = useState({ok:""});
     const [user, setUser] = useState({ name: "" });
     const [room_Num, setRoom_Num] = useState({ "9-116": 5, "7-234": 7, "25-101": 10 });
+    const [values, setValues] = useState()
 
     useEffect(() => {
         getUser();
@@ -96,7 +97,7 @@ function Apply(props) {
                                 reason: Yup.string()
                                     .required('대관목적을 입력해주세요.'),
                             })}
-                            onSubmit={(values, { setSubmitting }) => {
+                            onSubmit={(values, { setSubmitting, resetForm }) => {
                                 addRoomInfo(values);
                                 axios({
                                     method: 'post',
@@ -105,7 +106,8 @@ function Apply(props) {
                                 }).then(res => {
                                     if (res.status === 404) {
                                         alert(res.data.error)
-                                        return window.location.reload();
+                                        resetForm({})
+                                        return
                                     }
                                     alert("신청이 완료되었습니다!");
                                     setState({ok:"ok"});

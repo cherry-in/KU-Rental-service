@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, HashRouter, Route, Redirect, Switch } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -24,7 +24,7 @@ axios.defaults.validateStatus = function (status) {
 }
 
 ReactDOM.render(
-  <Router>
+  <HashRouter>
     <Switch>
       <PrivateRoute exact path="/" component={Home} />
       <Route path="/login" component={Login} />
@@ -42,7 +42,7 @@ ReactDOM.render(
       <Redirect path="/change/:id" to="/change" />
       <Redirect path="/notice" to="/notice" />
     </Switch>
-  </Router>,
+  </HashRouter>,
   document.getElementById('root')
 );
 

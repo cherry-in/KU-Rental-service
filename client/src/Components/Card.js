@@ -13,7 +13,7 @@ const Text = styled(Card.Body)`
     }
 `
 
-function Notice({ card_id, card_index, title, date, content, admin }) {
+function Notice({ card_id, card_index, title, date, content, admin, remove }) {
     function ContextAwareToggle({ children, eventKey, callback }) {
         const currentEventKey = useContext(AccordionContext);
 
@@ -44,18 +44,6 @@ function Notice({ card_id, card_index, title, date, content, admin }) {
 
         const new_date = year + "-" + month + "-" + date;
         return new_date
-    }
-
-    function remove (card_id) {
-        axios.delete(`/api/notices/${card_id}`)
-            .then(res => {
-                if (res.status === 404) return alert(res.data.error)
-                alert("삭제되었습니다!");
-                window.location.reload();
-            })
-            .catch(err => {
-                alert(err.error)
-            });
     }
 
     return (

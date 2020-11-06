@@ -34,6 +34,19 @@ function Notice() {
                 alert(err.error)
             });
     }
+    
+    function remove (card_id) {
+      axios.delete(`/api/notices/${card_id}`)
+          .then(res => {
+              if (res.status === 404) return alert(res.data.error)
+              alert("삭제되었습니다!");
+              getNotice();
+          })
+          .catch(err => {
+              alert(err.error)
+          });
+  }
+
 
     function getNotice() {
         axios.get(`/api/notices`)
@@ -58,7 +71,7 @@ function Notice() {
                         <h2 className="p-3 border-bottom d-flex justify-content-between">공지사항 {user.role === "admin" ? (
                             <Button as={Link} to="/write">글 작성</Button>) : null}</h2>
                         <Accordion>
-                            {notices.map((notice, index) => <CARD card_id={notice._id} card_index={index} title={notice.notice_title} date={notice.post_date} content={notice.notice_content} admin={user.role} />
+                            {notices.map((notice, index) => <CARD card_id={notice._id} card_index={index} title={notice.notice_title} date={notice.post_date} content={notice.notice_content} admin={user.role} remove={remove} />
                             )}
                         </Accordion>
                     </Col>
