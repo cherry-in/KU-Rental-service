@@ -16,7 +16,7 @@ function Home() {
     if (state) return <Redirect to="/" />;
 
     function tcheck() {
-        axios.get(`/users/${localStorage.getItem('_id')}`, {
+        axios.get(`/api/users/${localStorage.getItem('_id')}`, {
             headers: { authorization: localStorage.getItem('token') },
         })
             .then(res => {

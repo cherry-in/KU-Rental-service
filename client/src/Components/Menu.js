@@ -28,7 +28,7 @@ function Menu() {
     }, [])
 
     function acheck() {
-        axios.get(`/users/${localStorage.getItem('_id')}`, {
+        axios.get(`/api/users/${localStorage.getItem('_id')}`, {
             headers: { authorization: localStorage.getItem('token') },
         }).then(res => {
                 if (res.data.role == "admin") {

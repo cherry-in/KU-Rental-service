@@ -31,7 +31,7 @@ function ACheck(props) {
   }, [])
 
   function getReserve() {
-    axios.get(`/users/admin/${props.match.params.id}`, {
+    axios.get(`/api/users/admin/${props.match.params.id}`, {
       headers: { authorization: localStorage.getItem('token') },
     })
       .then(res => {
@@ -48,7 +48,7 @@ function ACheck(props) {
   if (state) return <Redirect to="/" />;
 
   function remove(index) {
-    axios.put(`/reserves/${reserve[index]._id}`)
+    axios.put(`/api/reserves/${reserve[index]._id}`)
       .then(res => {
         if (res.status === 404) return alert(res.data.error)
         alert("승인을 거절했습니다!");
@@ -60,7 +60,7 @@ function ACheck(props) {
   };
 
   function admit(index) {
-    axios.put(`/reserves/${reserve[index]._id}`, {
+    axios.put(`/api/reserves/${reserve[index]._id}`, {
       approve: true,
     })
       .then(res => {

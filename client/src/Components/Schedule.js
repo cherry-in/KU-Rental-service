@@ -20,7 +20,7 @@ function Cal(props) {
   });
 
   function getReserve(room) {
-    axios.get(`/reserves/room/${room}`, {
+    axios.get(`/api/reserves/room/${room}`, {
       headers: { authorization: localStorage.getItem('token') },
     })
       .then(res => {

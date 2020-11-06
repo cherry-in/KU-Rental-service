@@ -47,7 +47,7 @@ function Notice({ card_id, card_index, title, date, content, admin }) {
     }
 
     function remove (card_id) {
-        axios.delete(`/notices/${card_id}`)
+        axios.delete(`/api/notices/${card_id}`)
             .then(res => {
                 if (res.status === 404) return alert(res.data.error)
                 alert("삭제되었습니다!");

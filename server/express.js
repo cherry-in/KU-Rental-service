@@ -22,12 +22,12 @@ app.use(cors())
 console.log('path=', path.join(CURRENT_WORKING_DIR, 'client', 'build'))
 app.use('/', express.static(path.join(CURRENT_WORKING_DIR, 'client', 'build')))
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter, reservesRouter);
-app.use('/login', loginRouter);
-app.use('/reserves', reservesRouter);
-app.use('/notices', noticeRouter);
-app.use('/writes', writesRouter);
+app.use('/api/', indexRouter);
+app.use('/api/users', usersRouter, reservesRouter);
+app.use('/api/login', loginRouter);
+app.use('/api/reserves', reservesRouter);
+app.use('/api/notices', noticeRouter);
+app.use('/api/writes', writesRouter);
 
 app.use((err, req, res, next) => {
   if (err.name === 'UnauthorizedError') {

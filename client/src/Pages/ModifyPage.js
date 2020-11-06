@@ -25,7 +25,7 @@ function Modify({ match }) {
 
     function getOne(id) {
         if (id) {
-            axios.get(`/notices/${match.params.id}`)
+            axios.get(`/api/notices/${match.params.id}`)
                 .then(res => {
                     if (res.status !== 201) {
                         alert(res.data.error);
@@ -39,7 +39,7 @@ function Modify({ match }) {
     };
 
     function acheck() {
-        axios.get(`/users/admin/${localStorage.getItem('_id')}`, {
+        axios.get(`/api/users/admin/${localStorage.getItem('_id')}`, {
             headers: { authorization: localStorage.getItem('token') },
         })
             .then(res => {
@@ -73,7 +73,7 @@ function Modify({ match }) {
                             onSubmit={(values, { setSubmitting }) => {
                                 axios({
                                     method: 'put',
-                                    url: `/writes/${match.params.id}`,
+                                    url: `/api/writes/${match.params.id}`,
                                     data: values,
                                 })
                                     .then(res => {

@@ -12,9 +12,9 @@ const Check = styled.div`
     content: '새로운 비밀번호를 다시 입력하세요';
   }
 
-  & #reCheck:not(.right) {
-    content: '비밀번호가 일치하지 않습니다.';
+  & #reCheck:not(.right)::after {
     color: red;
+    content: "비밀번호가 일치하지 않습니다";
   }
 `
 
@@ -29,12 +29,12 @@ function Change(props) {
   return (
     <div className="">
       {(localStorage.getItem("token") !== null) ? (
-                <Menu />
-            ) : (
-                    <Menu expand="md" variant="dark">
-                        <Navbar.Brand>회원가입</Navbar.Brand>
-                    </Menu>
-                )}
+        <Menu />
+      ) : (
+          <Menu expand="md" variant="dark">
+            <Navbar.Brand>회원가입</Navbar.Brand>
+          </Menu>
+        )}
       <Container fluid className="p-0 vh-90">
         <Check className="row justify-content-center m-0">
           <Col md={4} className="pt-5">
@@ -50,7 +50,7 @@ function Change(props) {
                   .oneOf([Yup.ref("password"), null], '비밀번호가 일치하지 않습니다.'),
               })}
               onSubmit={(values, { setSubmitting }) => {
-                axios.put(`/users/change/${props.location.state.id}`, { ...values },
+                axios.put(`/api/users/change/${props.location.state.id}`, { ...values },
                 )
                   .then(res => {
                     console.log(res.data);
@@ -87,7 +87,7 @@ function Change(props) {
                     </div>
 
                     <div className="form-group">
-                      {touched.password2 && errors.password2 ? setCheckPw(false) : null}
+                      {touched.password2 && errors.password2 ? setCheckPw(false) : setCheckPw(true)}
                       <div id="reCheck" className={checkPw ? "right" : "err"}></div>
                       <input
                         className={(touched.password2 && errors.password2 ? 'form-control is-invalid' : "form-control")}

@@ -46,7 +46,7 @@ function Apply(props) {
     }
 
     function getUser() {
-        axios.get(`/users/${props.match.params.id}`, {
+        axios.get(`/api/users/${props.match.params.id}`, {
             headers: { authorization: localStorage.getItem('token') },
         })
             .then(res => {
@@ -100,7 +100,7 @@ function Apply(props) {
                                 addRoomInfo(values);
                                 axios({
                                     method: 'post',
-                                    url: '/reserves',
+                                    url: '/api/reserves',
                                     data: values
                                 }).then(res => {
                                     if (res.status === 404) {

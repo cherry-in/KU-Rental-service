@@ -22,7 +22,7 @@ function Write() {
     }
 
     function acheck() {
-        axios.get(`/users/admin/${localStorage.getItem('_id')}`, {
+        axios.get(`/api/users/admin/${localStorage.getItem('_id')}`, {
             headers: { authorization: localStorage.getItem('token') },
         })
             .then(res => {
@@ -56,7 +56,7 @@ function Write() {
                                 console.log(values)
                                 axios({
                                     method: 'post',
-                                    url: '/writes',
+                                    url: '/api/writes',
                                     data: values,
                                 }).then(res => {
                                     if (res.status === 404) return alert(res.data.error)

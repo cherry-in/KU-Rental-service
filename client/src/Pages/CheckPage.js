@@ -37,7 +37,7 @@ function Check(props) {
     if (state) return <Redirect to="/" />;
 
     function getReserve() {
-        axios.get(`/reserves/${props.match.params.id}`, {
+        axios.get(`/api/reserves/${props.match.params.id}`, {
             headers: { authorization: localStorage.getItem('token') },
         })
             .then(res => {
@@ -59,7 +59,7 @@ function Check(props) {
             });
     }
     function remove(index) {
-        axios.delete(`/reserves/${reserve[index]._id}`)
+        axios.delete(`/api/reserves/${reserve[index]._id}`)
             .then(res => {
                 if (res.status === 404) return alert(res.data.error)
                 alert("삭제되었습니다!");

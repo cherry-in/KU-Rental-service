@@ -18,7 +18,7 @@ function Notice() {
     if (state) return <Redirect to="/" />;
 
     function acheck() {
-        axios.get(`/users/${localStorage.getItem('_id')}`, {
+        axios.get(`/api/users/${localStorage.getItem('_id')}`, {
             headers: { authorization: localStorage.getItem('token') },
         })
             .then(res => {
@@ -36,7 +36,7 @@ function Notice() {
     }
 
     function getNotice() {
-        axios.get(`/notices`)
+        axios.get(`/api/notices`)
             .then(res => {
               console.log('res.data=', res.data)
                 if (res.status !== 201) {
