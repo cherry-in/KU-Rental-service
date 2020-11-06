@@ -44,10 +44,11 @@ router.get('/:_id', verifyToken, function (req, res, next) {
 
 router.get('/admin/:_id', function (req, res, next) {
   console.log('/admin get req.params', req.params)
-  User.findOne({ _id: req.params._id }, 'role', function (err, user) {
+  User.findOne({ _id: req.params._id }, function (err, user) {
     if (err) return res.status(500).json({ error: err });
-    if (user.role == 'admin') {
-      next();
+    if (user.role === 'admin') {
+      res.status(201).json(user);
+      // next();
     }
     else return res.status(404).json({ error: '권한이 없습니다.' })
   })
