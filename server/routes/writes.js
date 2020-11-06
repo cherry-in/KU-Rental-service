@@ -1,7 +1,4 @@
-const express = require('express');
-// const path = require('path');
-// const multer = require('multer');
-// const fs = require('fs');
+const express = require('express')
 const Notice = require('../models/notice');
 
 const router = express.Router();
