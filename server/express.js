@@ -11,6 +11,13 @@ const reservesRouter = require('./routes/reserves');
 const noticeRouter = require('./routes/notices');
 const writesRouter = require('./routes/writes');
 
+// 배포용?
+const isProduction = process.env.NODE_ENV === 'production'
+let root_url = '/'
+if (isProduction) {
+  root_url = '/app/rental'
+}
+
 const CURRENT_WORKING_DIR = process.cwd()
 const app = express()
 
@@ -22,12 +29,12 @@ app.use(cors())
 console.log('path=', path.join(CURRENT_WORKING_DIR, 'client', 'build'))
 app.use('/', express.static(path.join(CURRENT_WORKING_DIR, 'client', 'build')))
 
-app.use('/api/', indexRouter);
-app.use('/api/users', usersRouter, reservesRouter);
-app.use('/api/login', loginRouter);
-app.use('/api/reserves', reservesRouter);
-app.use('/api/notices', noticeRouter);
-app.use('/api/writes', writesRouter);
+app.use(path.join(root_url, '/api/'), indexRouter);
+app.use(path.join(root_url, '/api/users'), usersRouter, reservesRouter);
+app.use(path.join(root_url, '/api/login'), loginRouter);
+app.use(path.join(root_url, '/api/reserves'), reservesRouter);
+app.use(path.join(root_url, '/api/notices'), noticeRouter);
+app.use(path.join(root_url, '/api/writes'), writesRouter);
 
 app.use((err, req, res, next) => {
   if (err.name === 'UnauthorizedError') {
