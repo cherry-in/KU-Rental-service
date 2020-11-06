@@ -47,5 +47,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3030"
+  "proxy": "http://localhost:3030",
+  "homepage": "https://compmath.korea.ac.kr/app/rental"
 }
