@@ -4,8 +4,9 @@ const User = require('../models/user');
 const router = express.Router();
 
 /* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
+router.get('/', function(req, res, next) {
+  console.log('index router');
+  res.send("hello")
+});
 
 module.exports = router;

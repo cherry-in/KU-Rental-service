@@ -82,20 +82,17 @@ router.get('/room/:room', function (req, res, next) {
 
 router.get('/:_id', verifyToken, function (req, res, next) {
   console.log('/reserves get req.params', req.params)
-  Reserve.find({ user: req.params._id }, function (err, reserve) {
-    if (err) return res.status(500).json({ error: err });
-    // console.log(reserve, Date.now())
-    const reserves = reserve.map(item => (
-      new Date(item.end) >= Date.now() ? item : ""
-    ));
-
-    if (!reserves) {
-      console.log("no신청")
-      res.status(404).json({ error: "신청내역이 없습니다." })
-    }
-    console.log("reserves", reserves)
-    res.status(201).json(reserves);
-  })
+  Reserve.find({ user: req.params._id }).sort({date: 0})
+      .then((reserve) => {
+          const reserves = reserve.map(item => (
+              new Date(item.end) >= Date.now() ? item : ""
+          ));
+          console.log("reserves", reserves)
+          res.status(201).json(reserves);
+      })
+      .catch((err) => {
+          res.status(500).json({ error: err });
+      })
 });
 
 router.get('/admin/:_id', verifyToken, function (req, res, next) {

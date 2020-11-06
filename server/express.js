@@ -16,10 +16,11 @@ const app = express()
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(helmet())
+// app.use(helmet())
 app.use(cors())
 
-app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
+console.log('path=', path.join(CURRENT_WORKING_DIR, 'client', 'build'))
+app.use('/', express.static(path.join(CURRENT_WORKING_DIR, 'client', 'build')))
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter, reservesRouter);
