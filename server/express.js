@@ -18,6 +18,8 @@ if (isProduction) {
   root_url = '/app/rental'
 }
 
+console.log('isProductiion=', isProduction)
+
 const CURRENT_WORKING_DIR = process.cwd()
 const app = express()
 
@@ -27,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 
 console.log('path=', path.join(CURRENT_WORKING_DIR, 'client', 'build'))
-app.use('/', express.static(path.join(CURRENT_WORKING_DIR, 'client', 'build')))
+app.use(path.join(root_url, '/'), express.static(path.join(CURRENT_WORKING_DIR, 'client', 'build')))
 
 app.use(path.join(root_url, '/api/'), indexRouter);
 app.use(path.join(root_url, '/api/users'), usersRouter, reservesRouter);

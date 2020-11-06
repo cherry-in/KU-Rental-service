@@ -48,5 +48,5 @@
     ]
   },
   "proxy": "http://localhost:3030",
-  "homepage": "https://compmath.korea.ac.kr/app/rental"
+  "homepage": "."
 }
